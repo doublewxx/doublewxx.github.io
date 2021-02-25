@@ -73,8 +73,8 @@
   
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/02/24/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-02-24T03:24:52.281Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/2021/02/25/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2021-02-25T13:10:35.188Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/24/hello-world/">基础知识</a>
+      <a class="p-name article-title" href="/2021/02/25/hello-world/">基础知识</a>
     </h1>
   
 
@@ -93,24 +93,13 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <p>[toc]</p>
+<h2 id="1-0-1-0-2为什么不等于0-3"><a href="#1-0-1-0-2为什么不等于0-3" class="headerlink" title="1. 0.1+0.2为什么不等于0.3"></a>1. 0.1+0.2为什么不等于0.3</h2><p>JavaScript使用Number类型表示数字（整数和浮点数)，遵循 IEEE 754 标准，通过64位来表示一个数字。<br>JS中1位符号位，11位的指数e,剩余52位是尾数。<br>js最大安全数是 Number.MAX_SAFE_INTEGER == Math.pow(2,53) - 1。本来应该是Math.pow(2,52)-1，但是二进制表示的有效数字总是1.xxx。<br>计算机无法计算10进制，因此会先按照IEEE 754转换成二进制进行运算。<br>浮点数运算的五个步骤：对阶、尾数运算、规格化、舍入处理、溢出判断<br>1、0.1和0.2在转化为二进制后，都是无限循环小数，只能保留52位，会有精度损失<br>2、在运算时，需要对阶，一般是小阶对大阶，这一步也可能丢失进度，<br>3、对阶后进行尾数运算，相加后得到可结果，如果结果的整数部分超过1，需要进行规格化<br>4、规格化之后如果小数部分超出52位，需要再次摄入处理<br>5、0.1+0.2不涉及溢出判断，直接将结果转为10进制</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/24/hello-world/" data-id="ckliupiga0000p5vp77oo4yom" data-title="基础知识" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/25/hello-world/" data-id="ckliupiga0000p5vp77oo4yom" data-title="基础知识" class="article-share-link">Share</a>
       
       
       
@@ -124,8 +113,8 @@
   
     <article id="post-lodash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/02/24/lodash/" class="article-date">
-  <time class="dt-published" datetime="2021-02-24T03:24:52.281Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/2021/02/25/lodash/" class="article-date">
+  <time class="dt-published" datetime="2021-02-25T13:10:35.188Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -136,7 +125,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/24/lodash/">lodash</a>
+      <a class="p-name article-title" href="/2021/02/25/lodash/">lodash</a>
     </h1>
   
 
@@ -148,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/24/lodash/" data-id="cklivk0a900000msugcrq4ebn" data-title="lodash" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/25/lodash/" data-id="cklkvx328000024p069pu2ljp" data-title="lodash" class="article-share-link">Share</a>
       
       
       
@@ -191,11 +180,11 @@
       <ul>
         
           <li>
-            <a href="/2021/02/24/hello-world/">基础知识</a>
+            <a href="/2021/02/25/hello-world/">基础知识</a>
           </li>
         
           <li>
-            <a href="/2021/02/24/lodash/">lodash</a>
+            <a href="/2021/02/25/lodash/">lodash</a>
           </li>
         
       </ul>
