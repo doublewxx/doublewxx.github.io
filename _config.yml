@@ -99,5 +99,10 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: landscape
 
+#文章目录
+toc:
+  maxDepth: 3 //表示目录深度为3，即最多生成三级目录
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

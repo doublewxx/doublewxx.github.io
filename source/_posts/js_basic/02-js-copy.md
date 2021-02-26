@@ -99,3 +99,53 @@ var arr = [[1,2],3,4,[5,6]];
 var arr3 = JSON.parse(JSON.stringify(arr));  
 console.log(arr3) // [[1,2],3,4,[5,6]]
 ```
+#### 对象深拷贝
+方式1：手动复制
+```angular2html
+var obj1 = { a: 10, b: 20, c: 30 };
+var obj2 = { a: obj1.a, b: obj1.b, c: obj1.c };
+obj2.b = 100;
+console.log(obj1);
+// { a: 10, b: 20, c: 30 } // 沒被改到
+console.log(obj2);
+// { a: 10, b: 100, c: 30 }
+```
+方式2：JSON做字符串转换
+```angular2html
+var obj1 = { body: { a: 10 } };
+var obj2 = JSON.parse(JSON.stringify(obj1));
+obj2.body.a = 20;
+console.log(obj1);
+// { body: { a: 10 } }
+console.log(obj2);
+// { body: { a: 20 } }
+console.log(obj1 === obj2);
+// false
+console.log(obj1.body === obj2.body);
+```
+备注：这种方式简单易用，但是会抛弃对象的constructor，无论之前的构造函数是什么，拷贝后都是Object
+这种方法能正确处理的对象只有Number, String, Boolean, Array, 扁平对象，即那些能够被json直接表示的数据结构。RegExp对象是无法通过这种方式深拷贝。
+也就是说，只有可以转成JSON格式的对象才可以这样用，像function没办法转成JSON。
+方式3：递归拷贝
+```angular2html
+function deepClone(initalObj, finalObj) {    
+  var obj = finalObj || {};    
+  for (var i in initalObj) {        
+    var prop = initalObj[i];        // 避免相互引用对象导致死循环，如initalObj.a = initalObj的情况
+    if(prop === obj) {            
+      continue;
+    }        
+    if (typeof prop === 'object') {
+      obj[i] = (prop.constructor === Array) ? [] : {};            
+      arguments.callee(prop, obj[i]);
+    } else {
+      obj[i] = prop;
+    }
+  }    
+  return obj;
+}
+var str = {};
+var obj = { a: {a: "hello", b: 21} };
+deepClone(obj, str);
+console.log(str.a);
+```
