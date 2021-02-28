@@ -74,7 +74,7 @@
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/28/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
+  <time class="dt-published" datetime="2021-02-28T10:01:36.065Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -112,7 +112,7 @@
     <article id="post-lodash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/28/lodash/" class="article-date">
-  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
+  <time class="dt-published" datetime="2021-02-28T10:01:36.065Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/28/lodash/" data-id="cklovntow00002oo0aejuam7r" data-title="lodash" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/lodash/" data-id="cklozhn3j0000ztwu6zby7lof" data-title="lodash" class="article-share-link">Share</a>
       
       
       
@@ -151,7 +151,7 @@
     <article id="post-js_basic/01-basic-info" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/28/js_basic/01-basic-info/" class="article-date">
-  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
+  <time class="dt-published" datetime="2021-02-28T10:01:36.065Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -176,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/28/js_basic/01-basic-info/" data-id="cklovntox00012oo04nkn2i4i" data-title="基础知识" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/js_basic/01-basic-info/" data-id="cklozhn3l0001ztwu3w8u1yuu" data-title="基础知识" class="article-share-link">Share</a>
       
       
       
@@ -191,7 +191,7 @@
     <article id="post-js_basic/02-js-copy" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/28/js_basic/02-js-copy/" class="article-date">
-  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
+  <time class="dt-published" datetime="2021-02-28T10:01:36.065Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -243,7 +243,73 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/28/js_basic/02-js-copy/" data-id="cklovntoy00022oo03icj3235" data-title="JS数组的深拷贝与浅拷贝" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/js_basic/02-js-copy/" data-id="cklozhn3m0002ztwue9ak15xq" data-title="JS数组的深拷贝与浅拷贝" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nodejs/01-Node简介" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/" class="article-date">
+  <time class="dt-published" datetime="2021-02-28T10:01:36.065Z" itemprop="datePublished">2021-02-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/">Node简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3><span id="hello-world">hello world</span></h3><ol>
+<li>Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。</li>
+<li>Node的特点</li>
+</ol>
+<ul>
+<li>异步I/O</li>
+<li>事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。）</li>
+<li>单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换带来的性能开销，但是也有无法利用多核CPU、错误会导致整个应用退出、大量计算占用CPU导致无法继续调用异步I/O。Node通过child_process子进程讲计算来利用多核CPU）</li>
+<li>跨平台（基于libuv实现了跨平台）</li>
+</ul>
+<ol start="3">
+<li>Node的应用场景</li>
+</ol>
+<ul>
+<li>I/O密集型（面向网络且擅长并行I/O，优势在于Node利用事件循环的处理能力，而不是为每一个请求启动一个线程）。</li>
+<li>是否不擅长CPU密集型任务（如果有长时间运行的计算会导致CPU时间片不能释放，后续I/O无法发起。但是只要适当调整和分解大型运算任务为多个小任务，使运算可以适时释放，不阻塞I/O调用发起）</li>
+</ul>
+<ol start="4">
+<li>Node的使用者的倚重点</li>
+</ol>
+<ul>
+<li>前后端编程语言环境统一</li>
+<li>Node带来的高性能I/O用于实时应用</li>
+<li>并行I/O使得使用者可以更高效利用分布式环境</li>
+<li>并行I/O有效利用稳定借口提升Web渲染能力</li>
+<li>云计算平台提供Node支持</li>
+<li>工具类应用</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/" data-id="cklozhn3n0003ztwufafcc3w8" data-title="Node简介" class="article-share-link">Share</a>
       
       
       
@@ -299,6 +365,10 @@
         
           <li>
             <a href="/2021/02/28/js_basic/02-js-copy/">JS数组的深拷贝与浅拷贝</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/">Node简介</a>
           </li>
         
       </ul>
