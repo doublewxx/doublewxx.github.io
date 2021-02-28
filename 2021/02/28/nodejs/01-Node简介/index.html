@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Node简介 | cindy&#39;s Notebook</title>
+  <title>深入浅出Node | cindy&#39;s Notebook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="hello world Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。 Node的特点   异步I&#x2F;O 事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。） 单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换">
+  <meta name="description" content="Node简介 Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。 Node的特点   异步I&#x2F;O 事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。） 单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换带来的性能">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Node简介">
+<meta property="og:title" content="深入浅出Node">
 <meta property="og:url" content="http://example.com/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="cindy&#39;s Notebook">
-<meta property="og:description" content="hello world Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。 Node的特点   异步I&#x2F;O 事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。） 单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换">
+<meta property="og:description" content="Node简介 Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。 Node的特点   异步I&#x2F;O 事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。） 单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换带来的性能">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-02-28T10:01:36.065Z">
-<meta property="article:modified_time" content="2021-02-28T10:01:36.065Z">
+<meta property="article:published_time" content="2021-02-28T12:20:51.104Z">
+<meta property="article:modified_time" content="2021-02-28T12:20:51.104Z">
 <meta property="article:author" content="little cindy">
 <meta name="twitter:card" content="summary">
   
@@ -76,7 +76,7 @@
         <section id="main"><article id="post-nodejs/01-Node简介" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/" class="article-date">
-  <time class="dt-published" datetime="2021-02-28T10:01:36.065Z" itemprop="datePublished">2021-02-28</time>
+  <time class="dt-published" datetime="2021-02-28T12:20:51.104Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Node简介
+      深入浅出Node
     </h1>
   
 
@@ -95,7 +95,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3><span id="hello-world">hello world</span></h3><ol>
+        <h3><span id="node简介">Node简介</span></h3><ol>
 <li>Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。</li>
 <li>Node的特点</li>
 </ol>
@@ -123,11 +123,37 @@
 <li>云计算平台提供Node支持</li>
 <li>工具类应用</li>
 </ul>
+<h3><span id="模块机制">模块机制</span></h3><h4><span id="commonjs规范">CommonJS规范</span></h4><p>CommonJS规范的提出，主要为了弥补当前JS没有标准的缺陷，达到具备开发大型应用的基础能力。<br>模块规范</p>
+<ul>
+<li>模块引用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var math &#x3D; require(&#39;math&#39;);</span><br></pre></td></tr></table></figure></li>
+<li>模块定义<br>上下文提供了exports对象用于导出当前模块的方法或者变量，并且它是唯一导出的出口。在模块中，还存在一个module对象，代表模块自身，exports是module的属性。</li>
+<li>模块标识<br>模块标识就是传递给require()方法的参数，必须符合小拖放命名的字符串，或者相对路径or绝对路径。<h3><span id="node的模块实现">Node的模块实现</span></h3></li>
+</ul>
+<ol>
+<li>Node中引入模块，需要路径分析、文件定位、编译执行三个步骤。</li>
+<li>Node中模块分为两类，一类是Node提供的模块称为核心模块。另一类是用户编写的模块，称为文件模块。<ul>
+<li>核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，这部分核心模块被直接加载进内存，就可以省略文件定位和编译执行步骤，路径分析中优先判断</li>
+<li>文件模块在运行时动态加载，需要三个步骤，会慢一些</li>
+</ul>
+</li>
+<li>Node对引入过的模块都会进行缓存，缓存的是编译和执行之后的对象。无论核心模块还是文件模块，都是优先采用缓存。核心模块的缓存检查先于文件模块的缓存检查。</li>
+<li>路径分析和文件定位<h6><span id="模块标识符分析">模块标识符分析：</span></h6></li>
+</ol>
+<ul>
+<li>模块加载速度：缓存模块&lt;核心模块&lt;路径形式的文件模块&lt;自定义模块<h6><span id="文件定位分析">文件定位分析：</span></h6></li>
+<li>文件扩展名分析，Node会按照.js .json .node的次序补足扩展名，依次尝试。尝试过程中，需要调用fs模块同步阻塞式地判断文件是否存在。</li>
+<li>目录分析和包：分析标识符查找到一个目录，Node会当成一个包来处理。会去查找包里面是否有package.json，取出main属性指定的文件来定位。<br>如果main属性指定文件名错误，会将index当做默认文件名。如果这一级目录还没有找到，会下一个模块路径进行遍历。如果所有模块路径都找不到，就跑出查找失败的异常。<h6><span id="模块编译">模块编译：</span></h6>编译和执行是引入文件模块的最后一个阶段。定位到具体的文件后，Node会新建一个模块对象，根据路径载入并编译。<br>不同文件名载入方法有所不同</li>
+<li>.js 通过fs模块同步读取文件后编译执行。</li>
+<li>.node C/C++编写的扩展文件，通过dlopen()方法加载最后编译生成的文件</li>
+<li>.json 通过fs模块同步读取文件后，用JSON.parse()解析返回结果</li>
+<li>其余扩展名，被当做js文件载入<br>每一个编译成功的模块都会将其文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能<h5><span id="js模块的编译">JS模块的编译</span></h5>在编译的过程中，Node对获取的JavaScript文件内容进行了头尾包装。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(function (exports, require, module, _filename, _dirname) &#123; &#x2F;&#x2F; 新增行</span><br><span class="line">  var math &#x3D; require(&#39;math&#39;);</span><br><span class="line">  exports.area &#x3D; function (radius) &#123;</span><br><span class="line">    return Math.PI * radius * radius;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;); &#x2F;&#x2F; 新增行</span><br></pre></td></tr></table></figure>
+通过新增了头和尾，进行了作用域隔离，包装之后的代码会通过vm原生模块的runInThisContext()方法执行，返回一个具体的function对象。<br>最后把当前模块对象的exports属性、require()方法、module及在文件定位中得到的完整的文件路径和文件目录作为参数传入function()执行。<br>执行之后，模块的exports属性被返回给了调用方。<br>exports对象是通过形参的方式传入的，直接复制会改变形参的引用，但不会改变作用域外的值，因此需要用module.exports迂回一下。<h5><span id="cc模块的编译">C/C++模块的编译</span></h5>Node调用process.dlopen()方法进行加载和执行。dlopen()方法在不同平台不同实现，通过libuv兼容层进行了封装。<br>实际上node的模块文件并不需要编译，因为已经是编译生成的，所以只有加载和执行的过程。<br>在执行的过程中，模块的exports对象与.node模块产生联系，然后返回给调用者。<br>C/C++模块执行效率快，但是入门门槛高。<h5><span id="json文件的编译">JSON文件的编译</span></h5>利用fs模块同步读取JSON文件的内容之后，调用JSON.parse()方法得到对象，在赋给模块对象的exports，供外部调用。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/" data-id="cklozhn3n0003ztwufafcc3w8" data-title="Node简介" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/" data-id="cklp4gpsg000307kuhg409t7i" data-title="深入浅出Node" class="article-share-link">Share</a>
       
       
       
@@ -198,7 +224,7 @@
           </li>
         
           <li>
-            <a href="/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/">Node简介</a>
+            <a href="/2021/02/28/nodejs/01-Node%E7%AE%80%E4%BB%8B/">深入浅出Node</a>
           </li>
         
       </ul>
