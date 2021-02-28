@@ -73,8 +73,8 @@
   
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/02/26/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-02-26T11:42:53.721Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/2021/02/28/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/26/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2021/02/28/hello-world/">Hello World</a>
     </h1>
   
 
@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/26/hello-world/" data-id="ckliupiga0000p5vp77oo4yom" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/hello-world/" data-id="ckliupiga0000p5vp77oo4yom" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -111,8 +111,8 @@
   
     <article id="post-lodash" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/02/26/lodash/" class="article-date">
-  <time class="dt-published" datetime="2021-02-26T11:42:53.721Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/2021/02/28/lodash/" class="article-date">
+  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -123,7 +123,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/26/lodash/">lodash</a>
+      <a class="p-name article-title" href="/2021/02/28/lodash/">lodash</a>
     </h1>
   
 
@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/26/lodash/" data-id="cklm8865g00001mqvdfdlakck" data-title="lodash" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/lodash/" data-id="cklovntow00002oo0aejuam7r" data-title="lodash" class="article-share-link">Share</a>
       
       
       
@@ -150,8 +150,8 @@
   
     <article id="post-js_basic/01-basic-info" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/02/26/js_basic/01-basic-info/" class="article-date">
-  <time class="dt-published" datetime="2021-02-26T11:42:53.721Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/2021/02/28/js_basic/01-basic-info/" class="article-date">
+  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -162,7 +162,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/26/js_basic/01-basic-info/">基础知识</a>
+      <a class="p-name article-title" href="/2021/02/28/js_basic/01-basic-info/">基础知识</a>
     </h1>
   
 
@@ -171,11 +171,12 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2><span id="1-0102为什么不等于03">1、0.1+0.2为什么不等于0.3</span></h2><p>JavaScript使用Number类型表示数字（整数和浮点数)，遵循 IEEE 754 标准，通过64位来表示一个数字。<br>JS中1位符号位，11位的指数e,剩余52位是尾数。<br>js最大安全数是 Number.MAX_SAFE_INTEGER == Math.pow(2,53) - 1。本来应该是Math.pow(2,52)-1，但是二进制表示的有效数字总是1.xxx。<br>计算机无法计算10进制，因此会先按照IEEE 754转换成二进制进行运算。<br>浮点数运算的五个步骤：对阶、尾数运算、规格化、舍入处理、溢出判断<br>1、0.1和0.2在转化为二进制后，都是无限循环小数，只能保留52位，会有精度损失<br>2、在运算时，需要对阶，一般是小阶对大阶，这一步也可能丢失进度，<br>3、对阶后进行尾数运算，相加后得到可结果，如果结果的整数部分超过1，需要进行规格化<br>4、规格化之后如果小数部分超出52位，需要再次摄入处理<br>5、0.1+0.2不涉及溢出判断，直接将结果转为10进制</p>
-
+<h2><span id="2-11为什么为false">2、[1]==[1]为什么为false</span></h2><p>引用类型的比较，是数组堆内存的地址的比较，两个数组在堆内存中地址是不同的。</p>
+<h2><span id="3-如何将值类型的变量以引用的方式传递">3、如何将值类型的变量以引用的方式传递</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var str &#x3D; &quot;abcd&quot;;        &#x2F;&#x2F;基本类型</span><br><span class="line">var obj &#x3D; &#123;&quot;str&quot;:str&#125;;   &#x2F;&#x2F;引用类型</span><br><span class="line">var boj2 &#x3D; obj;          &#x2F;&#x2F;复制引用地址</span><br><span class="line">console.log(boj2.str);   &#x2F;&#x2F;abcd</span><br><span class="line">obj.str &#x3D; &quot;bcd&quot;;</span><br><span class="line">console.log(boj2.str);   &#x2F;&#x2F;bcd</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/26/js_basic/01-basic-info/" data-id="cklm8865h00011mqv4q2a6shm" data-title="基础知识" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/js_basic/01-basic-info/" data-id="cklovntox00012oo04nkn2i4i" data-title="基础知识" class="article-share-link">Share</a>
       
       
       
@@ -189,8 +190,8 @@
   
     <article id="post-js_basic/02-js-copy" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/02/26/js_basic/02-js-copy/" class="article-date">
-  <time class="dt-published" datetime="2021-02-26T11:42:53.721Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/2021/02/28/js_basic/02-js-copy/" class="article-date">
+  <time class="dt-published" datetime="2021-02-28T08:14:27.587Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -201,7 +202,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/26/js_basic/02-js-copy/">JS数组的深拷贝与浅拷贝</a>
+      <a class="p-name article-title" href="/2021/02/28/js_basic/02-js-copy/">JS数组的深拷贝与浅拷贝</a>
     </h1>
   
 
@@ -242,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/26/js_basic/02-js-copy/" data-id="cklm8865i00021mqv8rjx8318" data-title="JS数组的深拷贝与浅拷贝" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2021/02/28/js_basic/02-js-copy/" data-id="cklovntoy00022oo03icj3235" data-title="JS数组的深拷贝与浅拷贝" class="article-share-link">Share</a>
       
       
       
@@ -285,19 +286,19 @@
       <ul>
         
           <li>
-            <a href="/2021/02/26/hello-world/">Hello World</a>
+            <a href="/2021/02/28/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2021/02/26/lodash/">lodash</a>
+            <a href="/2021/02/28/lodash/">lodash</a>
           </li>
         
           <li>
-            <a href="/2021/02/26/js_basic/01-basic-info/">基础知识</a>
+            <a href="/2021/02/28/js_basic/01-basic-info/">基础知识</a>
           </li>
         
           <li>
-            <a href="/2021/02/26/js_basic/02-js-copy/">JS数组的深拷贝与浅拷贝</a>
+            <a href="/2021/02/28/js_basic/02-js-copy/">JS数组的深拷贝与浅拷贝</a>
           </li>
         
       </ul>
