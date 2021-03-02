@@ -1,1 +1,4 @@
 
+[submodule "themes/themes/hexo-theme-matery"]
+	path = themes/themes/hexo-theme-matery
+	url = https://github.com/blinkfox/hexo-theme-matery.git
