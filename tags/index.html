@@ -3,8 +3,8 @@
 
 
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="JS数组的深拷贝与浅拷贝, cindy&#39;s Notebook">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="keywords" content="标签, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JS数组的深拷贝与浅拷贝 | cindy&#39;s Notebook</title>
+    <title>标签 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,13 +29,13 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 
 
 
 <body>
-    <header class="navbar-fixed">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JS数组的深拷贝与浅拷贝</h1>
+                    <h1 class="description center-align post-title">tags</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-26
+                    2021-03-02
                 </div>
                 
 
@@ -459,41 +459,15 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="js数据类型">js数据类型</span></h3><p>js数据类型包含基本数据类型(String,Number,Boolean,Null,Undefined)和引用数据类型(Array,Object,Function)</p>
-<h3><span id="堆内存和栈内存">堆内存和栈内存</span></h3><p>1、栈内存中存放的是存储对象的地址，而堆内存中存放的是存储对象的具体内容。<br>2、基本数据类型的地址和具体值都存在于栈内存中，引用数据类型的地址存在于栈内存中，而具体内容存在在堆内存中。<br>3、栈内存运行效率比堆内存高，空间相对堆内存来说较小。所以将构造简单的原始类型值放在栈内存中，将构造复杂的引用类型值放在堆中而不影响栈的效率。</p>
-<h3><span id="浅拷贝与深拷贝">浅拷贝与深拷贝</span></h3><p>浅拷贝：复制一份引用，所有引用对象都指向一份数据，且都可以修改这份数据。<br>深拷贝：复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。</p>
-<h3><span id="浅拷贝">浅拷贝</span></h3><h4><span id="数组的浅拷贝">数组的浅拷贝</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr1 &#x3D; [1,2,3];</span><br><span class="line">let arr2 &#x3D; arr1;</span><br><span class="line">arr1[0] &#x3D; 2;</span><br><span class="line">console.log(arr1[0]);  &#x2F;&#x2F;2</span><br></pre></td></tr></table></figure>
-<h4><span id="对象的浅拷贝">对象的浅拷贝</span></h4><p>方式1：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let srcObj &#x3D; &#123;&#39;name&#39;: &#39;lilei&#39;, &#39;age&#39;: &#39;20&#39;&#125;;</span><br><span class="line">let copyObj &#x3D; srcObj;</span><br><span class="line">copyObj.age &#x3D; &#39;22&#39;;</span><br><span class="line">console.log(&#39;srcObj&#39;, srcObj);   &#x2F;&#x2F; srcObj &#123; name: &#39;lilei&#39;, age: &#39;22&#39; &#125;</span><br><span class="line">console.log(&#39;copyObj&#39;, copyObj);  &#x2F;&#x2F; copyObj &#123; name: &#39;lilei&#39;, age: &#39;22&#39; &#125;</span><br></pre></td></tr></table></figure>
-<p>方式2：Object.assign<br>可以处理对象属性为简单类型的深拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let srcObj &#x3D; &#123;&#39;name&#39;: &#39;lilei&#39;, &#39;age&#39;: &#39;20&#39;&#125;;</span><br><span class="line">let copyObj2 &#x3D; Object.assign(&#123;&#125;, srcObj, &#123;&#39;age&#39;: &#39;21&#39;&#125;);</span><br><span class="line">copyObj2.age &#x3D; &#39;23&#39;;</span><br><span class="line">console.log(&#39;srcObj&#39;, srcObj); &#x2F;&#x2F;&#123; name: &#39;lilei&#39;, age: &#39;20&#39; &#125;</span><br></pre></td></tr></table></figure>
-<p>不能处理对象属性为引用类型，则那对于这个对象而言其实是浅拷贝的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj &#x3D; &#123; a: &#123;a: &quot;hello&quot;, b: 21&#125; &#125;;</span><br><span class="line">var initalObj &#x3D; Object.assign(&#123;&#125;, obj);</span><br><span class="line">initalObj.a.a &#x3D; &quot;changed&quot;;</span><br><span class="line">console.log(obj.a.a); &#x2F;&#x2F; &quot;changed&quot;</span><br></pre></td></tr></table></figure>
-<h3><span id="深拷贝">深拷贝</span></h3><h4><span id="数组深拷贝">数组深拷贝</span></h4><p>方式1：直接遍历赋值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var arr1 &#x3D; [1,3,5];</span><br><span class="line">var arr2 &#x3D; [];</span><br><span class="line">arr1.forEach(function(value,index)&#123;</span><br><span class="line">arr2[index] &#x3D; value;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(arr2);</span><br><span class="line">&#x2F;&#x2F;这个时候改变arr1[0]  &#x3D; 3;那么输出arr2[0]还是等于1</span><br></pre></td></tr></table></figure>
-<p>方式2：使用slice方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr1 &#x3D; [1,2,3];</span><br><span class="line">var arr2 &#x3D; arr1.slice(0);</span><br><span class="line">console.log(arr2); &#x2F;&#x2F;[1,2,3]</span><br></pre></td></tr></table></figure>
-<p>方式3：使用concat方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr1 &#x3D; [1,2,3];</span><br><span class="line">var arr2 &#x3D; arr1.concat();</span><br><span class="line">console.log(arr2); &#x2F;&#x2F;[1,2,3]</span><br></pre></td></tr></table></figure>
-<p>方式4：使用map方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr1 &#x3D; [2,3,4];</span><br><span class="line">var arr2 &#x3D; arr1.map(function(value)&#123;</span><br><span class="line">return value;  </span><br><span class="line">&#125;)</span><br><span class="line">console.log(arr2);  &#x2F;&#x2F;[2,3,4]</span><br></pre></td></tr></table></figure>
-<p>方式5：ES6扩展运算符</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [1,2,3,4,5];</span><br><span class="line">var [ ... arr2 ] &#x3D; arr;</span><br><span class="line">console.log(arr); &#x2F;&#x2F;[1,2,3,4,5]</span><br><span class="line">console.log(arr2); &#x2F;&#x2F;[1,2,3,4,5]</span><br></pre></td></tr></table></figure>
-<p>方式6：for-in连原型链也一并复制的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [1,2,3,4,5];</span><br><span class="line">arr.prototype &#x3D; 5;</span><br><span class="line">var arr2 &#x3D; [];</span><br><span class="line">for(var a in arr) &#123;</span><br><span class="line">  arr2[a] &#x3D; arr[a];</span><br><span class="line">&#125;</span><br><span class="line">console.log(arr2); &#x2F;&#x2F; [1,2,3,4,5]</span><br><span class="line">console.log(arr2.prototype); &#x2F;&#x2F; 5</span><br><span class="line">&#x2F;&#x2F;之前的方法中新数组的prototype都是undefined</span><br></pre></td></tr></table></figure>
-<p>多维数组的深拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr &#x3D; [[1,2],3,4,[5,6]];</span><br><span class="line">var arr3 &#x3D; JSON.parse(JSON.stringify(arr));  </span><br><span class="line">console.log(arr3) &#x2F;&#x2F; [[1,2],3,4,[5,6]]</span><br></pre></td></tr></table></figure>
-<h4><span id="对象深拷贝">对象深拷贝</span></h4><p>方式1：手动复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj1 &#x3D; &#123; a: 10, b: 20, c: 30 &#125;;</span><br><span class="line">var obj2 &#x3D; &#123; a: obj1.a, b: obj1.b, c: obj1.c &#125;;</span><br><span class="line">obj2.b &#x3D; 100;</span><br><span class="line">console.log(obj1);</span><br><span class="line">&#x2F;&#x2F; &#123; a: 10, b: 20, c: 30 &#125; &#x2F;&#x2F; 沒被改到</span><br><span class="line">console.log(obj2);</span><br><span class="line">&#x2F;&#x2F; &#123; a: 10, b: 100, c: 30 &#125;</span><br></pre></td></tr></table></figure>
-<p>方式2：JSON做字符串转换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj1 &#x3D; &#123; body: &#123; a: 10 &#125; &#125;;</span><br><span class="line">var obj2 &#x3D; JSON.parse(JSON.stringify(obj1));</span><br><span class="line">obj2.body.a &#x3D; 20;</span><br><span class="line">console.log(obj1);</span><br><span class="line">&#x2F;&#x2F; &#123; body: &#123; a: 10 &#125; &#125;</span><br><span class="line">console.log(obj2);</span><br><span class="line">&#x2F;&#x2F; &#123; body: &#123; a: 20 &#125; &#125;</span><br><span class="line">console.log(obj1 &#x3D;&#x3D;&#x3D; obj2);</span><br><span class="line">&#x2F;&#x2F; false</span><br><span class="line">console.log(obj1.body &#x3D;&#x3D;&#x3D; obj2.body);</span><br></pre></td></tr></table></figure>
-<p>备注：这种方式简单易用，但是会抛弃对象的constructor，无论之前的构造函数是什么，拷贝后都是Object<br>这种方法能正确处理的对象只有Number, String, Boolean, Array, 扁平对象，即那些能够被json直接表示的数据结构。RegExp对象是无法通过这种方式深拷贝。<br>也就是说，只有可以转成JSON格式的对象才可以这样用，像function没办法转成JSON。<br>方式3：递归拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function deepClone(initalObj, finalObj) &#123;    </span><br><span class="line">  var obj &#x3D; finalObj || &#123;&#125;;    </span><br><span class="line">  for (var i in initalObj) &#123;        </span><br><span class="line">    var prop &#x3D; initalObj[i];        &#x2F;&#x2F; 避免相互引用对象导致死循环，如initalObj.a &#x3D; initalObj的情况</span><br><span class="line">    if(prop &#x3D;&#x3D;&#x3D; obj) &#123;            </span><br><span class="line">      continue;</span><br><span class="line">    &#125;        </span><br><span class="line">    if (typeof prop &#x3D;&#x3D;&#x3D; &#39;object&#39;) &#123;</span><br><span class="line">      obj[i] &#x3D; (prop.constructor &#x3D;&#x3D;&#x3D; Array) ? [] : &#123;&#125;;            </span><br><span class="line">      arguments.callee(prop, obj[i]);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      obj[i] &#x3D; prop;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;    </span><br><span class="line">  return obj;</span><br><span class="line">&#125;</span><br><span class="line">var str &#x3D; &#123;&#125;;</span><br><span class="line">var obj &#x3D; &#123; a: &#123;a: &quot;hello&quot;, b: 21&#125; &#125;;</span><br><span class="line">deepClone(obj, str);</span><br><span class="line">console.log(str.a);</span><br></pre></td></tr></table></figure>
+                
                 
             </div>
             <hr/>
@@ -519,7 +493,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/02/26/js_basic/02-js-copy/">http://example.com/2021/02/26/js_basic/02-js-copy/</a>
+                    <a href="http://example.com/tags/index.html">http://example.com/tags/index.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -726,54 +700,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/01/js_basic/01-basic-info/">
+                <a href="/tags/index.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="基础知识">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="tags">
                         
-                        <span class="card-title">基础知识</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-01
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            little cindy
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/02/24/lodash/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="lodash">
-                        
-                        <span class="card-title">lodash</span>
+                        <span class="card-title">tags</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -784,7 +722,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-02
                             </span>
                         <span class="publish-author">
                             
@@ -794,6 +732,45 @@
                         </span>
                     </div>
                 </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/tags/index.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="tags">
+                        
+                        <span class="card-title">tags</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            little cindy
+                            
+                        </span>
+                    </div>
+                </div>
+
                 
             </div>
         </div>
@@ -1208,7 +1185,7 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
 </body>
