@@ -24,7 +24,7 @@ title: 深入浅出Node
 CommonJS规范的提出，主要为了弥补当前JS没有标准的缺陷，达到具备开发大型应用的基础能力。
 模块规范
 - 模块引用
-```angular2
+```javascript
 var math = require('math');
 ```
 - 模块定义
@@ -54,7 +54,7 @@ var math = require('math');
 每一个编译成功的模块都会将其文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能
 ##### JS模块的编译
 在编译的过程中，Node对获取的JavaScript文件内容进行了头尾包装。
-```angular2
+```javascript
 (function (exports, require, module, _filename, _dirname) { // 新增行
   var math = require('math');
   exports.area = function (radius) {

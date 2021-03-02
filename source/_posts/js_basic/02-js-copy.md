@@ -12,7 +12,7 @@ js数据类型包含基本数据类型(String,Number,Boolean,Null,Undefined)和�
 深拷贝：复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。
 ### 浅拷贝
 #### 数组的浅拷贝
-```angular2html
+```javascript
 let arr1 = [1,2,3];
 let arr2 = arr1;
 arr1[0] = 2;
@@ -20,7 +20,7 @@ console.log(arr1[0]);  //2
 ```
 #### 对象的浅拷贝
 方式1：
-```
+```javascript
 let srcObj = {'name': 'lilei', 'age': '20'};
 let copyObj = srcObj;
 copyObj.age = '22';
@@ -29,14 +29,14 @@ console.log('copyObj', copyObj);  // copyObj { name: 'lilei', age: '22' }
 ```
 方式2：Object.assign
 可以处理对象属性为简单类型的深拷贝
-```angular2html
+```javascript
 let srcObj = {'name': 'lilei', 'age': '20'};
 let copyObj2 = Object.assign({}, srcObj, {'age': '21'});
 copyObj2.age = '23';
 console.log('srcObj', srcObj); //{ name: 'lilei', age: '20' }
 ```
 不能处理对象属性为引用类型，则那对于这个对象而言其实是浅拷贝的
-```
+```javascript
 var obj = { a: {a: "hello", b: 21} };
 var initalObj = Object.assign({}, obj);
 initalObj.a.a = "changed";
@@ -45,7 +45,7 @@ console.log(obj.a.a); // "changed"
 ### 深拷贝
 #### 数组深拷贝
 方式1：直接遍历赋值
-```angular2html
+```javascript
 var arr1 = [1,3,5];
 var arr2 = [];
 arr1.forEach(function(value,index){
@@ -55,19 +55,19 @@ console.log(arr2);
 //这个时候改变arr1[0]  = 3;那么输出arr2[0]还是等于1
 ```
 方式2：使用slice方法
-```angular2html
+```javascript
 var arr1 = [1,2,3];
 var arr2 = arr1.slice(0);
 console.log(arr2); //[1,2,3]
 ```
 方式3：使用concat方法
-```angular2html
+```javascript
 var arr1 = [1,2,3];
 var arr2 = arr1.concat();
 console.log(arr2); //[1,2,3]
 ```
 方式4：使用map方法
-```
+```javascript
 var arr1 = [2,3,4];
 var arr2 = arr1.map(function(value){
 return value;  
@@ -75,14 +75,14 @@ return value;
 console.log(arr2);  //[2,3,4]
 ```
 方式5：ES6扩展运算符
-```angular2html
+```javascript
   var arr = [1,2,3,4,5];
   var [ ... arr2 ] = arr;
   console.log(arr); //[1,2,3,4,5]
   console.log(arr2); //[1,2,3,4,5]
 ```
 方式6：for-in连原型链也一并复制的方法
-```angular2html
+```javascript
 var arr = [1,2,3,4,5];
 arr.prototype = 5;
 var arr2 = [];
@@ -94,14 +94,14 @@ console.log(arr2.prototype); // 5
 //之前的方法中新数组的prototype都是undefined
 ```
 多维数组的深拷贝
-```angular2html
+```javascript
 var arr = [[1,2],3,4,[5,6]];
 var arr3 = JSON.parse(JSON.stringify(arr));  
 console.log(arr3) // [[1,2],3,4,[5,6]]
 ```
 #### 对象深拷贝
 方式1：手动复制
-```angular2html
+```javascript
 var obj1 = { a: 10, b: 20, c: 30 };
 var obj2 = { a: obj1.a, b: obj1.b, c: obj1.c };
 obj2.b = 100;
@@ -111,7 +111,7 @@ console.log(obj2);
 // { a: 10, b: 100, c: 30 }
 ```
 方式2：JSON做字符串转换
-```angular2html
+```javascript
 var obj1 = { body: { a: 10 } };
 var obj2 = JSON.parse(JSON.stringify(obj1));
 obj2.body.a = 20;
@@ -127,7 +127,7 @@ console.log(obj1.body === obj2.body);
 这种方法能正确处理的对象只有Number, String, Boolean, Array, 扁平对象，即那些能够被json直接表示的数据结构。RegExp对象是无法通过这种方式深拷贝。
 也就是说，只有可以转成JSON格式的对象才可以这样用，像function没办法转成JSON。
 方式3：递归拷贝
-```angular2html
+```javascript
 function deepClone(initalObj, finalObj) {    
   var obj = finalObj || {};    
   for (var i in initalObj) {        

@@ -18,7 +18,7 @@ js最大安全数是 Number.MAX_SAFE_INTEGER == Math.pow(2,53) - 1。本来应�
 引用类型的比较，是数组堆内存的地址的比较，两个数组在堆内存中地址是不同的。
 
 ## 3、如何将值类型的变量以引用的方式传递
-```angular2
+```javascript
 var str = "abcd";        //基本类型
 var obj = {"str":str};   //引用类型
 var boj2 = obj;          //复制引用地址
