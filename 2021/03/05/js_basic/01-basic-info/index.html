@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="深入浅出Node, cindy&#39;s Notebook">
+    <meta name="keywords" content="基础知识, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深入浅出Node | cindy&#39;s Notebook</title>
+    <title>基础知识 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深入浅出Node</h1>
+                    <h1 class="description center-align post-title">基础知识</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-02
+                    2021-03-05
                 </div>
                 
 
@@ -467,65 +467,52 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="node简介">Node简介</span></h3><ol>
-<li>Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。</li>
-<li>Node的特点</li>
-</ol>
+                <h2><span id="1-0102为什么不等于03">1、0.1+0.2为什么不等于0.3</span></h2><p>JavaScript使用Number类型表示数字（整数和浮点数)，遵循 IEEE 754 标准，通过64位来表示一个数字。<br>JS中1位符号位，11位的指数e,剩余52位是尾数。<br>js最大安全数是 Number.MAX_SAFE_INTEGER == Math.pow(2,53) - 1。本来应该是Math.pow(2,52)-1，但是二进制表示的有效数字总是1.xxx。<br>计算机无法计算10进制，因此会先按照IEEE 754转换成二进制进行运算。<br>浮点数运算的五个步骤：对阶、尾数运算、规格化、舍入处理、溢出判断<br>1、0.1和0.2在转化为二进制后，都是无限循环小数，只能保留52位，会有精度损失<br>2、在运算时，需要对阶，一般是小阶对大阶，这一步也可能丢失进度，<br>3、对阶后进行尾数运算，相加后得到可结果，如果结果的整数部分超过1，需要进行规格化<br>4、规格化之后如果小数部分超出52位，需要再次摄入处理<br>5、0.1+0.2不涉及溢出判断，直接将结果转为10进制</p>
+<h2><span id="2-11为什么为false">2、[1]==[1]为什么为false</span></h2><p>引用类型的比较，是数组堆内存的地址的比较，两个数组在堆内存中地址是不同的。</p>
+<h2><span id="3-如何将值类型的变量以引用的方式传递">3、如何将值类型的变量以引用的方式传递</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"abcd"</span><span class="token punctuation">;</span>        <span class="token comment">//基本类型</span>
+<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"str"</span><span class="token operator">:</span>str<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>   <span class="token comment">//引用类型</span>
+<span class="token keyword">var</span> boj2 <span class="token operator">=</span> obj<span class="token punctuation">;</span>          <span class="token comment">//复制引用地址</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>boj2<span class="token punctuation">.</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//abcd</span>
+obj<span class="token punctuation">.</span>str <span class="token operator">=</span> <span class="token string">"bcd"</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>boj2<span class="token punctuation">.</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//bcd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2><span id="4-const定义的array中间元素是否可以被修改如果可以那么const修饰对象有什么意义">4、const定义的Array中间元素是否可以被修改？如果可以，那么const修饰对象有什么意义</span></h2><p>const定义的Array中间元素可以被修改，const定义的变量保存的是Array的地址，这个变量本身不可以修改，而存在于堆内存的Array本身是可以修改的。<br>对于const声明，只是它的赋值操作被冻结了，而值不会因为const而不变。主要是预防在coding过程中的coder因为疏忽对变量的意外修改。</p>
+<h2><span id="5-null与undefined的区别">5、null与undefined的区别</span></h2><p>null表示”没有对象”，此处不该有值</p>
+<p>典型用法</p>
 <ul>
-<li>异步I/O</li>
-<li>事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。）</li>
-<li>单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换带来的性能开销，但是也有无法利用多核CPU、错误会导致整个应用退出、大量计算占用CPU导致无法继续调用异步I/O。Node通过child_process子进程讲计算来利用多核CPU）</li>
-<li>跨平台（基于libuv实现了跨平台）</li>
+<li>作为函数的参数，表示该函数的参数不是对象</li>
+<li>作为对象原型链的终点</li>
 </ul>
-<ol start="3">
-<li>Node的应用场景</li>
-</ol>
+<p>undefined表示”缺少值”，此处该有值，但是还未定义</p>
 <ul>
-<li>I/O密集型（面向网络且擅长并行I/O，优势在于Node利用事件循环的处理能力，而不是为每一个请求启动一个线程）。</li>
-<li>是否不擅长CPU密集型任务（如果有长时间运行的计算会导致CPU时间片不能释放，后续I/O无法发起。但是只要适当调整和分解大型运算任务为多个小任务，使运算可以适时释放，不阻塞I/O调用发起）</li>
+<li>变量被声明了，但是没有赋值，就是undefined</li>
+<li>调用函数时，应该提供的参数没有提供，该参数等于undefined</li>
+<li>对象没有赋值的属性，该属性的值为undefined</li>
+<li>函数没有返回值时，默认返回undefined </li>
 </ul>
-<ol start="4">
-<li>Node的使用者的倚重点</li>
-</ol>
-<ul>
-<li>前后端编程语言环境统一</li>
-<li>Node带来的高性能I/O用于实时应用</li>
-<li>并行I/O使得使用者可以更高效利用分布式环境</li>
-<li>并行I/O有效利用稳定借口提升Web渲染能力</li>
-<li>云计算平台提供Node支持</li>
-<li>工具类应用</li>
-</ul>
-<h3><span id="模块机制">模块机制</span></h3><h4><span id="commonjs规范">CommonJS规范</span></h4><p>CommonJS规范的提出，主要为了弥补当前JS没有标准的缺陷，达到具备开发大型应用的基础能力。<br>模块规范</p>
-<ul>
-<li>模块引用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>模块定义<br>上下文提供了exports对象用于导出当前模块的方法或者变量，并且它是唯一导出的出口。在模块中，还存在一个module对象，代表模块自身，exports是module的属性。</li>
-<li>模块标识<br>模块标识就是传递给require()方法的参数，必须符合小拖放命名的字符串，或者相对路径or绝对路径。<h3><span id="node的模块实现">Node的模块实现</span></h3></li>
-</ul>
+<p>要比较相等性之前，不能将 null 和 undefined 转换成其他任何值，它们就是相等的，在ECMAScript规范中也是这样定义的。</p>
+<h2><span id="6-和的操作流程">6. ==和===的操作流程</span></h2><p>这两个操作符都会先转换操作，再比较它们的相等性<br>转化基本规则</p>
 <ol>
-<li>Node中引入模块，需要路径分析、文件定位、编译执行三个步骤。</li>
-<li>Node中模块分为两类，一类是Node提供的模块称为核心模块。另一类是用户编写的模块，称为文件模块。<ul>
-<li>核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，这部分核心模块被直接加载进内存，就可以省略文件定位和编译执行步骤，路径分析中优先判断</li>
-<li>文件模块在运行时动态加载，需要三个步骤，会慢一些</li>
-</ul>
-</li>
-<li>Node对引入过的模块都会进行缓存，缓存的是编译和执行之后的对象。无论核心模块还是文件模块，都是优先采用缓存。核心模块的缓存检查先于文件模块的缓存检查。</li>
-<li>路径分析和文件定位<h6><span id="模块标识符分析">模块标识符分析：</span></h6></li>
+<li>如果有一个操作数是布尔值，则在比较相等性之前现将其转换为数值-false转换为0，true转换为1</li>
+<li>如果有一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值</li>
+<li>如果一个操作数是对象，另一个操作数不是，则调用对象valueOf( )方法，用得到的基本类型值按照前面的规则进行比较</li>
+<li>如果一个操作数是布尔值，另一个操作数是字符串，会把双方转换为数字，再进行比较</li>
 </ol>
-<ul>
-<li>模块加载速度：缓存模块&lt;核心模块&lt;路径形式的文件模块&lt;自定义模块<h6><span id="文件定位分析">文件定位分析：</span></h6></li>
-<li>文件扩展名分析，Node会按照.js .json .node的次序补足扩展名，依次尝试。尝试过程中，需要调用fs模块同步阻塞式地判断文件是否存在。</li>
-<li>目录分析和包：分析标识符查找到一个目录，Node会当成一个包来处理。会去查找包里面是否有package.json，取出main属性指定的文件来定位。<br>如果main属性指定文件名错误，会将index当做默认文件名。如果这一级目录还没有找到，会下一个模块路径进行遍历。如果所有模块路径都找不到，就跑出查找失败的异常。<h6><span id="模块编译">模块编译：</span></h6>编译和执行是引入文件模块的最后一个阶段。定位到具体的文件后，Node会新建一个模块对象，根据路径载入并编译。<br>不同文件名载入方法有所不同</li>
-<li>.js 通过fs模块同步读取文件后编译执行。</li>
-<li>.node C/C++编写的扩展文件，通过dlopen()方法加载最后编译生成的文件</li>
-<li>.json 通过fs模块同步读取文件后，用JSON.parse()解析返回结果</li>
-<li>其余扩展名，被当做js文件载入<br>每一个编译成功的模块都会将其文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能<h5><span id="js模块的编译">JS模块的编译</span></h5>在编译的过程中，Node对获取的JavaScript文件内容进行了头尾包装。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">exports<span class="token punctuation">,</span> require<span class="token punctuation">,</span> module<span class="token punctuation">,</span> _filename<span class="token punctuation">,</span> _dirname</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 新增行</span>
-  <span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  exports<span class="token punctuation">.</span><span class="token function-variable function">area</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">radius</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> radius <span class="token operator">*</span> radius<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 新增行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-通过新增了头和尾，进行了作用域隔离，包装之后的代码会通过vm原生模块的runInThisContext()方法执行，返回一个具体的function对象。<br>最后把当前模块对象的exports属性、require()方法、module及在文件定位中得到的完整的文件路径和文件目录作为参数传入function()执行。<br>执行之后，模块的exports属性被返回给了调用方。<br>exports对象是通过形参的方式传入的，直接复制会改变形参的引用，但不会改变作用域外的值，因此需要用module.exports迂回一下。<h5><span id="cc模块的编译">C/C++模块的编译</span></h5>Node调用process.dlopen()方法进行加载和执行。dlopen()方法在不同平台不同实现，通过libuv兼容层进行了封装。<br>实际上node的模块文件并不需要编译，因为已经是编译生成的，所以只有加载和执行的过程。<br>在执行的过程中，模块的exports对象与.node模块产生联系，然后返回给调用者。<br>C/C++模块执行效率快，但是入门门槛高。<h5><span id="json文件的编译">JSON文件的编译</span></h5>利用fs模块同步读取JSON文件的内容之后，调用JSON.parse()方法得到对象，在赋给模块对象的exports，供外部调用。</li>
-</ul>
+<p>比较时遵循规则：</p>
+<ol>
+<li>null和undefined相等</li>
+<li>比较相等性之前，不能把null和undefined转换成任何其他值</li>
+<li>如果有一个操作数是NaN，一定返回false，包括NaN==NaN</li>
+<li>如果两个操作数都是对象，则比较它们是不是同一个对象</li>
+</ol>
+<h2><span id="7-javascript中不同类型以及不同环境下变量的内存都是何时释放">7. JavaScript中不同类型以及不同环境下变量的内存都是何时释放</span></h2><p>引用类型是在没有引用之后，通过V8的GC自动回收。<br>值类型如果处于闭包的情况下，要等闭包没有引用才会被GC回收，非闭包的情况下，等待V8的新生代(new space)切换的时候回收。</p>
+<h2><span id="8-js中typeof的类型有哪些">8. JS中typeof的类型有哪些</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//undefined</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//number</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//string</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//boolean</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//object</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">&#123;</span><span class="token string">"id"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//object</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//object</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -552,7 +539,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/02/nodejs/01-Node%E7%AE%80%E4%BB%8B/">http://example.com/2021/03/02/nodejs/01-Node%E7%AE%80%E4%BB%8B/</a>
+                    <a href="http://example.com/2021/03/05/js_basic/01-basic-info/">http://example.com/2021/03/05/js_basic/01-basic-info/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -759,48 +746,12 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2021/03/02/js_basic/02-js-copy/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JS数组的深拷贝与浅拷贝">
-                        
-                        <span class="card-title">JS数组的深拷贝与浅拷贝</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-02
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            little cindy
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2021/03/01/js_basic/01-basic-info/">
+                <a href="/2021/03/05/js_basic/01-basic-info/">
                     <div class="card-image">
                         
                         
@@ -817,7 +768,45 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            little cindy
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/05/js_basic/02-js-copy/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JS数组的深拷贝与浅拷贝">
+                        
+                        <span class="card-title">JS数组的深拷贝与浅拷贝</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
                             </span>
                         <span class="publish-author">
                             

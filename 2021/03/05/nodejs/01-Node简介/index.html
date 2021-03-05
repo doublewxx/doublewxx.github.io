@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="JS数组的深拷贝与浅拷贝, cindy&#39;s Notebook">
+    <meta name="keywords" content="深入浅出Node, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JS数组的深拷贝与浅拷贝 | cindy&#39;s Notebook</title>
+    <title>深入浅出Node | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JS数组的深拷贝与浅拷贝</h1>
+                    <h1 class="description center-align post-title">深入浅出Node</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-02
+                    2021-03-05
                 </div>
                 
 
@@ -467,110 +467,66 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="js数据类型">js数据类型</span></h3><p>js数据类型包含基本数据类型(String,Number,Boolean,Null,Undefined)和引用数据类型(Array,Object,Function)</p>
-<h3><span id="堆内存和栈内存">堆内存和栈内存</span></h3><p>1、栈内存中存放的是存储对象的地址，而堆内存中存放的是存储对象的具体内容。<br>2、基本数据类型的地址和具体值都存在于栈内存中，引用数据类型的地址存在于栈内存中，而具体内容存在在堆内存中。<br>3、栈内存运行效率比堆内存高，空间相对堆内存来说较小。所以将构造简单的原始类型值放在栈内存中，将构造复杂的引用类型值放在堆中而不影响栈的效率。</p>
-<h3><span id="浅拷贝与深拷贝">浅拷贝与深拷贝</span></h3><p>浅拷贝：复制一份引用，所有引用对象都指向一份数据，且都可以修改这份数据。<br>深拷贝：复制变量值，对于非基本类型的变量，则递归至基本类型变量后，再复制。</p>
-<h3><span id="浅拷贝">浅拷贝</span></h3><h4><span id="数组的浅拷贝">数组的浅拷贝</span></h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> arr2 <span class="token operator">=</span> arr1<span class="token punctuation">;</span>
-arr1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h4><span id="对象的浅拷贝">对象的浅拷贝</span></h4><p>方式1：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> srcObj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token operator">:</span> <span class="token string">'lilei'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token operator">:</span> <span class="token string">'20'</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> copyObj <span class="token operator">=</span> srcObj<span class="token punctuation">;</span>
-copyObj<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token string">'22'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'srcObj'</span><span class="token punctuation">,</span> srcObj<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// srcObj &#123; name: 'lilei', age: '22' &#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'copyObj'</span><span class="token punctuation">,</span> copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// copyObj &#123; name: 'lilei', age: '22' &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>方式2：Object.assign<br>可以处理对象属性为简单类型的深拷贝</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> srcObj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token operator">:</span> <span class="token string">'lilei'</span><span class="token punctuation">,</span> <span class="token string">'age'</span><span class="token operator">:</span> <span class="token string">'20'</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> copyObj2 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> srcObj<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token string">'age'</span><span class="token operator">:</span> <span class="token string">'21'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-copyObj2<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token string">'23'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'srcObj'</span><span class="token punctuation">,</span> srcObj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//&#123; name: 'lilei', age: '20' &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>不能处理对象属性为引用类型，则那对于这个对象而言其实是浅拷贝的</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token string">"hello"</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">21</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> initalObj <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-initalObj<span class="token punctuation">.</span>a<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token string">"changed"</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>a<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "changed"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3><span id="深拷贝">深拷贝</span></h3><h4><span id="数组深拷贝">数组深拷贝</span></h4><p>方式1：直接遍历赋值</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> arr2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-arr1<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token punctuation">,</span>index</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-arr2<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//这个时候改变arr1[0]  = 3;那么输出arr2[0]还是等于1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>方式2：使用slice方法</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> arr2 <span class="token operator">=</span> arr1<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//[1,2,3]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>方式3：使用concat方法</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> arr2 <span class="token operator">=</span> arr1<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//[1,2,3]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>方式4：使用map方法</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> arr2 <span class="token operator">=</span> arr1<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-<span class="token keyword">return</span> value<span class="token punctuation">;</span>  
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//[2,3,4]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>方式5：ES6扩展运算符</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> <span class="token punctuation">[</span> <span class="token operator">...</span> arr2 <span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//[1,2,3,4,5]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//[1,2,3,4,5]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>方式6：for-in连原型链也一并复制的方法</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-arr<span class="token punctuation">.</span>prototype <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> arr2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> a <span class="token keyword">in</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  arr2<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [1,2,3,4,5]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr2<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 5</span>
-<span class="token comment">//之前的方法中新数组的prototype都是undefined</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>多维数组的深拷贝</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> arr3 <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr3<span class="token punctuation">)</span> <span class="token comment">// [[1,2],3,4,[5,6]]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h4><span id="对象深拷贝">对象深拷贝</span></h4><p>方式1：手动复制</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> obj1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span> c<span class="token operator">:</span> <span class="token number">30</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> obj2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span> obj1<span class="token punctuation">.</span>a<span class="token punctuation">,</span> b<span class="token operator">:</span> obj1<span class="token punctuation">.</span>b<span class="token punctuation">,</span> c<span class="token operator">:</span> obj1<span class="token punctuation">.</span>c <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-obj2<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#123; a: 10, b: 20, c: 30 &#125; // 沒被改到</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#123; a: 10, b: 100, c: 30 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>方式2：JSON做字符串转换</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> obj1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span> body<span class="token operator">:</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span> <span class="token number">10</span> <span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> obj2 <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-obj2<span class="token punctuation">.</span>body<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#123; body: &#123; a: 10 &#125; &#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// &#123; body: &#123; a: 20 &#125; &#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1 <span class="token operator">===</span> obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// false</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj1<span class="token punctuation">.</span>body <span class="token operator">===</span> obj2<span class="token punctuation">.</span>body<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>备注：这种方式简单易用，但是会抛弃对象的constructor，无论之前的构造函数是什么，拷贝后都是Object<br>这种方法能正确处理的对象只有Number, String, Boolean, Array, 扁平对象，即那些能够被json直接表示的数据结构。RegExp对象是无法通过这种方式深拷贝。<br>也就是说，只有可以转成JSON格式的对象才可以这样用，像function没办法转成JSON。<br>方式3：递归拷贝</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span><span class="token parameter">initalObj<span class="token punctuation">,</span> finalObj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    
-  <span class="token keyword">var</span> obj <span class="token operator">=</span> finalObj <span class="token operator">||</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>    
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token keyword">in</span> initalObj<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        
-    <span class="token keyword">var</span> prop <span class="token operator">=</span> initalObj<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>        <span class="token comment">// 避免相互引用对象导致死循环，如initalObj.a = initalObj的情况</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>prop <span class="token operator">===</span> obj<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>            
-      <span class="token keyword">continue</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>        
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> prop <span class="token operator">===</span> <span class="token string">'object'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      obj<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>prop<span class="token punctuation">.</span>constructor <span class="token operator">===</span> Array<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>            
-      arguments<span class="token punctuation">.</span><span class="token function">callee</span><span class="token punctuation">(</span>prop<span class="token punctuation">,</span> obj<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-      obj<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> prop<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>    
-  <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token string">"hello"</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">21</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h3><span id="node简介">Node简介</span></h3><ol>
+<li>Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。</li>
+<li>Node的特点</li>
+</ol>
+<ul>
+<li>异步I/O</li>
+<li>事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。）</li>
+<li>单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换带来的性能开销，但是也有无法利用多核CPU、错误会导致整个应用退出、大量计算占用CPU导致无法继续调用异步I/O。Node通过child_process子进程讲计算来利用多核CPU）</li>
+<li>跨平台（基于libuv实现了跨平台）</li>
+</ul>
+<ol start="3">
+<li>Node的应用场景</li>
+</ol>
+<ul>
+<li>I/O密集型（面向网络且擅长并行I/O，优势在于Node利用事件循环的处理能力，而不是为每一个请求启动一个线程）。</li>
+<li>是否不擅长CPU密集型任务（如果有长时间运行的计算会导致CPU时间片不能释放，后续I/O无法发起。但是只要适当调整和分解大型运算任务为多个小任务，使运算可以适时释放，不阻塞I/O调用发起）</li>
+</ul>
+<ol start="4">
+<li>Node的使用者的倚重点</li>
+</ol>
+<ul>
+<li>前后端编程语言环境统一</li>
+<li>Node带来的高性能I/O用于实时应用</li>
+<li>并行I/O使得使用者可以更高效利用分布式环境</li>
+<li>并行I/O有效利用稳定借口提升Web渲染能力</li>
+<li>云计算平台提供Node支持</li>
+<li>工具类应用</li>
+</ul>
+<h3><span id="模块机制">模块机制</span></h3><h4><span id="commonjs规范">CommonJS规范</span></h4><p>CommonJS规范的提出，主要为了弥补当前JS没有标准的缺陷，达到具备开发大型应用的基础能力。<br>模块规范</p>
+<ul>
+<li>模块引用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>模块定义<br>上下文提供了exports对象用于导出当前模块的方法或者变量，并且它是唯一导出的出口。在模块中，还存在一个module对象，代表模块自身，exports是module的属性。</li>
+<li>模块标识<br>模块标识就是传递给require()方法的参数，必须符合小拖放命名的字符串，或者相对路径or绝对路径。<h3><span id="node的模块实现">Node的模块实现</span></h3></li>
+</ul>
+<ol>
+<li>Node中引入模块，需要路径分析、文件定位、编译执行三个步骤。</li>
+<li>Node中模块分为两类，一类是Node提供的模块称为核心模块。另一类是用户编写的模块，称为文件模块。<ul>
+<li>核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，这部分核心模块被直接加载进内存，就可以省略文件定位和编译执行步骤，路径分析中优先判断</li>
+<li>文件模块在运行时动态加载，需要三个步骤，会慢一些</li>
+</ul>
+</li>
+<li>Node对引入过的模块都会进行缓存，缓存的是编译和执行之后的对象。无论核心模块还是文件模块，都是优先采用缓存。核心模块的缓存检查先于文件模块的缓存检查。</li>
+<li>路径分析和文件定位<h6><span id="模块标识符分析">模块标识符分析：</span></h6></li>
+</ol>
+<ul>
+<li>模块加载速度：缓存模块&lt;核心模块&lt;路径形式的文件模块&lt;自定义模块<h6><span id="文件定位分析">文件定位分析：</span></h6></li>
+<li>文件扩展名分析，Node会按照.js .json .node的次序补足扩展名，依次尝试。尝试过程中，需要调用fs模块同步阻塞式地判断文件是否存在。</li>
+<li>目录分析和包：分析标识符查找到一个目录，Node会当成一个包来处理。会去查找包里面是否有package.json，取出main属性指定的文件来定位。<br>如果main属性指定文件名错误，会将index当做默认文件名。如果这一级目录还没有找到，会下一个模块路径进行遍历。如果所有模块路径都找不到，就跑出查找失败的异常。<h6><span id="模块编译">模块编译：</span></h6>编译和执行是引入文件模块的最后一个阶段。定位到具体的文件后，Node会新建一个模块对象，根据路径载入并编译。<br>不同文件名载入方法有所不同</li>
+<li>.js 通过fs模块同步读取文件后编译执行。</li>
+<li>.node C/C++编写的扩展文件，通过dlopen()方法加载最后编译生成的文件</li>
+<li>.json 通过fs模块同步读取文件后，用JSON.parse()解析返回结果</li>
+<li>其余扩展名，被当做js文件载入<br>每一个编译成功的模块都会将其文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能<h5><span id="js模块的编译">JS模块的编译</span></h5>在编译的过程中，Node对获取的JavaScript文件内容进行了头尾包装。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">exports<span class="token punctuation">,</span> require<span class="token punctuation">,</span> module<span class="token punctuation">,</span> _filename<span class="token punctuation">,</span> _dirname</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 新增行</span>
+  <span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  exports<span class="token punctuation">.</span><span class="token function-variable function">area</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">radius</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> radius <span class="token operator">*</span> radius<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 新增行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+通过新增了头和尾，进行了作用域隔离，包装之后的代码会通过vm原生模块的runInThisContext()方法执行，返回一个具体的function对象。<br>最后把当前模块对象的exports属性、require()方法、module及在文件定位中得到的完整的文件路径和文件目录作为参数传入function()执行。<br>执行之后，模块的exports属性被返回给了调用方。<br>exports对象是通过形参的方式传入的，直接复制会改变形参的引用，但不会改变作用域外的值，因此需要用module.exports迂回一下。<h5><span id="cc模块的编译">C/C++模块的编译</span></h5>Node调用process.dlopen()方法进行加载和执行。dlopen()方法在不同平台不同实现，通过libuv兼容层进行了封装。<br>实际上node的模块文件并不需要编译，因为已经是编译生成的，所以只有加载和执行的过程。<br>在执行的过程中，模块的exports对象与.node模块产生联系，然后返回给调用者。<br>C/C++模块执行效率快，但是入门门槛高。<h5><span id="json文件的编译">JSON文件的编译</span></h5>利用fs模块同步读取JSON文件的内容之后，调用JSON.parse()方法得到对象，在赋给模块对象的exports，供外部调用。</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -596,7 +552,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/02/js_basic/02-js-copy/">http://example.com/2021/03/02/js_basic/02-js-copy/</a>
+                    <a href="http://example.com/2021/03/05/nodejs/01-Node%E7%AE%80%E4%BB%8B/">http://example.com/2021/03/05/nodejs/01-Node%E7%AE%80%E4%BB%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -803,12 +759,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/02/js_basic/02-js-copy/">
+                <a href="/2021/03/05/js_basic/02-js-copy/">
                     <div class="card-image">
                         
                         
@@ -824,9 +779,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-02
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -835,7 +790,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -846,13 +800,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/02/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
+                <a href="/2021/03/05/js_basic/03-js-gc/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="深入浅出Node">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="JS垃圾回收机制">
                         
-                        <span class="card-title">深入浅出Node</span>
+                        <span class="card-title">JS垃圾回收机制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -863,7 +817,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
                             </span>
                         <span class="publish-author">
                             
