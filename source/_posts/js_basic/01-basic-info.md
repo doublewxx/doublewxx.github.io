@@ -56,3 +56,19 @@ undefined表示"缺少值"，此处该有值，但是还未定义
 2. 比较相等性之前，不能把null和undefined转换成任何其他值
 3. 如果有一个操作数是NaN，一定返回false，包括NaN==NaN
 4. 如果两个操作数都是对象，则比较它们是不是同一个对象
+
+## 7. JavaScript中不同类型以及不同环境下变量的内存都是何时释放
+引用类型是在没有引用之后，通过V8的GC自动回收。
+值类型如果处于闭包的情况下，要等闭包没有引用才会被GC回收，非闭包的情况下，等待V8的新生代(new space)切换的时候回收。
+
+## 8. JS中typeof的类型有哪些
+```javascript
+    console.log(typeof undefined);  //undefined
+    console.log(typeof 123);  //number
+    console.log(typeof '123');  //string
+    console.log(typeof true); //boolean
+    console.log(typeof [1,2,3]);  //object
+    console.log(typeof {"id": 11}); //object
+    console.log(typeof null); //object
+    console.log(typeof console.log);  //function
+```
