@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="深入浅出Node, cindy&#39;s Notebook">
+    <meta name="keywords" content="HTTP与HTTPS, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深入浅出Node | cindy&#39;s Notebook</title>
+    <title>HTTP与HTTPS | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深入浅出Node</h1>
+                    <h1 class="description center-align post-title">HTTP与HTTPS</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-05
+                    2021-03-10
                 </div>
                 
 
@@ -467,65 +467,32 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="node简介">Node简介</span></h3><ol>
-<li>Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。</li>
-<li>Node的特点</li>
-</ol>
-<ul>
-<li>异步I/O</li>
-<li>事件与回调函数（事件的编程方式具有轻量级、松耦合、只关注事务点等有事，但是多个异步任务的场景下事件与事件相互独立，如何协作是一个问题。）</li>
-<li>单线程（单线程不用在意状态的同步问题，没有死锁，也没有上下文切换带来的性能开销，但是也有无法利用多核CPU、错误会导致整个应用退出、大量计算占用CPU导致无法继续调用异步I/O。Node通过child_process子进程讲计算来利用多核CPU）</li>
-<li>跨平台（基于libuv实现了跨平台）</li>
-</ul>
-<ol start="3">
-<li>Node的应用场景</li>
-</ol>
-<ul>
-<li>I/O密集型（面向网络且擅长并行I/O，优势在于Node利用事件循环的处理能力，而不是为每一个请求启动一个线程）。</li>
-<li>是否不擅长CPU密集型任务（如果有长时间运行的计算会导致CPU时间片不能释放，后续I/O无法发起。但是只要适当调整和分解大型运算任务为多个小任务，使运算可以适时释放，不阻塞I/O调用发起）</li>
-</ul>
-<ol start="4">
-<li>Node的使用者的倚重点</li>
-</ol>
-<ul>
-<li>前后端编程语言环境统一</li>
-<li>Node带来的高性能I/O用于实时应用</li>
-<li>并行I/O使得使用者可以更高效利用分布式环境</li>
-<li>并行I/O有效利用稳定借口提升Web渲染能力</li>
-<li>云计算平台提供Node支持</li>
-<li>工具类应用</li>
-</ul>
-<h3><span id="模块机制">模块机制</span></h3><h4><span id="commonjs规范">CommonJS规范</span></h4><p>CommonJS规范的提出，主要为了弥补当前JS没有标准的缺陷，达到具备开发大型应用的基础能力。<br>模块规范</p>
-<ul>
-<li>模块引用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>模块定义<br>上下文提供了exports对象用于导出当前模块的方法或者变量，并且它是唯一导出的出口。在模块中，还存在一个module对象，代表模块自身，exports是module的属性。</li>
-<li>模块标识<br>模块标识就是传递给require()方法的参数，必须符合小拖放命名的字符串，或者相对路径or绝对路径。<h3><span id="node的模块实现">Node的模块实现</span></h3></li>
-</ul>
+                <h3><span id="http">HTTP</span></h3><p>HTTP协议是超文本传输协议的缩写，英文是Hyper Text Transfer Protocol。它是从WEB服务器传输超文本标记语言(HTML)到本地浏览器的传送协议。<br>HTTP是一个基于TCP/IP通信协议来传递数据的协议，传输的数据类型为HTML 文件,、图片文件, 查询结果等。<br>HTTP协议一般用于B/S架构。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。<br>一次访问网址经历DNS解析服务器IP，三次握手，发送请求，响应请求四个步骤。<br>三次握手是client端先发送SYN，svr发送ACK+SYN，client端在发送ACK。<br>HTTP的特点：</p>
 <ol>
-<li>Node中引入模块，需要路径分析、文件定位、编译执行三个步骤。</li>
-<li>Node中模块分为两类，一类是Node提供的模块称为核心模块。另一类是用户编写的模块，称为文件模块。<ul>
-<li>核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，这部分核心模块被直接加载进内存，就可以省略文件定位和编译执行步骤，路径分析中优先判断</li>
-<li>文件模块在运行时动态加载，需要三个步骤，会慢一些</li>
-</ul>
-</li>
-<li>Node对引入过的模块都会进行缓存，缓存的是编译和执行之后的对象。无论核心模块还是文件模块，都是优先采用缓存。核心模块的缓存检查先于文件模块的缓存检查。</li>
-<li>路径分析和文件定位<h6><span id="模块标识符分析">模块标识符分析：</span></h6></li>
+<li>http协议支持客户端/服务端模式，也是一种请求/响应模式的协议。</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。</li>
+<li>灵活：HTTP允许传输任意类型的数据对象。传输的类型由Content-Type加以标记。</li>
+<li>无连接：限制每次连接只处理一个请求。服务器处理完请求，并收到客户的应答后，即断开连接，但是却不利于客户端与服务器保持会话连接，为了弥补这种不足，产生了两项记录http状态的技术，一个叫做Cookie,一个叫做Session。</li>
+<li>无状态：无状态是指协议对于事务处理没有记忆，后续处理需要前面的信息，则必须重传。</li>
 </ol>
-<ul>
-<li>模块加载速度：缓存模块&lt;核心模块&lt;路径形式的文件模块&lt;自定义模块<h6><span id="文件定位分析">文件定位分析：</span></h6></li>
-<li>文件扩展名分析，Node会按照.js .json .node的次序补足扩展名，依次尝试。尝试过程中，需要调用fs模块同步阻塞式地判断文件是否存在。</li>
-<li>目录分析和包：分析标识符查找到一个目录，Node会当成一个包来处理。会去查找包里面是否有package.json，取出main属性指定的文件来定位。<br>如果main属性指定文件名错误，会将index当做默认文件名。如果这一级目录还没有找到，会下一个模块路径进行遍历。如果所有模块路径都找不到，就跑出查找失败的异常。<h6><span id="模块编译">模块编译：</span></h6>编译和执行是引入文件模块的最后一个阶段。定位到具体的文件后，Node会新建一个模块对象，根据路径载入并编译。<br>不同文件名载入方法有所不同</li>
-<li>.js 通过fs模块同步读取文件后编译执行。</li>
-<li>.node C/C++编写的扩展文件，通过dlopen()方法加载最后编译生成的文件</li>
-<li>.json 通过fs模块同步读取文件后，用JSON.parse()解析返回结果</li>
-<li>其余扩展名，被当做js文件载入<br>每一个编译成功的模块都会将其文件路径作为索引缓存在Module._cache对象上，以提高二次引入的性能<h5><span id="js模块的编译">JS模块的编译</span></h5>在编译的过程中，Node对获取的JavaScript文件内容进行了头尾包装。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">exports<span class="token punctuation">,</span> require<span class="token punctuation">,</span> module<span class="token punctuation">,</span> _filename<span class="token punctuation">,</span> _dirname</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 新增行</span>
-  <span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  exports<span class="token punctuation">.</span><span class="token function-variable function">area</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">radius</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span> <span class="token operator">*</span> radius <span class="token operator">*</span> radius<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 新增行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-通过新增了头和尾，进行了作用域隔离，包装之后的代码会通过vm原生模块的runInThisContext()方法执行，返回一个具体的function对象。<br>最后把当前模块对象的exports属性、require()方法、module及在文件定位中得到的完整的文件路径和文件目录作为参数传入function()执行。<br>执行之后，模块的exports属性被返回给了调用方。<br>exports对象是通过形参的方式传入的，直接复制会改变形参的引用，但不会改变作用域外的值，因此需要用module.exports迂回一下。<h5><span id="cc模块的编译">C/C++模块的编译</span></h5>Node调用process.dlopen()方法进行加载和执行。dlopen()方法在不同平台不同实现，通过libuv兼容层进行了封装。<br>实际上node的模块文件并不需要编译，因为已经是编译生成的，所以只有加载和执行的过程。<br>在执行的过程中，模块的exports对象与.node模块产生联系，然后返回给调用者。<br>C/C++模块执行效率快，但是入门门槛高。<h5><span id="json文件的编译">JSON文件的编译</span></h5>利用fs模块同步读取JSON文件的内容之后，调用JSON.parse()方法得到对象，在赋给模块对象的exports，供外部调用。</li>
-</ul>
+<h3><span id="https">HTTPS</span></h3><p>HTTP存在以下问题：<br>请求信息明文传输，容易被窃听截取。<br>数据的完整性未校验，容易被篡改<br>没有验证对方身份，存在冒充危险</p>
+<p>HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。<br>SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研发，SSL 协议位于 TCP/IP 协议与各种应用层协议之间，为数据通讯提供安全支持。<br>TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）<br>由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。</p>
+<h5><span id="浏览器在使用https传输数据的流程是什么">浏览器在使用HTTPS传输数据的流程是什么？</span></h5><p><img src="img.png" alt="img.png"></p>
+<ol>
+<li>首先客户端通过URL访问服务器建立SSL连接。</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
+<li>客户端的服务器开始协商SSL连接的安全等级，也就是信息加密的等级。</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
+<li>服务器利用自己的私钥解密出会话密钥。</li>
+<li>服务器利用会话密钥加密与客户端之间的通信。</li>
+</ol>
+<p>HTTPS的缺点：</p>
+<ol>
+<li>HTTPS协议多次握手，导致页面的加载时间延长近50%；</li>
+<li>HTTPS连接缓存不如HTTP高效，会增加数据开销和功耗；</li>
+<li>申请SSL证书需要钱，功能越强大的证书费用越高。</li>
+<li>SSL涉及到的安全算法会消耗 CPU 资源，对服务器资源消耗较大。</li>
+</ol>
 
                 
             </div>
@@ -552,7 +519,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/05/nodejs/01-Node%E7%AE%80%E4%BB%8B/">http://example.com/2021/03/05/nodejs/01-Node%E7%AE%80%E4%BB%8B/</a>
+                    <a href="http://example.com/2021/03/10/basic/02-http&https/">http://example.com/2021/03/10/basic/02-http&https/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -609,132 +576,6 @@
                 </div>
             </div>
             
-                <style>
-    #reward {
-        margin: 40px 0;
-        text-align: center;
-    }
-
-    #reward .reward-link {
-        font-size: 1.4rem;
-        line-height: 38px;
-    }
-
-    #reward .btn-floating:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #rewardModal {
-        width: 320px;
-        height: 350px;
-    }
-
-    #rewardModal .reward-title {
-        margin: 15px auto;
-        padding-bottom: 5px;
-    }
-
-    #rewardModal .modal-content {
-        padding: 10px;
-    }
-
-    #rewardModal .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 1.3rem;
-        line-height: 20px;
-        cursor: pointer;
-    }
-
-    #rewardModal .close:hover {
-        color: #ef5350;
-        transform: scale(1.3);
-        -moz-transform:scale(1.3);
-        -webkit-transform:scale(1.3);
-        -o-transform:scale(1.3);
-    }
-
-    #rewardModal .reward-tabs {
-        margin: 0 auto;
-        width: 210px;
-    }
-
-    .reward-tabs .tabs {
-        height: 38px;
-        margin: 10px auto;
-        padding-left: 0;
-    }
-
-    .reward-content ul {
-        padding-left: 0 !important;
-    }
-
-    .reward-tabs .tabs .tab {
-        height: 38px;
-        line-height: 38px;
-    }
-
-    .reward-tabs .tab a {
-        color: #fff;
-        background-color: #ccc;
-    }
-
-    .reward-tabs .tab a:hover {
-        background-color: #ccc;
-        color: #fff;
-    }
-
-    .reward-tabs .wechat-tab .active {
-        color: #fff !important;
-        background-color: #22AB38 !important;
-    }
-
-    .reward-tabs .alipay-tab .active {
-        color: #fff !important;
-        background-color: #019FE8 !important;
-    }
-
-    .reward-tabs .reward-img {
-        width: 210px;
-        height: 210px;
-    }
-</style>
-
-<div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('.tabs').tabs();
-    });
-</script>
-
-            
         </div>
     </div>
 
@@ -763,13 +604,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/05/js_basic/02-js-copy/">
+                <a href="/2021/03/10/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JS数组的深拷贝与浅拷贝">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="深入浅出Node">
                         
-                        <span class="card-title">JS数组的深拷贝与浅拷贝</span>
+                        <span class="card-title">深入浅出Node</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -780,7 +621,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-10
                         </span>
                         <span class="publish-author">
                             
@@ -800,7 +641,7 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/05/js_basic/03-js-gc/">
+                <a href="/2021/03/10/js_basic/03-js-gc/">
                     <div class="card-image">
                         
                         
@@ -817,7 +658,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-10
                             </span>
                         <span class="publish-author">
                             
@@ -959,60 +800,6 @@
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
-<style>
-    .aplayer .aplayer-lrc p {
-        
-        display: none;
-        
-        font-size: 12px;
-        font-weight: 700;
-        line-height: 16px !important;
-    }
-
-    .aplayer .aplayer-lrc p.aplayer-lrc-current {
-        
-        display: none;
-        
-        font-size: 15px;
-        color: #42b983;
-    }
-
-    
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-        left: -66px !important;
-    }
-
-    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        left: 0px !important;
-    }
-
-    
-</style>
-<div class="">
-    
-    <div class="row">
-        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
-                   server="netease"
-                   type="playlist"
-                   id="503838841"
-                   fixed='true'
-                   autoplay='false'
-                   theme='#42b983'
-                   loop='all'
-                   order='random'
-                   preload='auto'
-                   volume='0.7'
-                   list-folded='true'
-        >
-        </meting-js>
-    </div>
-</div>
-
-<script src="/libs/aplayer/APlayer.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-
-    
     <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
@@ -1047,25 +834,17 @@
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/doublewxx" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
 
 
 
 
 
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
 
 
 
@@ -1221,8 +1000,6 @@ $(function () {
     })();
 </script>
 
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
