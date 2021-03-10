@@ -540,7 +540,7 @@ addthis:
 # 打字效果副标题.
 # 如果有符号 ‘ ，请在 ’ 前面加上 \
 subtitle:
-  enable: true
+  enable: false
   loop: false # 是否循环
   showCursor: true # 是否显示光标
   startDelay: 300 # 开始延迟
