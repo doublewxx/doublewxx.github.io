@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="JS垃圾回收机制, cindy&#39;s Notebook">
+    <meta name="keywords" content="HTTP与HTTPS, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JS垃圾回收机制 | cindy&#39;s Notebook</title>
+    <title>HTTP与HTTPS | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JS垃圾回收机制</h1>
+                    <h1 class="description center-align post-title">HTTP与HTTPS</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-10
+                    2021-03-11
                 </div>
                 
 
@@ -467,7 +467,33 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h3><span id="http">HTTP</span></h3><p>HTTP协议是超文本传输协议的缩写，英文是Hyper Text Transfer Protocol。它是从WEB服务器传输超文本标记语言(HTML)到本地浏览器的传送协议。<br>HTTP是一个基于TCP/IP通信协议来传递数据的协议，传输的数据类型为HTML 文件,、图片文件, 查询结果等。<br>HTTP协议一般用于B/S架构。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。<br>一次访问网址经历DNS解析服务器IP，三次握手，发送请求，响应请求四个步骤。<br>三次握手是client端先发送SYN，svr发送ACK+SYN，client端在发送ACK。<br>HTTP的特点：</p>
+<ol>
+<li>http协议支持客户端/服务端模式，也是一种请求/响应模式的协议。</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。</li>
+<li>灵活：HTTP允许传输任意类型的数据对象。传输的类型由Content-Type加以标记。</li>
+<li>无连接：限制每次连接只处理一个请求。服务器处理完请求，并收到客户的应答后，即断开连接，但是却不利于客户端与服务器保持会话连接，为了弥补这种不足，产生了两项记录http状态的技术，一个叫做Cookie,一个叫做Session。</li>
+<li>无状态：无状态是指协议对于事务处理没有记忆，后续处理需要前面的信息，则必须重传。</li>
+</ol>
+<h3><span id="https">HTTPS</span></h3><p>HTTP存在以下问题：<br>请求信息明文传输，容易被窃听截取。<br>数据的完整性未校验，容易被篡改<br>没有验证对方身份，存在冒充危险</p>
+<p>HTTPS 协议（HyperText Transfer Protocol over Secure Socket Layer）：一般理解为HTTP+SSL/TLS，通过 SSL证书来验证服务器的身份，并为浏览器和服务器之间的通信进行加密。<br>SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研发，SSL 协议位于 TCP/IP 协议与各种应用层协议之间，为数据通讯提供安全支持。<br>TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）<br>由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。</p>
+<h5><span id="浏览器在使用https传输数据的流程是什么">浏览器在使用HTTPS传输数据的流程是什么？</span></h5><p><img src="img.png" alt="img.png"></p>
+<ol>
+<li>首先客户端通过URL访问服务器建立SSL连接。</li>
+<li>服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。</li>
+<li>客户端的服务器开始协商SSL连接的安全等级，也就是信息加密的等级。</li>
+<li>客户端的浏览器根据双方同意的安全等级，建立会话密钥，然后利用网站的公钥将会话密钥加密，并传送给网站。</li>
+<li>服务器利用自己的私钥解密出会话密钥。</li>
+<li>服务器利用会话密钥加密与客户端之间的通信。</li>
+</ol>
+<p>HTTPS的缺点：</p>
+<ol>
+<li>HTTPS协议多次握手，导致页面的加载时间延长近50%；</li>
+<li>HTTPS连接缓存不如HTTP高效，会增加数据开销和功耗；</li>
+<li>申请SSL证书需要钱，功能越强大的证书费用越高。</li>
+<li>SSL涉及到的安全算法会消耗 CPU 资源，对服务器资源消耗较大。</li>
+</ol>
+
                 
             </div>
             <hr/>
@@ -493,7 +519,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/10/js_basic/03-js-gc/">http://example.com/2021/03/10/js_basic/03-js-gc/</a>
+                    <a href="http://example.com/2021/03/11/basic/02-http&https/">http://example.com/2021/03/11/basic/02-http&https/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -578,7 +604,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/10/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
+                <a href="/2021/03/11/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
                     <div class="card-image">
                         
                         
@@ -595,7 +621,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
                         </span>
                         <span class="publish-author">
                             
@@ -615,13 +641,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/10/js_basic/01-basic-info/">
+                <a href="/2021/03/11/es6/let%E5%92%8Cconst/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="基础知识">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="let 和const 命令">
                         
-                        <span class="card-title">基础知识</span>
+                        <span class="card-title">let 和const 命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -632,7 +658,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
                             </span>
                         <span class="publish-author">
                             
