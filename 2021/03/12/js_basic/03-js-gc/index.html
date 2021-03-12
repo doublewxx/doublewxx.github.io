@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="基础知识, cindy&#39;s Notebook">
+    <meta name="keywords" content="JS垃圾回收机制, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基础知识 | cindy&#39;s Notebook</title>
+    <title>JS垃圾回收机制 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基础知识</h1>
+                    <h1 class="description center-align post-title">JS垃圾回收机制</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-11
+                    2021-03-12
                 </div>
                 
 
@@ -467,71 +467,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2><span id="1-0102为什么不等于03">1、0.1+0.2为什么不等于0.3</span></h2><p>JavaScript使用Number类型表示数字（整数和浮点数)，遵循 IEEE 754 标准，通过64位来表示一个数字。<br>JS中1位符号位，11位的指数e,剩余52位是尾数。<br>js最大安全数是 Number.MAX_SAFE_INTEGER == Math.pow(2,53) - 1。本来应该是Math.pow(2,52)-1，但是二进制表示的有效数字总是1.xxx。<br>计算机无法计算10进制，因此会先按照IEEE 754转换成二进制进行运算。<br>浮点数运算的五个步骤：对阶、尾数运算、规格化、舍入处理、溢出判断<br>1、0.1和0.2在转化为二进制后，都是无限循环小数，只能保留52位，会有精度损失<br>2、在运算时，需要对阶，一般是小阶对大阶，这一步也可能丢失进度，<br>3、对阶后进行尾数运算，相加后得到可结果，如果结果的整数部分超过1，需要进行规格化<br>4、规格化之后如果小数部分超出52位，需要再次摄入处理<br>5、0.1+0.2不涉及溢出判断，直接将结果转为10进制</p>
-<h2><span id="2-11为什么为false">2、[1]==[1]为什么为false</span></h2><p>引用类型的比较，是数组堆内存的地址的比较，两个数组在堆内存中地址是不同的。</p>
-<h2><span id="3-如何将值类型的变量以引用的方式传递">3、如何将值类型的变量以引用的方式传递</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"abcd"</span><span class="token punctuation">;</span>        <span class="token comment">//基本类型</span>
-<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"str"</span><span class="token operator">:</span>str<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>   <span class="token comment">//引用类型</span>
-<span class="token keyword">var</span> boj2 <span class="token operator">=</span> obj<span class="token punctuation">;</span>          <span class="token comment">//复制引用地址</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>boj2<span class="token punctuation">.</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//abcd</span>
-obj<span class="token punctuation">.</span>str <span class="token operator">=</span> <span class="token string">"bcd"</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>boj2<span class="token punctuation">.</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//bcd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2><span id="4-const定义的array中间元素是否可以被修改如果可以那么const修饰对象有什么意义">4、const定义的Array中间元素是否可以被修改？如果可以，那么const修饰对象有什么意义</span></h2><p>const定义的Array中间元素可以被修改，const定义的变量保存的是Array的地址，这个变量本身不可以修改，而存在于堆内存的Array本身是可以修改的。<br>对于const声明，只是它的赋值操作被冻结了，而值不会因为const而不变。主要是预防在coding过程中的coder因为疏忽对变量的意外修改。</p>
-<h2><span id="5-null与undefined的区别">5、null与undefined的区别</span></h2><p>null表示”没有对象”，此处不该有值</p>
-<p>典型用法</p>
-<ul>
-<li>作为函数的参数，表示该函数的参数不是对象</li>
-<li>作为对象原型链的终点</li>
-</ul>
-<p>undefined表示”缺少值”，此处该有值，但是还未定义</p>
-<ul>
-<li>变量被声明了，但是没有赋值，就是undefined</li>
-<li>调用函数时，应该提供的参数没有提供，该参数等于undefined</li>
-<li>对象没有赋值的属性，该属性的值为undefined</li>
-<li>函数没有返回值时，默认返回undefined </li>
-</ul>
-<p>要比较相等性之前，不能将 null 和 undefined 转换成其他任何值，它们就是相等的，在ECMAScript规范中也是这样定义的。</p>
-<h2><span id="6-和的操作流程">6. ==和===的操作流程</span></h2><p>这两个操作符都会先转换操作，再比较它们的相等性<br>转化基本规则</p>
-<ol>
-<li>如果有一个操作数是布尔值，则在比较相等性之前现将其转换为数值-false转换为0，true转换为1</li>
-<li>如果有一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值</li>
-<li>如果一个操作数是对象，另一个操作数不是，则调用对象valueOf( )方法，用得到的基本类型值按照前面的规则进行比较</li>
-<li>如果一个操作数是布尔值，另一个操作数是字符串，会把双方转换为数字，再进行比较</li>
-</ol>
-<p>比较时遵循规则：</p>
-<ol>
-<li>null和undefined相等</li>
-<li>比较相等性之前，不能把null和undefined转换成任何其他值</li>
-<li>如果有一个操作数是NaN，一定返回false，包括NaN==NaN</li>
-<li>如果两个操作数都是对象，则比较它们是不是同一个对象</li>
-</ol>
-<h2><span id="7-javascript中不同类型以及不同环境下变量的内存都是何时释放">7. JavaScript中不同类型以及不同环境下变量的内存都是何时释放</span></h2><p>引用类型是在没有引用之后，通过V8的GC自动回收。<br>值类型如果处于闭包的情况下，要等闭包没有引用才会被GC回收，非闭包的情况下，等待V8的新生代(new space)切换的时候回收。<br>如何爆掉JS的内存<br>数组循环赋值</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>随着死循环会查出数组的最大长度，报错。<br>FATAL ERROR: invalid array length Allocation failed - JavaScript heap out of memory</p>
-<p>数组循环赋空值</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>死循环，不会爆掉V8内存，但是导致进程阻塞。</p>
-<p>push Buffer类型</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Buffer</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>内存泄露的速度比直接push Number类型的慢很多。<br>因为ES定义的Number类型，实质上是遵循IEEE-2008的64位存储，也就是说，Number类型的1与buffer类型的1，完全不一样，前者在编译器中是00000000000000000000000000（63个0）1，占了64位；但是后者就只是1，只占了1位。当push buffer崩溃时，也会崩溃，只不过比Number类型的慢一些。<br>当push buffer崩溃时…不存在的，push buffer不会崩溃，当内存顶到爆，也就是即将到达100%时，会自动垃圾回收，直观地讲，就是会瞬间降低内存，push工作继续，很是神奇。</p>
-<h2><span id="8-js中typeof的类型有哪些">8. JS中typeof的类型有哪些</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//undefined</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//number</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//string</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//boolean</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">&#123;</span><span class="token string">"id"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+                
                 
             </div>
             <hr/>
@@ -557,7 +493,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/11/js_basic/01-basic-info/">http://example.com/2021/03/11/js_basic/01-basic-info/</a>
+                    <a href="http://example.com/2021/03/12/js_basic/03-js-gc/">http://example.com/2021/03/12/js_basic/03-js-gc/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -638,18 +574,17 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/11/js_basic/01-basic-info/">
+                <a href="/2021/03/12/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="基础知识">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="深入浅出Node">
                         
-                        <span class="card-title">基础知识</span>
+                        <span class="card-title">深入浅出Node</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -659,9 +594,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -670,7 +605,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -681,13 +615,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/11/js_basic/02-js-copy/">
+                <a href="/2021/03/12/basic/02-http&https/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JS数组的深拷贝与浅拷贝">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="HTTP与HTTPS">
                         
-                        <span class="card-title">JS数组的深拷贝与浅拷贝</span>
+                        <span class="card-title">HTTP与HTTPS</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -698,7 +632,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-12
                             </span>
                         <span class="publish-author">
                             
