@@ -102,4 +102,49 @@ while(true){
     console.log(typeof null); //object
     console.log(typeof console.log);  //function
 ```
+## 9. koa 的中间件机制
+1. app.use函数，在application中将调用use的参数都添加到this.middleware数组中
+2. 在push时，对generator语法进行兼容，调用convert函数将其转换为async/await语法
+3. 源码中，通过 compose() 这个方法，就能将我们传入的中间件数组转换并级联执行，最后 callback() 返回this.handleRequest()的执行结果。
+compose的函数源码
+```javascript
+function compose (middleware) {
+    if (!Array.isArray(middleware)) throw new TypeError('Middleware stack must be an array!')
+    for (const fn of middleware) {
+        if (typeof fn !== 'function') throw new TypeError('Middleware must be composed of functions!')
+    }
 
+    /**
+     * @param {Object} context
+     * @return {Promise}
+     * @api public
+     */
+
+    return function (context, next) {
+        // last called middleware #
+        let index = -1
+        return dispatch(0)
+        function dispatch (i) {
+            if (i <= index) return Promise.reject(new Error('next() called multiple times'))
+            index = i
+            let fn = middleware[i]
+            if (i === middleware.length) fn = next
+            if (!fn) return Promise.resolve()
+            try {
+                return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+            } catch (err) {
+                return Promise.reject(err)
+            }
+        }
+    }
+}
+```
+1. compose()返回一个匿名函数的结果，匿名函数自执行了dispatch() 这个函数，并传入了0作为参数。
+2. 上面的代码执行了中间件 fn(context, next)，并传递了 context 和 next 函数两个参数。context 就是 koa 中的上下文对象 context。至于 next 函数则是返回一个 dispatch(i+1) 的执行结果。值得一提的是 i+1 这个参数，传递这个参数就相当于执行了下一个中间件，从而形成递归调用。
+3. 只有执行了 next 函数，才能正确得执行下一个中间件。
+   所以当我们用 async 的语法写中间件的时候，执行流程大致如下：
+
+    1. 先执行第一个中间件（因为compose 会默认执行 dispatch(0)），该中间件返回 Promise，然后被 Koa 监听，执行对应的逻辑（成功或失败）
+    2. 在执行第一个中间件的逻辑时，遇到 await next()时，会继续执行 dispatch(i+1)，也就是执行 dispatch(1)，会手动触发执行第二个中间件。这时候，第一个中间件 await next() 后面的代码就会被 pending，等待 await next() 返回 Promise，才会继续执行第一个中间件 await next() 后面的代码。
+    3. 同样的在执行第二个中间件的时候，遇到 await next() 的时候，会手动执行第三个中间件，await next() 后面的代码依然被 pending，等待 await 下一个中间件的 Promise.resolve。只有在接收到第三个中间件的 resolve 后才会执行后面的代码，然后第二个中间会返回 Promise，被第一个中间件的 await 捕获，这时候才会执行第一个中间件的后续代码，然后再返回 Promise
+    4. 以此类推，如果有多个中间件的时候，会依照上面的逻辑不断执行，先执行第一个中间件，在 await next() 出 pending，继续执行第二个中间件，继续在 await next() 出 pending，继续执行第三个中间，直到最后一个中间件执行完，然后返回 Promise，然后倒数第二个中间件才执行后续的代码并返回Promise，然后是倒数第三个中间件，接着一直以这种方式执行直到第一个中间件执行完，并返回 Promise，从而实现文章开头那张图的执行顺序。
