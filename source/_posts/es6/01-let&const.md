@@ -154,3 +154,29 @@ const foo = Object.freeze({});
 foo.prop = 123;
 ```
 5. ES5 只有两种声明变量的方法：var命令和function命令。ES6 除了添加let和const命令，还有import命令和class命令。因此ES6一共有6种声明变量的方式。
+
+## 4. 顶层对象的属性
+顶层对象，在浏览器中指的是window对象，在Node中指的是global对象。ES5中，顶层对象的属性与全局变量等价。
+顶层对象的属性与全局变量挂钩，被认为是 JavaScript 语言最大的设计败笔之一。
+这样的设计带来了几个很大的问题：
+1、没法在编译时就报出变量未声明的错误，只有运行时才能知道（因为全局变量可能是顶层对象的属性创造的，而属性的创造是动态的）；
+2、程序员很容易不知不觉地就创建了全局变量（比如打字出错）；
+3、顶层对象的属性是到处可以读写的，这非常不利于模块化编程。
+4、window对象有实体含义，指的是浏览器的窗口对象，顶层对象是一个有实体含义的对象，也是不合适的。
+ES6规定var和function命令声明的全局变量，依旧是顶层对象的属性。let、const和class命令声明的全局变量，不属于顶层对象的属性
+
+## globalThis对象
+JavaScript 语言存在一个顶层对象，它提供全局环境（即全局作用域），所有代码都是在这个环境中运行。但是，顶层对象在各种实现里面是不统一的。
+- 浏览器里面，顶层对象是window，但 Node 和 Web Worker 没有window。
+- 浏览器和 Web Worker 里面，self也指向顶层对象，但是 Node 没有self。
+- Node 里面，顶层对象是global，但其他环境都不支持。
+- 全局环境中，this会返回顶层对象。但是，Node.js 模块中this返回的是当前模块，ES6 模块中this返回的是undefined。
+- 函数里面的this，如果函数不是作为对象的方法运行，而是单纯作为函数运行，this会指向顶层对象。但是，严格模式下，这时this会返回undefined。
+```javascript
+var getGlobal = function () {
+  if (typeof self !== 'undefined') { return self; }
+  if (typeof window !== 'undefined') { return window; }
+  if (typeof global !== 'undefined') { return global; }
+  throw new Error('unable to locate global object');
+};
+```
