@@ -478,13 +478,52 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/04/15/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
+                    <a href="/2021/04/18/nodejs/02-%E5%BC%82%E6%AD%A5IO/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="深入浅出Node">
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="异步IO">
                             
-                            <span class="card-title">深入浅出Node</span>
+                            <span class="card-title">异步IO</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 异步IO原因
+提升用户体验，如果加载资源需要阻塞渲染等事件，对用户不够友好。
+
+资源分配：利用单线程，远离多线程的死锁和状态同步等问题；再利用异步I/O，让单线程远离阻塞，更好使用CPU。
+2. 异步I/O现状2.1. 异步I/O与非
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                little cindy
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/04/18/nodejs/01-Node%E7%AE%80%E4%BB%8B+%E6%A8%A1%E5%9D%97/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Node简介+模块">
+                            
+                            <span class="card-title">Node简介+模块</span>
                         </div>
                     </a>
 
@@ -502,7 +541,7 @@ Node的特点
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
                             </span>
                             <span class="publish-author">
                                 
@@ -519,27 +558,26 @@ Node的特点
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/04/15/js_basic/04-stack/">
+                    <a href="/2021/04/18/js_basic/03-js-gc/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="调用堆栈">
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="JS垃圾回收机制">
                             
-                            <span class="card-title">调用堆栈</span>
+                            <span class="card-title">JS垃圾回收机制</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1. 调用堆栈定义
-调用栈是解释器（比如浏览器中的 JavaScript 解释器）追踪函数执行流的一种机制。当执行环境中调用了多个函数时，通过这种机制，我们能够追踪到哪个函数正在执行，执行的函数体中又调用了哪个函数。
-JavaScript是
+                                这是测试逻辑
+
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
                             </span>
                             <span class="publish-author">
                                 
@@ -556,7 +594,7 @@ JavaScript是
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/04/15/es6/03-extend/">
+                    <a href="/2021/04/18/es6/03-extend/">
                         <div class="card-image">
                             
                             
@@ -577,7 +615,7 @@ ES2019 允许 JavaScript 字符串直
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
                             </span>
                             <span class="publish-author">
                                 
@@ -594,26 +632,28 @@ ES2019 允许 JavaScript 字符串直
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/04/15/js_basic/03-js-gc/">
+                    <a href="/2021/04/18/js_basic/04-stack/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="JS垃圾回收机制">
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="调用堆栈">
                             
-                            <span class="card-title">JS垃圾回收机制</span>
+                            <span class="card-title">调用堆栈</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                这是测试逻辑
+                                1. 调用堆栈定义
+调用栈是解释器（比如浏览器中的 JavaScript 解释器）追踪函数执行流的一种机制。当执行环境中调用了多个函数时，通过这种机制，我们能够追踪到哪个函数正在执行，执行的函数体中又调用了哪个函数。
 
+JavaScript
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
                             </span>
                             <span class="publish-author">
                                 
@@ -796,42 +836,6 @@ for (var i = 0; i &lt; 10; i++) &#123;
                         <div class="publish-info">
                             <span class="publish-date">
                                 <i class="far fa-clock fa-fw icon-date"></i>2021-02-26
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                little cindy
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/02/24/lodash/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="lodash">
-                            
-                            <span class="card-title">lodash</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                敬请期待
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-24
                             </span>
                             <span class="publish-author">
                                 

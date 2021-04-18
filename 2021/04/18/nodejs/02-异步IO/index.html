@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="调用堆栈, cindy&#39;s Notebook">
+    <meta name="keywords" content="异步IO, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>调用堆栈 | cindy&#39;s Notebook</title>
+    <title>异步IO | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">调用堆栈</h1>
+                    <h1 class="description center-align post-title">异步IO</h1>
                 </div>
             </div>
         </div>
@@ -399,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-15
+                    2021-04-18
                 </div>
                 
 
@@ -423,52 +423,68 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-调用堆栈定义">1. 调用堆栈定义</span></h3><ul>
-<li>调用栈是解释器（比如浏览器中的 JavaScript 解释器）追踪函数执行流的一种机制。当执行环境中调用了多个函数时，通过这种机制，我们能够追踪到哪个函数正在执行，执行的函数体中又调用了哪个函数。</li>
-<li>JavaScript是一门单线程的语言，只有一个调用栈，同一时间只能做一件事。</li>
-<li>每一个进入调用栈的都称为调用帧。</li>
-<li>堆栈溢出：达到调用栈最大值。<h3><span id="2-执行上下文">2. 执行上下文</span></h3>执行上下文是评估和执行JavaScript代码的环境的抽象概念，每当JavaScript代码在运行的时候，都是在执行上下文运行。<h5><span id="执行上下文分类">执行上下文分类：</span></h5></li>
-<li>全局执行上下文：创建全局window对象，设置this等于这个全局对象</li>
-<li>函数执行上下文：每当函数被调用的时候，为该函数创建一个新的上下文</li>
-<li>Eval函数执行上下文：eval函数内部的代码会有自己的执行上下文<h5><span id="创建执行上下文">创建执行上下文</span></h5><h6><span id="1-创建阶段">1. 创建阶段</span></h6><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">ExecutionContext <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  ThisBinding <span class="token operator">=</span> <span class="token operator">&lt;</span><span class="token keyword">this</span> value<span class="token operator">></span><span class="token punctuation">,</span>
-  LexicalEnvironment <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  VariableEnvironment <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<ol>
-<li>This 绑定<br>在函数执行上下文中，this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined（在严格模式下）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-<span class="token function-variable function">baz</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-foo<span class="token punctuation">.</span><span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 'this' 引用 'foo', 因为 'baz' 被对象 'foo' 调用</span>
-<span class="token keyword">let</span> bar <span class="token operator">=</span> foo<span class="token punctuation">.</span>baz<span class="token punctuation">;</span>
-<span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 'this' 指向全局 window 对象，因为没有指定引用对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>创建<strong>词法环境</strong>组件<br>词法环境是一种规范类型，基于 ECMAScript 代码的词法嵌套结构来定义标识符和具体变量和函数的关联。一个词法环境由环境记录器和一个可能的引用外部词法环境的空值组成。<ul>
-<li>词法环境就是一种持有标识符-变量映射的解构</li>
-<li>词法环境的内部有环境记录器和外部环境的引用。环境记录器是存储变量和函数声明的实际位置。外部环境的引用意味着它可以访问其父级词法环境。</li>
-<li>词法环境包含全局环境和函数环境两种。全局环境的外部环境的引用是null。</li>
-<li>环境记录器也分为两种，在全局环境中，环境记录器是对象环境记录器。在函数环境中，环境记录器是声明式环境记录器。</li>
-</ul>
+                <h3><span id="1-异步io原因">1. 异步IO原因</span></h3><ol>
+<li><p>提升用户体验，如果加载资源需要阻塞渲染等事件，对用户不够友好。</p>
 </li>
-<li>创建<strong>变量环境</strong>组件<ul>
-<li>变量环境也是一个词法环境，其环境记录器持有变量声明语句在执行上下文中创建的绑定关系。</li>
-<li>ES6中，词法环境组件和变量环境组件的不同是，前者用于存储函数声明和变量(let和const)，后者只用来存储var变量绑定。<h6><span id="2-执行阶段">2. 执行阶段</span></h6><h3><span id="2-操作流程">2. 操作流程</span></h3></li>
-</ul>
+<li><p>资源分配：利用单线程，远离多线程的死锁和状态同步等问题；再利用异步I/O，让单线程远离阻塞，更好使用CPU。</p>
+<h3><span id="2-异步io现状">2. 异步I/O现状</span></h3><h4><span id="21-异步io与非阻塞io">2.1. 异步I/O与非阻塞I/O</span></h4><p>阻塞I/O与非阻塞I/O：操作系统对I/O只有阻塞与非阻塞两种方式。阻塞I/O被调用时，需要等待I/O完全执行完成才会返回结果。这样会导致CPU的等待，处理能力没有被充分利用。<br>非阻塞I/O是立即返回，但是对于抽象出来的文件而言，并没有返回文件的内容，只有文件描述符。非阻塞I/O返回的并不是业务层需要的数据，而是当前调用的状态，为了获取完整数据，需要重复调用I/O来确认是否完成，这种重复判断操作是否完成的技术叫轮询。<br>阻塞I/O会浪费CPU，非阻塞I/O需要轮询确认数据是否完全获取。<br>常用轮询技术：</p>
 </li>
 </ol>
 <ul>
-<li>每调用一个函数，解释器就会把该函数的执行上下文添加进调用栈并开始执行。</li>
-<li>正在调用栈中执行的函数还调用了其它函数，那么新函数也将会被添加进调用栈，一旦这个函数被调用，便会立即执行。</li>
-<li>当前函数执行完毕后，解释器将其清出调用栈，继续执行当前执行环境下的剩余的代码。</li>
-<li>当分配的调用栈空间被占满时，会引发“堆栈溢出”错误。<h3><span id="3javascript引擎">3.JavaScript引擎</span></h3>JS引擎主要由两部分组成：<br>内存堆：进行内存分配<br>调用栈：代码执行的地方<br>在代码中有些引擎之外的API，是浏览器提供的Web API，比如DOM、AJAX、setTimeout等<h3><span id="4-javascript的执行机制">4. JavaScript的执行机制</span></h3></li>
-<li>javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变</li>
-<li>任务分为同步任务和异步任务两种。同步任务就在主线程执行，异步任务进入Event Table并注册回调函数。</li>
-<li>当指定的任务完成后，Event Table会将这个函数移入Event Queue</li>
-<li>主线程任务全部执行完后，去Event Queue读取对应函数，进入主线程执行。</li>
-<li>不断重复这个过程，形成Event Loop</li>
-<li>js引擎存在monitoring process进程不断的检查主线程执行栈是否为空，一旦为空，就会去Event Queue那里检查是否有等待被调用的函数。</li>
+<li>read：最原始，性能最低</li>
+<li>select：改进过的，根据文件描述符上的事件状态来进行判断，采用数组存储状态，有长度限制，最多1024个文件</li>
+<li>poll：改进select，使用链表来存储状态</li>
+<li>epoll： Linux下效率最高的I/O事件通知机制，进入轮询的时候如果没有I/O事件，进行休眠，直到事件将其唤醒。</li>
+<li>kqueue：类似epoll</li>
+</ul>
+<h4><span id="22-理想的非阻塞异步io">2.2 理想的非阻塞异步I/O</span></h4><p>理想的非阻塞异步I/O：应用程序发起非阻塞调用，无需通过遍历或者事件唤醒等方式轮询，可以直接处理下一个任务，只需要在I/O完成后通过信号或者回调将数据传递给应用程序。<br>我们常说Node是单线程的，这里的单线程是说JavaScript执行在单线程中，内部I/O任务另有线程池。</p>
+<h3><span id="3-node的异步io">3. Node的异步I/O</span></h3><h4><span id="31-事件循环">3.1 事件循环</span></h4><pre class="line-numbers language-plantuml" data-language="plantuml"><code class="language-plantuml">start
+ if (还有事件) then (yes)
+ repeat
+  :取出一个事件;
+  if (有关联回调) then (yes)
+    :执行回调;
+  endif
+  repeat while (还有事件) is (yes)  
+else (no)
+  :退出;
+endif
+stop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>进程启动的时候，Node创建一个类似while(true)的循环，每次执行循环体的过程称为Tick，每个Tick的过程就是看是否有事件等待处理，有就取出事件和相关的回调函数，如果存在关联的回调函数，就执行它们，再进入下一个循环。如果不再有事件处理，就退出进程。</p>
+<h4><span id="32-观察者">3.2 观察者</span></h4><p>每个事件循环中有一个或者多个观察者，判断是否有事件需要处理的过程就是向观察者询问是否有处理的事件。事件循环就是一个典型的生产者/消费者模型。异步I/O、网络请求等是事件的生产者，为Node提供各类事件，这些事件被传递到相应的观察者那里，事件循环则从观察者那里取出事件并处理。<br>在Windows下这个循环基于IOCP创建，而在*nix下基于多线程创建，Node下的libuv这一层屏蔽了这些差异。</p>
+<h4><span id="33-请求对象">3.3 请求对象</span></h4><p>从JavaScript发起调用到内核执行完I/O操作的过渡过程中，存在一种中间产物，叫请求对象。所有的状态都保存在这个对象中，包括送入线程池等待执行以及I/O操作完成后的回调处理。</p>
+<h4><span id="34-执行回调">3.4 执行回调</span></h4><p>I/O相关操作调用完成后，将获取的结果存储在result属性上，再通知IOCP当前对象操作已经完成。在事件循环的过程中，也是用到了事件循环的I/O观察者。事件循环、观察者、请求对象和I/O线程池四者共同组成了Node异步I/O模型的基本要素。</p>
+<h4><span id="35-备注">3.5 备注</span></h4><p>在Node中，除了JavaScript是单线程的，Node自身是多线程的，只是I/O线程使用的CPU比较少。除了用户代码无法并行执行外，所有的I/O是可以并行的。</p>
+<h3><span id="4-非io的异步api">4. 非I/O的异步API</span></h3><h4><span id="41-定时器">4.1 定时器</span></h4><p>调用setTimeOut()或者setInterval()创建的定时器会被插入到定时器观察者内部的一个红黑树中。每次Tick执行时，会从该红黑树中迭代取出定时器对象，检查是否超过定时事件，如果超出就形成一个事件，回调会立即执行。定时器的问题就是，它的精度并不是完全准确的，如果某一次循环占用的时间角度，下次循环时，他或许已经超时很久了。例如setTimeOut()设定10ms后执行，但是9ms之后有一个任务占用了5ms的时间片，再次轮到定时器执行的时候，已经超时了4ms。</p>
+<h4><span id="42-processnexttick">4.2 process.nextTick()</span></h4><p>为立即异步执行一个任务，之前使用setTimeOut(fnc,0)，这种精度不够，而且需要动用红黑树，创建定时器对象和迭代等操作，较浪费性能。process.nextTick()操作轻量。每次调用nextTick()，只会将回调函数放入队列，在下一轮Tick的时候取出执行。</p>
+<h4><span id="43-setimmediate">4.3 setImmediate()</span></h4><p>setImmediate()与nextTick()类似，都是将回调延迟执行。从执行顺序来看是没有差别的，例如</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'正常执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">setImmediata</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'正常执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 这两种方式执行结果一样</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>放在一起的时候，执行结果是</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'nextTick延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token function">setImmediata</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'setImmediate延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'正常执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 执行结果</span>
+<span class="token comment">// 正常执行</span>
+<span class="token comment">// nextTick延迟执行</span>
+<span class="token comment">// setImmediate延迟执行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>原因分析：nextTick中回调函数优先级高于setImmediate()。事件循环对观察者的检查有先后顺序，process.nextTick()属于idle观察者，setImmediate()属于check观察者。每一个轮询检查中，idle观察者优先于I/O观察者，I/O观察者先于check观察者。<br>process.nextTick()的回调函数保存在一个数组中，setImmediate()的结果保存在链表中。行为上，process.nextTick()在每轮循环中会将数组中的回调函数全部执行完，而setImemediate()在每轮循环中执行链表中的一个回调函数。</p>
+<h3><span id="5-事件驱动与高性能服务器">5. 事件驱动与高性能服务器</span></h3><h4><span id="51-经典服务器模型">5.1 经典服务器模型</span></h4><ul>
+<li>同步式：一次处理一个请求，其余请求等待。</li>
+<li>每进程/每请求：为每个请求启动一个进程，可以处理多个请求，但是不具备扩展性</li>
+<li>每线程/每请求：为每个请求启动一个线程来处理。虽然相比进程更加轻量，但是每个线程都要占用内存，当大并发请求到来时，内存会用光，服务缓慢。Apache用的是这个模式。<br>Node通过事件驱动的方式处理请求，无需为每个请求创建额外的对应线程，可以省掉创建线程和销毁线程的开销，同时操作系统在调度任务时因为线程较少，上下文切换的代价也很低。Nginx也是采用了事件驱动的模式。</li>
 </ul>
 
                 
@@ -496,7 +512,7 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/04/15/js_basic/04-stack/">http://example.com/2021/04/15/js_basic/04-stack/</a>
+                    <a href="http://example.com/2021/04/18/nodejs/02-%E5%BC%82%E6%AD%A5IO/">http://example.com/2021/04/18/nodejs/02-%E5%BC%82%E6%AD%A5IO/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -577,54 +593,18 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/04/15/nodejs/01-Node%E7%AE%80%E4%BB%8B/">
+                <a href="/2021/04/18/nodejs/02-%E5%BC%82%E6%AD%A5IO/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="深入浅出Node">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="异步IO">
                         
-                        <span class="card-title">深入浅出Node</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-15
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            little cindy
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/04/15/es6/03-extend/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="各类扩展">
-                        
-                        <span class="card-title">各类扩展</span>
+                        <span class="card-title">异步IO</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -635,7 +615,45 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            little cindy
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/18/nodejs/01-Node%E7%AE%80%E4%BB%8B+%E6%A8%A1%E5%9D%97/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Node简介+模块">
+                        
+                        <span class="card-title">Node简介+模块</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-18
                             </span>
                         <span class="publish-author">
                             
