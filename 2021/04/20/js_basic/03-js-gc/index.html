@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="调用堆栈, cindy&#39;s Notebook">
+    <meta name="keywords" content="JS垃圾回收机制, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>调用堆栈 | cindy&#39;s Notebook</title>
+    <title>JS垃圾回收机制 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">调用堆栈</h1>
+                    <h1 class="description center-align post-title">JS垃圾回收机制</h1>
                 </div>
             </div>
         </div>
@@ -399,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-19
+                    2021-04-20
                 </div>
                 
 
@@ -423,68 +423,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-调用堆栈定义">1. 调用堆栈定义</span></h3><ul>
-<li><p>调用栈是解释器（比如浏览器中的 JavaScript 解释器）追踪函数执行流的一种机制。当执行环境中调用了多个函数时，通过这种机制，我们能够追踪到哪个函数正在执行，执行的函数体中又调用了哪个函数。</p>
-</li>
-<li><p>JavaScript是一门单线程的语言，只有一个调用栈，同一时间只能做一件事。</p>
-</li>
-<li><p>每一个进入调用栈的都称为调用帧。</p>
-</li>
-<li><p>堆栈溢出：达到调用栈最大值。</p>
-<h3><span id="2-执行上下文">2. 执行上下文</span></h3><p>执行上下文是评估和执行JavaScript代码的环境的抽象概念，每当JavaScript代码在运行的时候，都是在执行上下文运行。</p>
-<h5><span id="执行上下文分类">执行上下文分类：</span></h5></li>
-<li><p>全局执行上下文：创建全局window对象，设置this等于这个全局对象</p>
-</li>
-<li><p>函数执行上下文：每当函数被调用的时候，为该函数创建一个新的上下文</p>
-</li>
-<li><p>Eval函数执行上下文：eval函数内部的代码会有自己的执行上下文</p>
-<h5><span id="创建执行上下文">创建执行上下文</span></h5><h6><span id="1-创建阶段">1. 创建阶段</span></h6><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">ExecutionContext <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  ThisBinding <span class="token operator">=</span> <span class="token operator">&lt;</span><span class="token keyword">this</span> value<span class="token operator">></span><span class="token punctuation">,</span>
-  LexicalEnvironment <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  VariableEnvironment <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<ol>
-<li>This 绑定<br>在函数执行上下文中，this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined（在严格模式下）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-<span class="token function-variable function">baz</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-foo<span class="token punctuation">.</span><span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 'this' 引用 'foo', 因为 'baz' 被对象 'foo' 调用</span>
-<span class="token keyword">let</span> bar <span class="token operator">=</span> foo<span class="token punctuation">.</span>baz<span class="token punctuation">;</span>
-<span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 'this' 指向全局 window 对象，因为没有指定引用对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>创建<strong>词法环境</strong>组件<br>词法环境是一种规范类型，基于 ECMAScript 代码的词法嵌套结构来定义标识符和具体变量和函数的关联。一个词法环境由环境记录器和一个可能的引用外部词法环境的空值组成。<ul>
-<li>词法环境就是一种持有标识符-变量映射的解构</li>
-<li>词法环境的内部有环境记录器和外部环境的引用。环境记录器是存储变量和函数声明的实际位置。外部环境的引用意味着它可以访问其父级词法环境。</li>
-<li>词法环境包含全局环境和函数环境两种。全局环境的外部环境的引用是null。</li>
-<li>环境记录器也分为两种，在全局环境中，环境记录器是对象环境记录器。在函数环境中，环境记录器是声明式环境记录器。</li>
-</ul>
-</li>
-<li>创建<strong>变量环境</strong>组件<ul>
-<li>变量环境也是一个词法环境，其环境记录器持有变量声明语句在执行上下文中创建的绑定关系。</li>
-<li>ES6中，词法环境组件和变量环境组件的不同是，前者用于存储函数声明和变量(let和const)，后者只用来存储var变量绑定。<h6><span id="2-执行阶段">2. 执行阶段</span></h6></li>
-</ul>
-</li>
-</ol>
-<h3><span id="2-操作流程">2. 操作流程</span></h3><ul>
-<li><p>每调用一个函数，解释器就会把该函数的执行上下文添加进调用栈并开始执行。</p>
-</li>
-<li><p>正在调用栈中执行的函数还调用了其它函数，那么新函数也将会被添加进调用栈，一旦这个函数被调用，便会立即执行。</p>
-</li>
-<li><p>当前函数执行完毕后，解释器将其清出调用栈，继续执行当前执行环境下的剩余的代码。</p>
-</li>
-<li><p>当分配的调用栈空间被占满时，会引发“堆栈溢出”错误。</p>
-<h3><span id="3javascript引擎">3.JavaScript引擎</span></h3><p>JS引擎主要由两部分组成：<br>内存堆：进行内存分配<br>调用栈：代码执行的地方<br>在代码中有些引擎之外的API，是浏览器提供的Web API，比如DOM、AJAX、setTimeout等</p>
-</li>
-</ul>
-<h3><span id="4-javascript的执行机制">4. JavaScript的执行机制</span></h3><ul>
-<li>javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变</li>
-<li>任务分为同步任务和异步任务两种。同步任务就在主线程执行，异步任务进入Event Table并注册回调函数。</li>
-<li>当指定的任务完成后，Event Table会将这个函数移入Event Queue</li>
-<li>主线程任务全部执行完后，去Event Queue读取对应函数，进入主线程执行。</li>
-<li>不断重复这个过程，形成Event Loop</li>
-<li>js引擎存在monitoring process进程不断的检查主线程执行栈是否为空，一旦为空，就会去Event Queue那里检查是否有等待被调用的函数。</li>
-</ul>
+                <p>这是测试逻辑</p>
 
                 
             </div>
@@ -511,7 +450,7 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/04/19/js_basic/04-stack/">http://example.com/2021/04/19/js_basic/04-stack/</a>
+                    <a href="http://example.com/2021/04/20/js_basic/03-js-gc/">http://example.com/2021/04/20/js_basic/03-js-gc/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -596,13 +535,13 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/19/es6/03-extend/">
+                <a href="/2021/04/20/nodejs/01-Node%E7%AE%80%E4%BB%8B+%E6%A8%A1%E5%9D%97/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="各类扩展">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Node简介+模块">
                         
-                        <span class="card-title">各类扩展</span>
+                        <span class="card-title">Node简介+模块</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -613,7 +552,7 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-19
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-20
                         </span>
                         <span class="publish-author">
                             
@@ -633,13 +572,13 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/25/es6/02-Destructuring/">
+                <a href="/2021/04/20/es6/03-extend/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="变量的解构赋值">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="各类扩展">
                         
-                        <span class="card-title">变量的解构赋值</span>
+                        <span class="card-title">各类扩展</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -650,7 +589,7 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-20
                             </span>
                         <span class="publish-author">
                             
