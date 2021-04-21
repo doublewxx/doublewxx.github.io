@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="JS执行机制, cindy&#39;s Notebook">
+    <meta name="keywords" content="JS垃圾回收机制, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JS执行机制 | cindy&#39;s Notebook</title>
+    <title>JS垃圾回收机制 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JS执行机制</h1>
+                    <h1 class="description center-align post-title">JS垃圾回收机制</h1>
                 </div>
             </div>
         </div>
@@ -399,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-20
+                    2021-04-21
                 </div>
                 
 
@@ -423,21 +423,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-单线程">1. 单线程</span></h3><p>javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变。</p>
-<h3><span id="2-javascript的事件循环">2. JavaScript的事件循环</span></h3><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U2NyaXB0VHlwZT0iYXBwbGljYXRpb24vZWNtYXNjcmlwdCIgY29udGVudFN0eWxlVHlwZT0idGV4dC9jc3MiIGhlaWdodD0iMzI2cHgiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHN0eWxlPSJ3aWR0aDoyNjdweDtoZWlnaHQ6MzI2cHg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNjcgMzI2IiB3aWR0aD0iMjY3cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzPjxmaWx0ZXIgaGVpZ2h0PSIzMDAlIiBpZD0iZm1mbjY0Y2c3YmRyZSIgd2lkdGg9IjMwMCUiIHg9Ii0xIiB5PSItMSI+PGZlR2F1c3NpYW5CbHVyIHJlc3VsdD0iYmx1ck91dCIgc3RkRGV2aWF0aW9uPSIyLjAiLz48ZmVDb2xvck1hdHJpeCBpbj0iYmx1ck91dCIgcmVzdWx0PSJibHVyT3V0MiIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIC40IDAiLz48ZmVPZmZzZXQgZHg9IjQuMCIgZHk9IjQuMCIgaW49ImJsdXJPdXQyIiByZXN1bHQ9ImJsdXJPdXQzIi8+PGZlQmxlbmQgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iYmx1ck91dDMiIG1vZGU9Im5vcm1hbCIvPjwvZmlsdGVyPjwvZGVmcz48Zz48ZWxsaXBzZSBjeD0iMTMyLjI1IiBjeT0iMjAiIGZpbGw9IiMwMDAwMDAiIGZpbHRlcj0idXJsKCNmbWZuNjRjZzdiZHJlKSIgcng9IjEwIiByeT0iMTAiIHN0eWxlPSJzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MS4wOyIvPjxyZWN0IGZpbGw9IiNGRUZFQ0UiIGZpbHRlcj0idXJsKCNmbWZuNjRjZzdiZHJlKSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgd2lkdGg9IjEwNCIgeD0iODAuMjUiIHk9IjUwIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iODQiIHg9IjkwLjI1IiB5PSI3MS4xMzg3Ij7ku7vliqHov5vlhaXmiafooYzmoIg8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2ZtZm42NGNnN2JkcmUpIiBwb2ludHM9IjkzLjc1LDEwMy45Njg4LDE3MC43NSwxMDMuOTY4OCwxODIuNzUsMTE1Ljk2ODgsMTcwLjc1LDEyNy45Njg4LDkzLjc1LDEyNy45Njg4LDgxLjc1LDExNS45Njg4LDkzLjc1LDEwMy45Njg4IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI3NyIgeD0iOTMuNzUiIHk9IjExOS43NzY5Ij7mmK/lkKbmmK/lkIzmraXku7vliqE8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTEiIHg9IjcwLjc1IiB5PSIxMTMuMzc0NSI+5pivPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjExIiB4PSIxODIuNzUiIHk9IjExMy4zNzQ1Ij7lkKY8L3RleHQ+PHJlY3QgZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2ZtZm42NGNnN2JkcmUpIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB3aWR0aD0iNTYiIHg9IjQxIiB5PSIxMzcuOTY4OCIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjM2IiB4PSI1MSIgeT0iMTU5LjEwNzQiPuS4u+e6v+eoizwvdGV4dD48cmVjdCBmaWxsPSIjRkVGRUNFIiBmaWx0ZXI9InVybCgjZm1mbjY0Y2c3YmRyZSkiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHdpZHRoPSIxMTYiIHg9IjExIiB5PSIxOTEuOTM3NSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9Ijk2IiB4PSIyMSIgeT0iMjEzLjA3NjIiPuS7u+WKoeWFqOmDqOaJp+ihjOWujOavlTwvdGV4dD48cmVjdCBmaWxsPSIjRkVGRUNFIiBmaWx0ZXI9InVybCgjZm1mbjY0Y2c3YmRyZSkiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHdpZHRoPSI5MCIgeD0iMTUwLjUiIHk9IjEzNy45Njg4Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNzAiIHg9IjE2MC41IiB5PSIxNTkuMTA3NCI+RXZlbnQgVGFibGU8L3RleHQ+PHJlY3QgZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2ZtZm42NGNnN2JkcmUpIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB3aWR0aD0iOTciIHg9IjE0NyIgeT0iMTkxLjkzNzUiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI3NyIgeD0iMTU3IiB5PSIyMTMuMDc2MiI+RXZlbnQgUXVldWU8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2ZtZm42NGNnN2JkcmUpIiBwb2ludHM9IjEzMi4yNSwyMzEuOTA2MywxNDQuMjUsMjQzLjkwNjMsMTMyLjI1LDI1NS45MDYzLDEyMC4yNSwyNDMuOTA2MywxMzIuMjUsMjMxLjkwNjMiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIvPjxyZWN0IGZpbGw9IiNGRUZFQ0UiIGZpbHRlcj0idXJsKCNmbWZuNjRjZzdiZHJlKSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgd2lkdGg9IjIzNiIgeD0iMTQuMjUiIHk9IjI3NS45MDYzIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjE2IiB4PSIyNC4yNSIgeT0iMjk3LjA0NDkiPuivu+WPluS7u+WKoemYn+WIl+S4reeahOe7k+aenO+8jOi/m+WFpeS4u+e6v+eoi+aJp+ihjDwvdGV4dD48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSIxMzIuMjUiIHgyPSIxMzIuMjUiIHkxPSIzMCIgeTI9IjUwIi8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSIxMjguMjUsNDAsMTMyLjI1LDUwLDEzNi4yNSw0MCwxMzIuMjUsNDQiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjY5IiB4Mj0iNjkiIHkxPSIxNzEuOTM3NSIgeTI9IjE5MS45Mzc1Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI2NSwxODEuOTM3NSw2OSwxOTEuOTM3NSw3MywxODEuOTM3NSw2OSwxODUuOTM3NSIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTk1LjUiIHgyPSIxOTUuNSIgeTE9IjE3MS45Mzc1IiB5Mj0iMTkxLjkzNzUiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjE5MS41LDE4MS45Mzc1LDE5NS41LDE5MS45Mzc1LDE5OS41LDE4MS45Mzc1LDE5NS41LDE4NS45Mzc1IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI4MS43NSIgeDI9IjY5IiB5MT0iMTE1Ljk2ODgiIHkyPSIxMTUuOTY4OCIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjY5IiB4Mj0iNjkiIHkxPSIxMTUuOTY4OCIgeTI9IjEzNy45Njg4Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI2NSwxMjcuOTY4OCw2OSwxMzcuOTY4OCw3MywxMjcuOTY4OCw2OSwxMzEuOTY4OCIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTgyLjc1IiB4Mj0iMTk1LjUiIHkxPSIxMTUuOTY4OCIgeTI9IjExNS45Njg4Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTk1LjUiIHgyPSIxOTUuNSIgeTE9IjExNS45Njg4IiB5Mj0iMTM3Ljk2ODgiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjE5MS41LDEyNy45Njg4LDE5NS41LDEzNy45Njg4LDE5OS41LDEyNy45Njg4LDE5NS41LDEzMS45Njg4IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI2OSIgeDI9IjY5IiB5MT0iMjI1LjkwNjMiIHkyPSIyNDMuOTA2MyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjY5IiB4Mj0iMTIwLjI1IiB5MT0iMjQzLjkwNjMiIHkyPSIyNDMuOTA2MyIvPjxwb2x5Z29uIGZpbGw9IiNBODAwMzYiIHBvaW50cz0iMTEwLjI1LDIzOS45MDYzLDEyMC4yNSwyNDMuOTA2MywxMTAuMjUsMjQ3LjkwNjMsMTE0LjI1LDI0My45MDYzIiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSIxOTUuNSIgeDI9IjE5NS41IiB5MT0iMjI1LjkwNjMiIHkyPSIyNDMuOTA2MyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjE5NS41IiB4Mj0iMTQ0LjI1IiB5MT0iMjQzLjkwNjMiIHkyPSIyNDMuOTA2MyIvPjxwb2x5Z29uIGZpbGw9IiNBODAwMzYiIHBvaW50cz0iMTU0LjI1LDIzOS45MDYzLDE0NC4yNSwyNDMuOTA2MywxNTQuMjUsMjQ3LjkwNjMsMTUwLjI1LDI0My45MDYzIiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSIxMzIuMjUiIHgyPSIxMzIuMjUiIHkxPSI4My45Njg4IiB5Mj0iMTAzLjk2ODgiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjEyOC4yNSw5My45Njg4LDEzMi4yNSwxMDMuOTY4OCwxMzYuMjUsOTMuOTY4OCwxMzIuMjUsOTcuOTY4OCIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTMyLjI1IiB4Mj0iMTMyLjI1IiB5MT0iMjU1LjkwNjMiIHkyPSIyNzUuOTA2MyIvPjxwb2x5Z29uIGZpbGw9IiNBODAwMzYiIHBvaW50cz0iMTI4LjI1LDI2NS45MDYzLDEzMi4yNSwyNzUuOTA2MywxMzYuMjUsMjY1LjkwNjMsMTMyLjI1LDI2OS45MDYzIiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48IS0tTUQ1PVs0YTEyZmI5ZjdhYzdkZDk4NWU0NDdmNzQ5Y2NlY2NkN10KQHN0YXJ0dW1sDQpzdGFydA0KOuS7u+WKoei/m+WFpeaJp+ihjOagiDsNCmlmICjmmK/lkKbmmK/lkIzmraXku7vliqEpIHRoZW4gKOaYrykNCiAgICA65Li757q/56iLOw0KICAgIDrku7vliqHlhajpg6jmiafooYzlrozmr5U7DQplbHNlICjlkKYpDQogICAgOkV2ZW50IFRhYmxlOw0KICAgIDpFdmVudCBRdWV1ZTsNCmVuZGlmDQo66K+75Y+W5Lu75Yqh6Zif5YiX5Lit55qE57uT5p6c77yM6L+b5YWl5Li757q/56iL5omn6KGMOw0KQGVuZHVtbA0KClBsYW50VU1MIHZlcnNpb24gMS4yMDIxLjViZXRhMyhVbmtub3duIGNvbXBpbGUgdGltZSkKKEdQTCBzb3VyY2UgZGlzdHJpYnV0aW9uKQpKYXZhIFJ1bnRpbWU6IEphdmEoVE0pIFNFIFJ1bnRpbWUgRW52aXJvbm1lbnQKSlZNOiBKYXZhIEhvdFNwb3QoVE0pIDY0LUJpdCBTZXJ2ZXIgVk0KRGVmYXVsdCBFbmNvZGluZzogVVRGLTgKTGFuZ3VhZ2U6IGVuCkNvdW50cnk6IFVTCi0tPjwvZz48L3N2Zz4=">
-<p>流程描述：</p>
-<ul>
-<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入Event Table并注册函数。</li>
-<li>当指定的事情完成时，Event Table会将这个函数移入Event Queue。</li>
-<li>主线程内的任务执行完毕为空，去Event Queue读取对应的函数，进入主线程执行。</li>
-<li>上述过程会不断重复，也就是常说的Event Loop(事件循环)。</li>
-</ul>
-<h3><span id="3-settimeout">3. setTimeOut</span></h3><p>setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，意思就是不用再等多少秒了，只要主线程执行栈内的同步任务全部执行完成，栈为空就马上执行。即便主线程为空，0毫秒实际上也是达不到的。根据HTML的标准，最低是4毫秒。</p>
-<h3><span id="4-setinterval">4. setInterval</span></h3><p>setInterval会每隔指定的时间将注册的函数置入Event Queue，如果前面的任务耗时太久，那么同样需要等待。因为是每隔ms秒会有回调函数进入Event Queue，一旦setInterval的回调函数fn执行时间超过了延迟时间ms，就看不出时间差异了。</p>
-<h3><span id="5-promise与processnexttickcallback">5. Promise与process.nextTick(callback)</span></h3><ul>
-<li>macro-task(宏任务)：包括整体代码script，setTimeout，setInterval</li>
-<li>micro-task(微任务)：Promise，process.nextTick<br>不同任务进入不同的Event Queue<br>进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。<h3><span id="6-备注">6. 备注</span></h3>执行和运行有很大的区别，javascript在不同的环境下，比如node，浏览器，Ringo等等，执行方式是不同的。而运行大多指javascript解析引擎，是统一的。</li>
-</ul>
+                <p>这是测试逻辑</p>
 
                 
             </div>
@@ -464,7 +450,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/04/20/js_basic/05-js-execute/">http://example.com/2021/04/20/js_basic/05-js-execute/</a>
+                    <a href="http://example.com/2021/04/21/js_basic/03-js-gc/">http://example.com/2021/04/21/js_basic/03-js-gc/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -549,13 +535,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/20/js_basic/04-stack/">
+                <a href="/2021/04/21/nodejs/01-Node%E7%AE%80%E4%BB%8B+%E6%A8%A1%E5%9D%97/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="调用堆栈">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Node简介+模块">
                         
-                        <span class="card-title">调用堆栈</span>
+                        <span class="card-title">Node简介+模块</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -566,7 +552,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-21
                         </span>
                         <span class="publish-author">
                             
@@ -586,13 +572,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/25/es6/02-Destructuring/">
+                <a href="/2021/04/21/es6/03-extend/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="变量的解构赋值">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="各类扩展">
                         
-                        <span class="card-title">变量的解构赋值</span>
+                        <span class="card-title">各类扩展</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -603,7 +589,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-21
                             </span>
                         <span class="publish-author">
                             

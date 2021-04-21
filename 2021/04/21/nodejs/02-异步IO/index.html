@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="基础知识, cindy&#39;s Notebook">
+    <meta name="keywords" content="异步IO, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>基础知识 | cindy&#39;s Notebook</title>
+    <title>异步IO | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -266,12 +266,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">基础知识</h1>
+                    <h1 class="description center-align post-title">异步IO</h1>
                 </div>
             </div>
         </div>
@@ -399,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-01
+                    2021-04-21
                 </div>
                 
 
@@ -423,118 +423,58 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2><span id="1-0102为什么不等于03">1、0.1+0.2为什么不等于0.3</span></h2><p>JavaScript使用Number类型表示数字（整数和浮点数)，遵循 IEEE 754 标准，通过64位来表示一个数字。<br>JS中1位符号位，11位的指数e,剩余52位是尾数。<br>js最大安全数是 Number.MAX_SAFE_INTEGER == Math.pow(2,53) - 1。本来应该是Math.pow(2,52)-1，但是二进制表示的有效数字总是1.xxx。<br>计算机无法计算10进制，因此会先按照IEEE 754转换成二进制进行运算。<br>浮点数运算的五个步骤：对阶、尾数运算、规格化、舍入处理、溢出判断<br>1、0.1和0.2在转化为二进制后，都是无限循环小数，只能保留52位，会有精度损失<br>2、在运算时，需要对阶，一般是小阶对大阶，这一步也可能丢失进度，<br>3、对阶后进行尾数运算，相加后得到可结果，如果结果的整数部分超过1，需要进行规格化<br>4、规格化之后如果小数部分超出52位，需要再次摄入处理<br>5、0.1+0.2不涉及溢出判断，直接将结果转为10进制</p>
-<h2><span id="2-11为什么为false">2、[1]==[1]为什么为false</span></h2><p>引用类型的比较，是数组堆内存的地址的比较，两个数组在堆内存中地址是不同的。</p>
-<h2><span id="3-如何将值类型的变量以引用的方式传递">3、如何将值类型的变量以引用的方式传递</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> str <span class="token operator">=</span> <span class="token string">"abcd"</span><span class="token punctuation">;</span>        <span class="token comment">//基本类型</span>
-<span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"str"</span><span class="token operator">:</span>str<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>   <span class="token comment">//引用类型</span>
-<span class="token keyword">var</span> boj2 <span class="token operator">=</span> obj<span class="token punctuation">;</span>          <span class="token comment">//复制引用地址</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>boj2<span class="token punctuation">.</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//abcd</span>
-obj<span class="token punctuation">.</span>str <span class="token operator">=</span> <span class="token string">"bcd"</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>boj2<span class="token punctuation">.</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">//bcd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2><span id="4-const定义的array中间元素是否可以被修改如果可以那么const修饰对象有什么意义">4、const定义的Array中间元素是否可以被修改？如果可以，那么const修饰对象有什么意义</span></h2><p>const定义的Array中间元素可以被修改，const定义的变量保存的是Array的地址，这个变量本身不可以修改，而存在于堆内存的Array本身是可以修改的。<br>对于const声明，只是它的赋值操作被冻结了，而值不会因为const而不变。主要是预防在coding过程中的coder因为疏忽对变量的意外修改。</p>
-<h2><span id="5-null与undefined的区别">5、null与undefined的区别</span></h2><p>null表示”没有对象”，此处不该有值</p>
-<p>典型用法</p>
+                <h3><span id="1-异步io原因">1. 异步IO原因</span></h3><ol>
+<li><p>提升用户体验，如果加载资源需要阻塞渲染等事件，对用户不够友好。</p>
+</li>
+<li><p>资源分配：利用单线程，远离多线程的死锁和状态同步等问题；再利用异步I/O，让单线程远离阻塞，更好使用CPU。</p>
+<h3><span id="2-异步io现状">2. 异步I/O现状</span></h3><h4><span id="21-异步io与非阻塞io">2.1. 异步I/O与非阻塞I/O</span></h4><p>阻塞I/O与非阻塞I/O：操作系统对I/O只有阻塞与非阻塞两种方式。阻塞I/O被调用时，需要等待I/O完全执行完成才会返回结果。这样会导致CPU的等待，处理能力没有被充分利用。<br>非阻塞I/O是立即返回，但是对于抽象出来的文件而言，并没有返回文件的内容，只有文件描述符。非阻塞I/O返回的并不是业务层需要的数据，而是当前调用的状态，为了获取完整数据，需要重复调用I/O来确认是否完成，这种重复判断操作是否完成的技术叫轮询。<br>阻塞I/O会浪费CPU，非阻塞I/O需要轮询确认数据是否完全获取。<br>常用轮询技术：</p>
+</li>
+</ol>
 <ul>
-<li>作为函数的参数，表示该函数的参数不是对象</li>
-<li>作为对象原型链的终点</li>
+<li>read：最原始，性能最低</li>
+<li>select：改进过的，根据文件描述符上的事件状态来进行判断，采用数组存储状态，有长度限制，最多1024个文件</li>
+<li>poll：改进select，使用链表来存储状态</li>
+<li>epoll： Linux下效率最高的I/O事件通知机制，进入轮询的时候如果没有I/O事件，进行休眠，直到事件将其唤醒。</li>
+<li>kqueue：类似epoll</li>
 </ul>
-<p>undefined表示”缺少值”，此处该有值，但是还未定义</p>
-<ul>
-<li>变量被声明了，但是没有赋值，就是undefined</li>
-<li>调用函数时，应该提供的参数没有提供，该参数等于undefined</li>
-<li>对象没有赋值的属性，该属性的值为undefined</li>
-<li>函数没有返回值时，默认返回undefined </li>
+<h4><span id="22-理想的非阻塞异步io">2.2 理想的非阻塞异步I/O</span></h4><p>理想的非阻塞异步I/O：应用程序发起非阻塞调用，无需通过遍历或者事件唤醒等方式轮询，可以直接处理下一个任务，只需要在I/O完成后通过信号或者回调将数据传递给应用程序。<br>我们常说Node是单线程的，这里的单线程是说JavaScript执行在单线程中，内部I/O任务另有线程池。</p>
+<h3><span id="3-node的异步io">3. Node的异步I/O</span></h3><h4><span id="31-事件循环">3.1 事件循环</span></h4><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U2NyaXB0VHlwZT0iYXBwbGljYXRpb24vZWNtYXNjcmlwdCIgY29udGVudFN0eWxlVHlwZT0idGV4dC9jc3MiIGhlaWdodD0iNDUxcHgiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiIHN0eWxlPSJ3aWR0aDoyMjBweDtoZWlnaHQ6NDUxcHg7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyMjAgNDUxIiB3aWR0aD0iMjIwcHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzPjxmaWx0ZXIgaGVpZ2h0PSIzMDAlIiBpZD0iZjF2cjlnbGRyZ25lNWMiIHdpZHRoPSIzMDAlIiB4PSItMSIgeT0iLTEiPjxmZUdhdXNzaWFuQmx1ciByZXN1bHQ9ImJsdXJPdXQiIHN0ZERldmlhdGlvbj0iMi4wIi8+PGZlQ29sb3JNYXRyaXggaW49ImJsdXJPdXQiIHJlc3VsdD0iYmx1ck91dDIiIHR5cGU9Im1hdHJpeCIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAuNCAwIi8+PGZlT2Zmc2V0IGR4PSI0LjAiIGR5PSI0LjAiIGluPSJibHVyT3V0MiIgcmVzdWx0PSJibHVyT3V0MyIvPjxmZUJsZW5kIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9ImJsdXJPdXQzIiBtb2RlPSJub3JtYWwiLz48L2ZpbHRlcj48L2RlZnM+PGc+PGVsbGlwc2UgY3g9IjEyMC41IiBjeT0iMjAiIGZpbGw9IiMwMDAwMDAiIGZpbHRlcj0idXJsKCNmMXZyOWdsZHJnbmU1YykiIHJ4PSIxMCIgcnk9IjEwIiBzdHlsZT0ic3Ryb2tlOm5vbmU7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSIjRkVGRUNFIiBmaWx0ZXI9InVybCgjZjF2cjlnbGRyZ25lNWMpIiBwb2ludHM9Ijk4LjUsNTAsMTQyLjUsNTAsMTU0LjUsNjIsMTQyLjUsNzQsOTguNSw3NCw4Ni41LDYyLDk4LjUsNTAiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjExIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjQ0IiB4PSI5OC41IiB5PSI2NS44MDgxIj7ov5jmnInkuovku7Y8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjEiIHg9IjY1LjUiIHk9IjU5LjQwNTgiPnllczwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNCIgeD0iMTU0LjUiIHk9IjU5LjQwNTgiPm5vPC90ZXh0PjxyZWN0IGZpbGw9IiNGRUZFQ0UiIGZpbHRlcj0idXJsKCNmMXZyOWdsZHJnbmU1YykiIGhlaWdodD0iMzMuOTY4OCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHdpZHRoPSI5MiIgeD0iMTMuNSIgeT0iMTM3Ljk2ODgiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI3MiIgeD0iMjMuNSIgeT0iMTU5LjEwNzQiPuWPluWHuuS4gOS4quS6i+S7tjwvdGV4dD48cmVjdCBmaWxsPSIjRkVGRUNFIiBmaWx0ZXI9InVybCgjZjF2cjlnbGRyZ25lNWMpIiBoZWlnaHQ9IjMzLjk2ODgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB3aWR0aD0iNjgiIHg9IjI1LjUiIHk9IjI0MC4zMzk4Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDgiIHg9IjM1LjUiIHk9IjI2MS40Nzg1Ij7miafooYzlm57osIM8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2YxdnI5Z2xkcmduZTVjKSIgcG9pbnRzPSIzMiwxOTEuOTM3NSw4NywxOTEuOTM3NSw5OSwyMDMuOTM3NSw4NywyMTUuOTM3NSwzMiwyMTUuOTM3NSwyMCwyMDMuOTM3NSwzMiwxOTEuOTM3NSIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjEiIHg9IjYzLjUiIHk9IjIyNi4xNDc5Ij55ZXM8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNTUiIHg9IjMyIiB5PSIyMDcuNzQ1NiI+5pyJ5YWz6IGU5Zue6LCDPC90ZXh0Pjxwb2x5Z29uIGZpbGw9IiNGRUZFQ0UiIGZpbHRlcj0idXJsKCNmMXZyOWdsZHJnbmU1YykiIHBvaW50cz0iNTkuNSwyOTQuMzA4Niw3MS41LDMwNi4zMDg2LDU5LjUsMzE4LjMwODYsNDcuNSwzMDYuMzA4Niw1OS41LDI5NC4zMDg2IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiLz48cG9seWdvbiBmaWxsPSIjRkVGRUNFIiBmaWx0ZXI9InVybCgjZjF2cjlnbGRyZ25lNWMpIiBwb2ludHM9IjU5LjUsODQsNzEuNSw5Niw1OS41LDEwOCw0Ny41LDk2LDU5LjUsODQiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIvPjxwb2x5Z29uIGZpbGw9IiNGRUZFQ0UiIGZpbHRlcj0idXJsKCNmMXZyOWdsZHJnbmU1YykiIHBvaW50cz0iMzcuNSwzMzguMzA4Niw4MS41LDMzOC4zMDg2LDkzLjUsMzUwLjMwODYsODEuNSwzNjIuMzA4NiwzNy41LDM2Mi4zMDg2LDI1LjUsMzUwLjMwODYsMzcuNSwzMzguMzA4NiIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNDQiIHg9IjM3LjUiIHk9IjM1NC4xMTY3Ij7ov5jmnInkuovku7Y8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjEiIHg9IjkzLjUiIHk9IjM0Ny43MTQ0Ij55ZXM8L3RleHQ+PHJlY3QgZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2YxdnI5Z2xkcmduZTVjKSIgaGVpZ2h0PSIzMy45Njg4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgd2lkdGg9IjQ0IiB4PSIxNTkuNSIgeT0iODQiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIyNCIgeD0iMTY5LjUiIHk9IjEwNS4xMzg3Ij7pgIDlh7o8L3RleHQ+PHBvbHlnb24gZmlsbD0iI0ZFRkVDRSIgZmlsdGVyPSJ1cmwoI2YxdnI5Z2xkcmduZTVjKSIgcG9pbnRzPSIxMjAuNSwzNjguMzA4NiwxMzIuNSwzODAuMzA4NiwxMjAuNSwzOTIuMzA4NiwxMDguNSwzODAuMzA4NiwxMjAuNSwzNjguMzA4NiIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7Ii8+PGVsbGlwc2UgY3g9IjEyMC41IiBjeT0iNDIzLjMwODYiIGZpbGw9IiNGRkZGRkYiIGZpbHRlcj0idXJsKCNmMXZyOWdsZHJnbmU1YykiIHJ4PSIxMSIgcnk9IjExIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjEuMDsiLz48ZWxsaXBzZSBjeD0iMTIwLjUiIGN5PSI0MjMuMzA4NiIgZmlsbD0iIzAwMDAwMCIgcng9IjYiIHJ5PSI2IiBzdHlsZT0ic3Ryb2tlOiM3RjdGN0Y7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI1OS41IiB4Mj0iNTkuNSIgeTE9IjIxNS45Mzc1IiB5Mj0iMjQwLjMzOTgiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjU1LjUsMjMwLjMzOTgsNTkuNSwyNDAuMzM5OCw2My41LDIzMC4zMzk4LDU5LjUsMjM0LjMzOTgiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9Ijk5IiB4Mj0iMTExIiB5MT0iMjAzLjkzNzUiIHkyPSIyMDMuOTM3NSIvPjxwb2x5Z29uIGZpbGw9IiNBODAwMzYiIHBvaW50cz0iMTA3LDI0Ny4zMjQyLDExMSwyNTcuMzI0MiwxMTUsMjQ3LjMyNDIsMTExLDI1MS4zMjQyIiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSIxMTEiIHgyPSIxMTEiIHkxPSIyMDMuOTM3NSIgeTI9IjMwNi4zMDg2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTExIiB4Mj0iNzEuNSIgeTE9IjMwNi4zMDg2IiB5Mj0iMzA2LjMwODYiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjgxLjUsMzAyLjMwODYsNzEuNSwzMDYuMzA4Niw4MS41LDMxMC4zMDg2LDc3LjUsMzA2LjMwODYiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjU5LjUiIHgyPSI1OS41IiB5MT0iMjc0LjMwODYiIHkyPSIyOTQuMzA4NiIvPjxwb2x5Z29uIGZpbGw9IiNBODAwMzYiIHBvaW50cz0iNTUuNSwyODQuMzA4Niw1OS41LDI5NC4zMDg2LDYzLjUsMjg0LjMwODYsNTkuNSwyODguMzA4NiIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iNTkuNSIgeDI9IjU5LjUiIHkxPSIxNzEuOTM3NSIgeTI9IjE5MS45Mzc1Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI1NS41LDE4MS45Mzc1LDU5LjUsMTkxLjkzNzUsNjMuNSwxODEuOTM3NSw1OS41LDE4NS45Mzc1IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI1OS41IiB4Mj0iNTkuNSIgeTE9IjEwOCIgeTI9IjEzNy45Njg4Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI1NS41LDEyNy45Njg4LDU5LjUsMTM3Ljk2ODgsNjMuNSwxMjcuOTY4OCw1OS41LDEzMS45Njg4IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI5My41IiB4Mj0iMTI3LjUiIHkxPSIzNTAuMzA4NiIgeTI9IjM1MC4zMDg2Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSIxMjMuNSwyMzIuODM5OCwxMjcuNSwyMjIuODM5OCwxMzEuNSwyMzIuODM5OCwxMjcuNSwyMjguODM5OCIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTI3LjUiIHgyPSIxMjcuNSIgeTE9Ijk2IiB5Mj0iMzUwLjMwODYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSIxMjcuNSIgeDI9IjcxLjUiIHkxPSI5NiIgeTI9Ijk2Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI4MS41LDkyLDcxLjUsOTYsODEuNSwxMDAsNzcuNSw5NiIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iNTkuNSIgeDI9IjU5LjUiIHkxPSIzMTguMzA4NiIgeTI9IjMzOC4zMDg2Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI1NS41LDMyOC4zMDg2LDU5LjUsMzM4LjMwODYsNjMuNSwzMjguMzA4Niw1OS41LDMzMi4zMDg2IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI4Ni41IiB4Mj0iNTkuNSIgeTE9IjYyIiB5Mj0iNjIiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI1OS41IiB4Mj0iNTkuNSIgeTE9IjYyIiB5Mj0iODQiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjU1LjUsNzQsNTkuNSw4NCw2My41LDc0LDU5LjUsNzgiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjE1NC41IiB4Mj0iMTgxLjUiIHkxPSI2MiIgeTI9IjYyIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTgxLjUiIHgyPSIxODEuNSIgeTE9IjYyIiB5Mj0iODQiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjE3Ny41LDc0LDE4MS41LDg0LDE4NS41LDc0LDE4MS41LDc4IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI1OS41IiB4Mj0iNTkuNSIgeTE9IjM2Mi4zMDg2IiB5Mj0iMzgwLjMwODYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSI1OS41IiB4Mj0iMTA4LjUiIHkxPSIzODAuMzA4NiIgeTI9IjM4MC4zMDg2Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSI5OC41LDM3Ni4zMDg2LDEwOC41LDM4MC4zMDg2LDk4LjUsMzg0LjMwODYsMTAyLjUsMzgwLjMwODYiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjE4MS41IiB4Mj0iMTgxLjUiIHkxPSIxMTcuOTY4OCIgeTI9IjM4MC4zMDg2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTgxLjUiIHgyPSIxMzIuNSIgeTE9IjM4MC4zMDg2IiB5Mj0iMzgwLjMwODYiLz48cG9seWdvbiBmaWxsPSIjQTgwMDM2IiBwb2ludHM9IjE0Mi41LDM3Ni4zMDg2LDEzMi41LDM4MC4zMDg2LDE0Mi41LDM4NC4zMDg2LDEzOC41LDM4MC4zMDg2IiBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiNBODAwMzY7c3Ryb2tlLXdpZHRoOjEuNTsiIHgxPSIxMjAuNSIgeDI9IjEyMC41IiB5MT0iMzAiIHkyPSI1MCIvPjxwb2x5Z29uIGZpbGw9IiNBODAwMzYiIHBvaW50cz0iMTE2LjUsNDAsMTIwLjUsNTAsMTI0LjUsNDAsMTIwLjUsNDQiIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6I0E4MDAzNjtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjEyMC41IiB4Mj0iMTIwLjUiIHkxPSIzOTIuMzA4NiIgeTI9IjQxMi4zMDg2Ii8+PHBvbHlnb24gZmlsbD0iI0E4MDAzNiIgcG9pbnRzPSIxMTYuNSw0MDIuMzA4NiwxMjAuNSw0MTIuMzA4NiwxMjQuNSw0MDIuMzA4NiwxMjAuNSw0MDYuMzA4NiIgc3R5bGU9InN0cm9rZTojQTgwMDM2O3N0cm9rZS13aWR0aDoxLjA7Ii8+PCEtLU1ENT1bZjcyMmQwYWY3NDBkZGExZDZiZTUyNjQ4YmY5ODg5ZGNdCkBzdGFydHVtbA0Kc3RhcnQNCiBpZiAo6L+Y5pyJ5LqL5Lu2KSB0aGVuICh5ZXMpDQogcmVwZWF0DQogIDrlj5blh7rkuIDkuKrkuovku7Y7DQogIGlmICjmnInlhbPogZTlm57osIMpIHRoZW4gKHllcykNCiAgICA65omn6KGM5Zue6LCDOw0KICBlbmRpZg0KICByZXBlYXQgd2hpbGUgKOi/mOacieS6i+S7tikgaXMgKHllcykgIA0KZWxzZSAobm8pDQogIDrpgIDlh7o7DQplbmRpZg0Kc3RvcA0KQGVuZHVtbA0KClBsYW50VU1MIHZlcnNpb24gMS4yMDIxLjViZXRhMyhVbmtub3duIGNvbXBpbGUgdGltZSkKKEdQTCBzb3VyY2UgZGlzdHJpYnV0aW9uKQpKYXZhIFJ1bnRpbWU6IEphdmEoVE0pIFNFIFJ1bnRpbWUgRW52aXJvbm1lbnQKSlZNOiBKYXZhIEhvdFNwb3QoVE0pIDY0LUJpdCBTZXJ2ZXIgVk0KRGVmYXVsdCBFbmNvZGluZzogVVRGLTgKTGFuZ3VhZ2U6IGVuCkNvdW50cnk6IFVTCi0tPjwvZz48L3N2Zz4=">
+<p>进程启动的时候，Node创建一个类似while(true)的循环，每次执行循环体的过程称为Tick，每个Tick的过程就是看是否有事件等待处理，有就取出事件和相关的回调函数，如果存在关联的回调函数，就执行它们，再进入下一个循环。如果不再有事件处理，就退出进程。</p>
+<h4><span id="32-观察者">3.2 观察者</span></h4><p>每个事件循环中有一个或者多个观察者，判断是否有事件需要处理的过程就是向观察者询问是否有处理的事件。事件循环就是一个典型的生产者/消费者模型。异步I/O、网络请求等是事件的生产者，为Node提供各类事件，这些事件被传递到相应的观察者那里，事件循环则从观察者那里取出事件并处理。<br>在Windows下这个循环基于IOCP创建，而在*nix下基于多线程创建，Node下的libuv这一层屏蔽了这些差异。</p>
+<h4><span id="33-请求对象">3.3 请求对象</span></h4><p>从JavaScript发起调用到内核执行完I/O操作的过渡过程中，存在一种中间产物，叫请求对象。所有的状态都保存在这个对象中，包括送入线程池等待执行以及I/O操作完成后的回调处理。</p>
+<h4><span id="34-执行回调">3.4 执行回调</span></h4><p>I/O相关操作调用完成后，将获取的结果存储在result属性上，再通知IOCP当前对象操作已经完成。在事件循环的过程中，也是用到了事件循环的I/O观察者。事件循环、观察者、请求对象和I/O线程池四者共同组成了Node异步I/O模型的基本要素。</p>
+<h4><span id="35-备注">3.5 备注</span></h4><p>在Node中，除了JavaScript是单线程的，Node自身是多线程的，只是I/O线程使用的CPU比较少。除了用户代码无法并行执行外，所有的I/O是可以并行的。</p>
+<h3><span id="4-非io的异步api">4. 非I/O的异步API</span></h3><h4><span id="41-定时器">4.1 定时器</span></h4><p>调用setTimeOut()或者setInterval()创建的定时器会被插入到定时器观察者内部的一个红黑树中。每次Tick执行时，会从该红黑树中迭代取出定时器对象，检查是否超过定时事件，如果超出就形成一个事件，回调会立即执行。定时器的问题就是，它的精度并不是完全准确的，如果某一次循环占用的时间角度，下次循环时，他或许已经超时很久了。例如setTimeOut()设定10ms后执行，但是9ms之后有一个任务占用了5ms的时间片，再次轮到定时器执行的时候，已经超时了4ms。</p>
+<h4><span id="42-processnexttick">4.2 process.nextTick()</span></h4><p>为立即异步执行一个任务，之前使用setTimeOut(fnc,0)，这种精度不够，而且需要动用红黑树，创建定时器对象和迭代等操作，较浪费性能。process.nextTick()操作轻量。每次调用nextTick()，只会将回调函数放入队列，在下一轮Tick的时候取出执行。</p>
+<h4><span id="43-setimmediate">4.3 setImmediate()</span></h4><p>setImmediate()与nextTick()类似，都是将回调延迟执行。从执行顺序来看是没有差别的，例如</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'正常执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">setImmediata</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'正常执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 这两种方式执行结果一样</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>放在一起的时候，执行结果是</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'nextTick延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token function">setImmediata</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'setImmediate延迟执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'正常执行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 执行结果</span>
+<span class="token comment">// 正常执行</span>
+<span class="token comment">// nextTick延迟执行</span>
+<span class="token comment">// setImmediate延迟执行</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>原因分析：nextTick中回调函数优先级高于setImmediate()。事件循环对观察者的检查有先后顺序，process.nextTick()属于idle观察者，setImmediate()属于check观察者。每一个轮询检查中，idle观察者优先于I/O观察者，I/O观察者先于check观察者。<br>process.nextTick()的回调函数保存在一个数组中，setImmediate()的结果保存在链表中。行为上，process.nextTick()在每轮循环中会将数组中的回调函数全部执行完，而setImemediate()在每轮循环中执行链表中的一个回调函数。</p>
+<h3><span id="5-事件驱动与高性能服务器">5. 事件驱动与高性能服务器</span></h3><h4><span id="51-经典服务器模型">5.1 经典服务器模型</span></h4><ul>
+<li>同步式：一次处理一个请求，其余请求等待。</li>
+<li>每进程/每请求：为每个请求启动一个进程，可以处理多个请求，但是不具备扩展性</li>
+<li>每线程/每请求：为每个请求启动一个线程来处理。虽然相比进程更加轻量，但是每个线程都要占用内存，当大并发请求到来时，内存会用光，服务缓慢。Apache用的是这个模式。<br>Node通过事件驱动的方式处理请求，无需为每个请求创建额外的对应线程，可以省掉创建线程和销毁线程的开销，同时操作系统在调度任务时因为线程较少，上下文切换的代价也很低。Nginx也是采用了事件驱动的模式。</li>
 </ul>
-<p>要比较相等性之前，不能将 null 和 undefined 转换成其他任何值，它们就是相等的，在ECMAScript规范中也是这样定义的。</p>
-<h2><span id="6-和的操作流程">6. ==和===的操作流程</span></h2><p>这两个操作符都会先转换操作，再比较它们的相等性<br>转化基本规则</p>
-<ol>
-<li>如果有一个操作数是布尔值，则在比较相等性之前现将其转换为数值-false转换为0，true转换为1</li>
-<li>如果有一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值</li>
-<li>如果一个操作数是对象，另一个操作数不是，则调用对象valueOf( )方法，用得到的基本类型值按照前面的规则进行比较</li>
-<li>如果一个操作数是布尔值，另一个操作数是字符串，会把双方转换为数字，再进行比较</li>
-</ol>
-<p>比较时遵循规则：</p>
-<ol>
-<li>null和undefined相等</li>
-<li>比较相等性之前，不能把null和undefined转换成任何其他值</li>
-<li>如果有一个操作数是NaN，一定返回false，包括NaN==NaN</li>
-<li>如果两个操作数都是对象，则比较它们是不是同一个对象</li>
-</ol>
-<h2><span id="7-javascript中不同类型以及不同环境下变量的内存都是何时释放">7. JavaScript中不同类型以及不同环境下变量的内存都是何时释放</span></h2><p>引用类型是在没有引用之后，通过V8的GC自动回收。<br>值类型如果处于闭包的情况下，要等闭包没有引用才会被GC回收，非闭包的情况下，等待V8的新生代(new space)切换的时候回收。<br>如何爆掉JS的内存<br>数组循环赋值</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>随着死循环会查出数组的最大长度，报错。<br>FATAL ERROR: invalid array length Allocation failed - JavaScript heap out of memory</p>
-<p>数组循环赋空值</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>死循环，不会爆掉V8内存，但是导致进程阻塞。</p>
-<p>push Buffer类型</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    arr<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Buffer</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>内存泄露的速度比直接push Number类型的慢很多。<br>因为ES定义的Number类型，实质上是遵循IEEE-2008的64位存储，也就是说，Number类型的1与buffer类型的1，完全不一样，前者在编译器中是00000000000000000000000000（63个0）1，占了64位；但是后者就只是1，只占了1位。当push buffer崩溃时，也会崩溃，只不过比Number类型的慢一些。<br>当push buffer崩溃时…不存在的，push buffer不会崩溃，当内存顶到爆，也就是即将到达100%时，会自动垃圾回收，直观地讲，就是会瞬间降低内存，push工作继续，很是神奇。</p>
-<h2><span id="8-js中typeof的类型有哪些">8. JS中typeof的类型有哪些</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//undefined</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//number</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token string">'123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//string</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//boolean</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">&#123;</span><span class="token string">"id"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> console<span class="token punctuation">.</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//function</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2><span id="9-koa-的中间件机制">9. koa 的中间件机制</span></h2><ol>
-<li><p>app.use函数，在application中将调用use的参数都添加到this.middleware数组中</p>
-</li>
-<li><p>在push时，对generator语法进行兼容，调用convert函数将其转换为async/await语法</p>
-</li>
-<li><p>源码中，通过 compose() 这个方法，就能将我们传入的中间件数组转换并级联执行，最后 callback() 返回this.handleRequest()的执行结果。<br>compose的函数源码</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">compose</span> <span class="token punctuation">(</span><span class="token parameter">middleware</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>middleware<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'Middleware stack must be an array!'</span><span class="token punctuation">)</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> fn <span class="token keyword">of</span> middleware<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> fn <span class="token operator">!==</span> <span class="token string">'function'</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">TypeError</span><span class="token punctuation">(</span><span class="token string">'Middleware must be composed of functions!'</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">/**
-     * @param &#123;Object&#125; context
-     * @return &#123;Promise&#125;
-     * @api public
-     */</span>
-
-    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// last called middleware #</span>
-        <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">return</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">function</span> <span class="token function">dispatch</span> <span class="token punctuation">(</span><span class="token parameter">i</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> index<span class="token punctuation">)</span> <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">'next() called multiple times'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            index <span class="token operator">=</span> i
-            <span class="token keyword">let</span> fn <span class="token operator">=</span> middleware<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">===</span> middleware<span class="token punctuation">.</span>length<span class="token punctuation">)</span> fn <span class="token operator">=</span> next
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fn<span class="token punctuation">)</span> <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token function">fn</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token function">dispatch</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>compose()返回一个匿名函数的结果，匿名函数自执行了dispatch() 这个函数，并传入了0作为参数。</p>
-</li>
-<li><p>上面的代码执行了中间件 fn(context, next)，并传递了 context 和 next 函数两个参数。context 就是 koa 中的上下文对象 context。至于 next 函数则是返回一个 dispatch(i+1) 的执行结果。值得一提的是 i+1 这个参数，传递这个参数就相当于执行了下一个中间件，从而形成递归调用。</p>
-</li>
-<li><p>只有执行了 next 函数，才能正确得执行下一个中间件。<br>所以当我们用 async 的语法写中间件的时候，执行流程大致如下：</p>
-<ol>
-<li>先执行第一个中间件（因为compose 会默认执行 dispatch(0)），该中间件返回 Promise，然后被 Koa 监听，执行对应的逻辑（成功或失败）</li>
-<li>在执行第一个中间件的逻辑时，遇到 await next()时，会继续执行 dispatch(i+1)，也就是执行 dispatch(1)，会手动触发执行第二个中间件。这时候，第一个中间件 await next() 后面的代码就会被 pending，等待 await next() 返回 Promise，才会继续执行第一个中间件 await next() 后面的代码。</li>
-<li>同样的在执行第二个中间件的时候，遇到 await next() 的时候，会手动执行第三个中间件，await next() 后面的代码依然被 pending，等待 await 下一个中间件的 Promise.resolve。只有在接收到第三个中间件的 resolve 后才会执行后面的代码，然后第二个中间会返回 Promise，被第一个中间件的 await 捕获，这时候才会执行第一个中间件的后续代码，然后再返回 Promise</li>
-<li>以此类推，如果有多个中间件的时候，会依照上面的逻辑不断执行，先执行第一个中间件，在 await next() 出 pending，继续执行第二个中间件，继续在 await next() 出 pending，继续执行第三个中间，直到最后一个中间件执行完，然后返回 Promise，然后倒数第二个中间件才执行后续的代码并返回Promise，然后是倒数第三个中间件，接着一直以这种方式执行直到第一个中间件执行完，并返回 Promise，从而实现文章开头那张图的执行顺序。</li>
-</ol>
-</li>
-</ol>
 
                 
             </div>
@@ -561,7 +501,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/01/js_basic/01-basic-info/">http://example.com/2021/03/01/js_basic/01-basic-info/</a>
+                    <a href="http://example.com/2021/04/21/nodejs/02-%E5%BC%82%E6%AD%A5IO/">http://example.com/2021/04/21/nodejs/02-%E5%BC%82%E6%AD%A5IO/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -642,54 +582,18 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/11/es6/01-let&const/">
+                <a href="/2021/04/21/nodejs/02-%E5%BC%82%E6%AD%A5IO/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="let 和const 命令">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="异步IO">
                         
-                        <span class="card-title">let 和const 命令</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-11
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            little cindy
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/02/26/js_basic/02-js-copy/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="JS数组的深拷贝与浅拷贝">
-                        
-                        <span class="card-title">JS数组的深拷贝与浅拷贝</span>
+                        <span class="card-title">异步IO</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -700,7 +604,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-21
                             </span>
                         <span class="publish-author">
                             
@@ -709,6 +613,56 @@ console<span class="token punctuation">.</span><span class="token function">log<
                             
                         </span>
                     </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/21/basic/02-http&https/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="HTTP与HTTPS">
+                        
+                        <span class="card-title">HTTP与HTTPS</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/HTTP%E5%8D%8F%E8%AE%AE/" class="post-category">
+                                    HTTP协议
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/HTTP-HTTPS/">
+                        <span class="chip bg-color">HTTP HTTPS</span>
+                    </a>
+                    
                 </div>
                 
             </div>
