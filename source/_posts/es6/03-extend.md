@@ -1,5 +1,10 @@
 ---
 title: 各类扩展
+date: 2021-04-15 16:23:30
+tags: 
+  - ES6
+  - 各类扩展
+categories: ES6
 ---
 ## 1. 字符串的扩展
 1. 字符的Unicode表示法： 加强了对 Unicode 的支持，允许采用\uxxxx形式表示一个字符，其中xxxx表示字符的 Unicode 码点。

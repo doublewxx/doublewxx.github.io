@@ -1,5 +1,9 @@
 ---
 title: Node简介+模块
+date: 2021-03-09 17:25:30
+tags: 
+  - 模块机制
+categories: Node
 ---
 ### Node简介
 1. Node的结构与Chrome十分相似，它们都是基于事件驱动的异步架构，浏览器通过事件驱动来服务界面上的交互，Node通过事件驱动来服务IO。

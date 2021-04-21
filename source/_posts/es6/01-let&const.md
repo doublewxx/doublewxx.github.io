@@ -1,5 +1,10 @@
 ---
 title: let 和const 命令
+date: 2021-03-24 16:23:30
+tags: 
+  - ES6
+  - 块级作用域 
+categories: ES6
 ---
 ## 1. let和var的区别
 1. let声明的变量只在它所在的代码块有效。
@@ -165,7 +170,7 @@ foo.prop = 123;
 4、window对象有实体含义，指的是浏览器的窗口对象，顶层对象是一个有实体含义的对象，也是不合适的。
 ES6规定var和function命令声明的全局变量，依旧是顶层对象的属性。let、const和class命令声明的全局变量，不属于顶层对象的属性
 
-## globalThis对象
+## 5. globalThis对象
 JavaScript 语言存在一个顶层对象，它提供全局环境（即全局作用域），所有代码都是在这个环境中运行。但是，顶层对象在各种实现里面是不统一的。
 - 浏览器里面，顶层对象是window，但 Node 和 Web Worker 没有window。
 - 浏览器和 Web Worker 里面，self也指向顶层对象，但是 Node 没有self。

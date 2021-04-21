@@ -1,5 +1,9 @@
 ---
 title: JS执行机制
+date: 2021-03-09 17:25:30
+tags: 
+  - 执行机制
+categories: JavaScript
 ---
 ### 1. 单线程
 javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变。

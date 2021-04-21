@@ -1,5 +1,11 @@
 ---
 title: JS数组的深拷贝与浅拷贝
+date: 2021-03-09 17:25:30
+tags: 
+  - 拷贝
+  - JS对象
+  - JS数组
+categories: JavaScript
 ---
 ### js数据类型
 js数据类型包含基本数据类型(String,Number,Boolean,Null,Undefined)和引用数据类型(Array,Object,Function)
