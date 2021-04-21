@@ -1,6 +1,6 @@
 ---
 title: HTTP与HTTPS
-tags: HTTP HTTPS
+tags: HTTP、HTTPS
 categories: HTTP协议
 ---
 ### HTTP
