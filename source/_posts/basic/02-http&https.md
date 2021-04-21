@@ -1,5 +1,7 @@
 ---
 title: HTTP与HTTPS
+tags: HTTP HTTPS
+categories: HTTP协议
 ---
 ### HTTP
 HTTP协议是超文本传输协议的缩写，英文是Hyper Text Transfer Protocol。它是从WEB服务器传输超文本标记语言(HTML)到本地浏览器的传送协议。
