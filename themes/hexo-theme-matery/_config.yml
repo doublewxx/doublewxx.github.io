@@ -38,8 +38,8 @@ plantuml:
 # 站点运行开始时间.
 time:
   enable: false
-  year: 2019 # 年份
-  month: 06 # 月份
+  year: 2021 # 年份
+  month: 02 # 月份
   date: 28 # 日期
   hour: 00 # 小时
   minute: 00 # 分钟
@@ -121,7 +121,7 @@ indexbtn:
   enable: true
   name: Github
   icon: fab fa-github-alt
-  url: https://github.com/blinkfox/hexo-theme-matery
+  url: https://github.com/doublewxx
 
 # The configurations of the second line of home banner
 # icon/button will not show up if you leave the corresponding socialLink empty
@@ -198,15 +198,15 @@ clicklove:
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
-  avatar: /medias/avatar.jpg
+  avatar: /medias/avatar.jpeg
   career: Software Engineer
-  introduction: If you wish to succeed, you should use persistence as your good friend, experience as your reference, prudence as your brother and hope as your sentry.
+  introduction: God helps those who help themselves.
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的项目"信息，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 myProjects:
-  enable: true
+  enable: false
   data:
     hexo-theme-matery:
       icon: fas fa-file-alt
@@ -230,21 +230,21 @@ myProjects:
 mySkills:
   enable: true
   data:
-    Java:
+    Node:
       background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
-      percent: 85%
+      percent: 80%
     JavaScript:
       background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
       percent: 80%
-    HTML5:
+    VUE:
       background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
       percent: 80%
     CSS:
       background: 'linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)'
-      percent: 70%
+      percent: 90%
     SQL:
       background: 'linear-gradient(to right, #4CAF50 0%, #81C784 100%)'
-      percent: 90%
+      percent: 60%
     程序设计:
       background: 'linear-gradient(to right, #FFEB3B 0%, #FFF176 100%)'
       percent: 75%
@@ -255,9 +255,9 @@ mySkills:
 myGallery:
   enable: true
   data:
-    - /medias/featureimages/0.jpg
-    - /medias/featureimages/1.jpg
-    - /medias/featureimages/2.jpg
+    - /medias/featureimages/1.jpeg
+    - /medias/featureimages/2.jpeg
+    - /medias/featureimages/3.jpeg
 
 # Whether to display post-calender in the `archive` page
 # 设置在归档页面中是否显示'文章日历'控件
@@ -343,7 +343,7 @@ changyan:
 # Whether to display fork me on github icon and link, default true, You can change it to your repo address
 # 配置是否在 header 中显示 fork me on github 的图标，默认为true，你可以修改为你的仓库地址.
 githubLink:
-  enable: true
+  enable: false
   url: https://github.com/blinkfox/hexo-theme-matery
   title: Fork Me
 
@@ -483,7 +483,7 @@ featureImages:
 # noreprint（不允许转载 not allowed to reprint）
 # pay（付费转载 pay for reprinting）
 reprint:
-  enable: true # whether enable reprint section 是否启用“转载规则限定模块”
+  enable: false # whether enable reprint section 是否启用“转载规则限定模块”
   default: cc_by
 
 # DaoVoice online contact

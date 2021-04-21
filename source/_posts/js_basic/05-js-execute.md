@@ -3,6 +3,7 @@ title: JS执行机制
 date: 2021-03-09 17:25:30
 tags: 
   - 执行机制
+  - 基础知识
 categories: JavaScript
 ---
 ### 1. 单线程
