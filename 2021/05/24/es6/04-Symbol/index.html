@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="调用堆栈, cindy&#39;s Notebook">
+    <meta name="keywords" content="Symbol, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>调用堆栈 | cindy&#39;s Notebook</title>
+    <title>Symbol | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">调用堆栈</h1>
+                    <h1 class="description center-align post-title">Symbol</h1>
                 </div>
             </div>
         </div>
@@ -324,8 +324,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-                                <span class="chip bg-color">基础知识</span>
+                            <a href="/tags/ES6/">
+                                <span class="chip bg-color">ES6</span>
+                            </a>
+                        
+                            <a href="/tags/Symbol/">
+                                <span class="chip bg-color">Symbol</span>
                             </a>
                         
                     </div>
@@ -336,8 +340,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JavaScript/" class="post-category">
-                                JavaScript
+                            <a href="/categories/ES6/" class="post-category">
+                                ES6
                             </a>
                         
                     </div>
@@ -349,7 +353,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-09
+                    2021-05-24
                 </div>
                 
 
@@ -373,67 +377,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-调用堆栈定义">1. 调用堆栈定义</span></h3><ul>
-<li><p>调用栈是解释器（比如浏览器中的 JavaScript 解释器）追踪函数执行流的一种机制。当执行环境中调用了多个函数时，通过这种机制，我们能够追踪到哪个函数正在执行，执行的函数体中又调用了哪个函数。</p>
-</li>
-<li><p>JavaScript是一门单线程的语言，只有一个调用栈，同一时间只能做一件事。</p>
-</li>
-<li><p>每一个进入调用栈的都称为调用帧。</p>
-</li>
-<li><p>堆栈溢出：达到调用栈最大值。</p>
-<h3><span id="2-执行上下文">2. 执行上下文</span></h3><p>执行上下文是评估和执行JavaScript代码的环境的抽象概念，每当JavaScript代码在运行的时候，都是在执行上下文运行。</p>
-<h5><span id="执行上下文分类">执行上下文分类：</span></h5></li>
-<li><p>全局执行上下文：创建全局window对象，设置this等于这个全局对象</p>
-</li>
-<li><p>函数执行上下文：每当函数被调用的时候，为该函数创建一个新的上下文</p>
-</li>
-<li><p>Eval函数执行上下文：eval函数内部的代码会有自己的执行上下文</p>
-<h5><span id="创建执行上下文">创建执行上下文</span></h5><h6><span id="1-创建阶段">1. 创建阶段</span></h6><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">ExecutionContext <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  ThisBinding <span class="token operator">=</span> <span class="token operator">&lt;</span><span class="token keyword">this</span> value<span class="token operator">></span><span class="token punctuation">,</span>
-  LexicalEnvironment <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  VariableEnvironment <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<ol>
-<li>This 绑定<br>在函数执行上下文中，this 的值取决于该函数是如何被调用的。如果它被一个引用对象调用，那么 this 会被设置成那个对象，否则 this 的值被设置为全局对象或者 undefined（在严格模式下）。<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-<span class="token function-variable function">baz</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-foo<span class="token punctuation">.</span><span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 'this' 引用 'foo', 因为 'baz' 被对象 'foo' 调用</span>
-<span class="token keyword">let</span> bar <span class="token operator">=</span> foo<span class="token punctuation">.</span>baz<span class="token punctuation">;</span>
-<span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 'this' 指向全局 window 对象，因为没有指定引用对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>创建<strong>词法环境</strong>组件<br>词法环境是一种规范类型，基于 ECMAScript 代码的词法嵌套结构来定义标识符和具体变量和函数的关联。一个词法环境由环境记录器和一个可能的引用外部词法环境的空值组成。<ul>
-<li>词法环境就是一种持有标识符-变量映射的解构</li>
-<li>词法环境的内部有环境记录器和外部环境的引用。环境记录器是存储变量和函数声明的实际位置。外部环境的引用意味着它可以访问其父级词法环境。</li>
-<li>词法环境包含全局环境和函数环境两种。全局环境的外部环境的引用是null。</li>
-<li>环境记录器也分为两种，在全局环境中，环境记录器是对象环境记录器。在函数环境中，环境记录器是声明式环境记录器。</li>
-</ul>
-</li>
-<li>创建<strong>变量环境</strong>组件<ul>
-<li>变量环境也是一个词法环境，其环境记录器持有变量声明语句在执行上下文中创建的绑定关系。</li>
-<li>ES6中，词法环境组件和变量环境组件的不同是，前者用于存储函数声明和变量(let和const)，后者只用来存储var变量绑定。<h6><span id="2-执行阶段">2. 执行阶段</span></h6></li>
-</ul>
-</li>
-</ol>
-<h3><span id="3-操作流程">3. 操作流程</span></h3><ul>
-<li><p>每调用一个函数，解释器就会把该函数的执行上下文添加进调用栈并开始执行。</p>
-</li>
-<li><p>正在调用栈中执行的函数还调用了其它函数，那么新函数也将会被添加进调用栈，一旦这个函数被调用，便会立即执行。</p>
-</li>
-<li><p>当前函数执行完毕后，解释器将其清出调用栈，继续执行当前执行环境下的剩余的代码。</p>
-</li>
-<li><p>当分配的调用栈空间被占满时，会引发“堆栈溢出”错误。</p>
-<h3><span id="4javascript引擎">4.JavaScript引擎</span></h3><p>JS引擎主要由两部分组成：<br>内存堆：进行内存分配<br>调用栈：代码执行的地方<br>在代码中有些引擎之外的API，是浏览器提供的Web API，比如DOM、AJAX、setTimeout等</p>
-</li>
-</ul>
-<h3><span id="5-javascript的执行机制">5. JavaScript的执行机制</span></h3><ul>
-<li>javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变</li>
-<li>任务分为同步任务和异步任务两种。同步任务就在主线程执行，异步任务进入Event Table并注册回调函数。</li>
-<li>当指定的任务完成后，Event Table会将这个函数移入Event Queue</li>
-<li>主线程任务全部执行完后，去Event Queue读取对应函数，进入主线程执行。</li>
-<li>不断重复这个过程，形成Event Loop</li>
-<li>js引擎存在monitoring process进程不断的检查主线程执行栈是否为空，一旦为空，就会去Event Queue那里检查是否有等待被调用的函数。</li>
+                <h2><span id="1-symbol概述">1. Symbol概述</span></h2><ul>
+<li>Symbol是一种新的原始数据类型，用于防止属性名的冲突，通过Symbol函数生成。</li>
+<li>对象的属性名可以有两种类型，Symbol和原来的字符串。</li>
+<li>Symbol函数前不能使用new命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。</li>
+<li>Symbol接受字符串或者对象为参数，调用对象的toString方法，将其转为字符串，然后再生成一个Symbol值。</li>
+<li>Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。</li>
+<li>Symbol 值不能与其他类型的值进行运算，但是可以显式转化为字符串，也可以转化为布尔值，但是不能转化为数字。<h2><span id="2-symbolprototypedescription">2. Symbol.prototype.description</span></h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> sym <span class="token operator">=</span> <span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+sym<span class="token punctuation">.</span>description <span class="token comment">// "foo"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2><span id="3-symbol做属性名">3. Symbol做属性名</span></h2></li>
+<li>对象使用Symbol值定义属性时，必须放在方括号中</li>
+<li>Symbol 值作为对象属性名时，不能用点运算符，点运算符后面只能是字符串</li>
+<li>Symbol 值作为属性名时，该属性还是公开属性，不是私有属性<h2><span id="4-消除魔术字符串">4. 消除魔术字符串</span></h2>一些对象中的值的定义，如果只是为了不能和对象其他属性值冲突，可以用Symbol<h2><span id="5-属性名的遍历">5. 属性名的遍历</span></h2></li>
+<li>Symbol 作为属性名，遍历对象的时候，该属性不会出现在for…in、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。</li>
+<li>它也不是私有属性，有一个Object.getOwnPropertySymbols()方法，可以获取指定对象的所有 Symbol 属性名。该方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值。由于以 Symbol 值作为键名，不会被常规方法遍历得到。我们可以利用这个特性，为对象定义一些非私有的、但又希望只用于内部的方法。<h2><span id="6-symbolforsymbolkeyfor">6. Symbol.for()，Symbol.keyFor()</span></h2></li>
+<li>Symbol.for()接受一个字符串作为参数，然后搜索有没有以该参数作为名称的 Symbol 值。如果有，就返回这个 Symbol 值，否则就新建一个以该字符串为名称的 Symbol 值，并将其注册到全局。</li>
+<li>Symbol.keyFor()方法返回一个已登记的 Symbol 类型值的key。</li>
+<li>Symbol.for()为 Symbol 值登记的名字，是全局环境的，不管有没有在全局环境运行。<h2><span id="7-模块的-singleton-模式">7. 模块的 Singleton 模式</span></h2></li>
+<li>Singleton 模式指的是调用一个类，任何时候返回的都是同一个实例。</li>
 </ul>
 
                 
@@ -449,8 +410,12 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-                                    <span class="chip bg-color">基础知识</span>
+                                <a href="/tags/ES6/">
+                                    <span class="chip bg-color">ES6</span>
+                                </a>
+                            
+                                <a href="/tags/Symbol/">
+                                    <span class="chip bg-color">Symbol</span>
                                 </a>
                             
                         </div>
@@ -496,17 +461,18 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/09/es6/02-Destructuring/">
+                <a href="/2021/05/24/es6/04-Symbol/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="变量的解构赋值">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Symbol">
                         
-                        <span class="card-title">变量的解构赋值</span>
+                        <span class="card-title">Symbol</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -516,9 +482,9 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -531,6 +497,7 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -538,8 +505,8 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                         <span class="chip bg-color">ES6</span>
                     </a>
                     
-                    <a href="/tags/%E5%8F%98%E9%87%8F%E8%A7%A3%E6%9E%84/">
-                        <span class="chip bg-color">变量解构</span>
+                    <a href="/tags/Symbol/">
+                        <span class="chip bg-color">Symbol</span>
                     </a>
                     
                 </div>
@@ -553,13 +520,13 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/09/js_basic/05-js-execute/">
+                <a href="/2021/04/23/life/01-%E5%88%98%E6%93%8E%E8%AE%B2%E5%BA%A7%E5%88%86%E4%BA%AB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="JS执行机制">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="如何面对多元的世界-刘擎">
                         
-                        <span class="card-title">JS执行机制</span>
+                        <span class="card-title">如何面对多元的世界-刘擎</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -570,14 +537,14 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-23
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JavaScript/" class="post-category">
-                                    JavaScript
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
                                 </a>
                             
                             
@@ -587,12 +554,8 @@ foo<span class="token punctuation">.</span><span class="token function">baz</spa
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-                        <span class="chip bg-color">基础知识</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6/">
-                        <span class="chip bg-color">执行机制</span>
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
                     </a>
                     
                 </div>
