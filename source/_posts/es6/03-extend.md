@@ -13,6 +13,7 @@ categories: ES6
 4. 根据标准，JSON 数据必须是 UTF-8 编码。但是，现在的JSON.stringify()方法有可能返回不符合 UTF-8 标准的字符串。如果遇到0xD800到0xDFFF之间的单个码点，或者不存在的配对形式，它会返回转义字符串，留给应用自己决定下一步的处理。
 5. 模板字符串
 6. 模板编译
+
 ## 2. 字符串新增方法
 ```javascript
 String.fromCodePoint() // 用于从 Unicode 码点返回对应字符，可以识别码点大于OXFFFF的字符

@@ -37,5 +37,6 @@ setInterval会每隔指定的时间将注册的函数置入Event Queue，如果�
 - micro-task(微任务)：Promise，process.nextTick
 不同任务进入不同的Event Queue
 进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。
+
 ### 6. 备注
 执行和运行有很大的区别，javascript在不同的环境下，比如node，浏览器，Ringo等等，执行方式是不同的。而运行大多指javascript解析引擎，是统一的。
