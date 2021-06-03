@@ -405,9 +405,9 @@
 <ul>
 <li>模块引用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> math <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'math'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 <li>模块定义<br>上下文提供了exports对象用于导出当前模块的方法或者变量，并且它是唯一导出的出口。在模块中，还存在一个module对象，代表模块自身，exports是module的属性。</li>
-<li>模块标识<br>模块标识就是传递给require()方法的参数，必须符合小拖放命名的字符串，或者相对路径or绝对路径。<h3><span id="node的模块实现">Node的模块实现</span></h3></li>
+<li>模块标识<br>模块标识就是传递给require()方法的参数，必须符合小拖放命名的字符串，或者相对路径or绝对路径</li>
 </ul>
-<ol>
+<h3><span id="node的模块实现">Node的模块实现</span></h3><ol>
 <li>Node中引入模块，需要路径分析、文件定位、编译执行三个步骤。</li>
 <li>Node中模块分为两类，一类是Node提供的模块称为核心模块。另一类是用户编写的模块，称为文件模块。<ul>
 <li>核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，这部分核心模块被直接加载进内存，就可以省略文件定位和编译执行步骤，路径分析中优先判断</li>

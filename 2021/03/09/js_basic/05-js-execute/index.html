@@ -390,8 +390,9 @@
 <h3><span id="4-setinterval">4. setInterval</span></h3><p>setInterval会每隔指定的时间将注册的函数置入Event Queue，如果前面的任务耗时太久，那么同样需要等待。因为是每隔ms秒会有回调函数进入Event Queue，一旦setInterval的回调函数fn执行时间超过了延迟时间ms，就看不出时间差异了。</p>
 <h3><span id="5-promise与processnexttickcallback">5. Promise与process.nextTick(callback)</span></h3><ul>
 <li>macro-task(宏任务)：包括整体代码script，setTimeout，setInterval</li>
-<li>micro-task(微任务)：Promise，process.nextTick<br>不同任务进入不同的Event Queue<br>进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。<h3><span id="6-备注">6. 备注</span></h3>执行和运行有很大的区别，javascript在不同的环境下，比如node，浏览器，Ringo等等，执行方式是不同的。而运行大多指javascript解析引擎，是统一的。</li>
+<li>micro-task(微任务)：Promise，process.nextTick<br>不同任务进入不同的Event Queue<br>进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。</li>
 </ul>
+<h3><span id="6-备注">6. 备注</span></h3><p>执行和运行有很大的区别，javascript在不同的环境下，比如node，浏览器，Ringo等等，执行方式是不同的。而运行大多指javascript解析引擎，是统一的。</p>
 
                 
             </div>
