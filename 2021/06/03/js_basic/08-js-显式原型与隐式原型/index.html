@@ -373,7 +373,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h3><span id="1-__proto__和prototype的定义">1. __proto__和prototype的定义</span></h3><p>显式原型：方法这个特殊的对象，除了和其他对象一样有上述<em>proto_属性之外，还有自己特有的属性——原型属性（prototype），这个属性是一个指针，指向一个对象，这个对象的用途就是包含所有实例共享的属性和方法（我们把这个对象叫做原型对象）。原型对象也有一个属性，叫做constructor，这个属性包含了一个指针，指回原构造函数。<br>隐式原型：对象的隐式原型指向构造该对象的构造函数的原型，这也保证了实例能够访问在构造函数原型中定义的属性和方法。JavaScript中任意对象都有一个内置属性[[prototype]]，在ES5之前没有标准的方法访问这个内置属性，但是大多数浏览器都支持通过__proto__来访问。ES5中有了对于这个内置属性标准的Get方法Object.getPrototypeOf().<br>注意：Object.prototype._proto</em> = null;<br>两者关系：隐式原型指向创建这个对象的函数(constructor)的prototype<br>总结<br>1.对象有属性<strong>proto</strong>,指向该对象的构造函数的原型对象。<br>2.方法除了有属性<strong>proto</strong>,还有属性prototype，prototype指向该方法的原型对象。</p>
+<h3><span id="2-__proto__和prototype的作用">2. __proto__和prototype的作用</span></h3><p>显式原型：实现基于原型的继承与属性的共享。<br>隐式原型：构成原型链，同样用于实现基于原型的继承。</p>
+
                 
             </div>
             <hr/>
