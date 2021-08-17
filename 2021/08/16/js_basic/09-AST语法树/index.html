@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="个人随笔, cindy&#39;s Notebook">
+    <meta name="keywords" content="AST语法树, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>个人随笔 | cindy&#39;s Notebook</title>
+    <title>AST语法树 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">个人随笔</h1>
+                    <h1 class="description center-align post-title">AST语法树</h1>
                 </div>
             </div>
         </div>
@@ -324,8 +324,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%80%9D%E8%80%83/">
-                                <span class="chip bg-color">思考</span>
+                            <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+                                <span class="chip bg-color">基础知识</span>
                             </a>
                         
                     </div>
@@ -336,8 +336,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
-                                生活
+                            <a href="/categories/JavaScript/" class="post-category">
+                                JavaScript
                             </a>
                         
                     </div>
@@ -349,7 +349,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-08-06
+                    2021-08-16
                 </div>
                 
 
@@ -373,7 +373,79 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>发在这里，待补充</p>
+                <h3><span id="1-什么是ast语法树">1. 什么是AST语法树</span></h3><p>AST是抽象语法树（Abstract Syntax Tree），是源代码的抽象语法结构的树状表现形式。webpack、eslint 等很多工具库的核心都是通过抽象语法书这个概念来实现对代码的检查、分析等操作<br>常用的浏览器就是通过将 js 代码转化为抽象语法树来进行下一步的分析等其他操作。<br>以下方代码为例子</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> a<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>上述代码转换为AST之后，就是</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+  <span class="token string">"type"</span><span class="token operator">:</span> <span class="token string">"Program"</span><span class="token punctuation">,</span> <span class="token comment">// 顶级type属性</span>
+  <span class="token string">"body"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 数组，每个元素是一个对象，里面包含了所有的对于该语句的描述信息</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token string">"type"</span><span class="token operator">:</span> <span class="token string">"VariableDeclaration"</span><span class="token punctuation">,</span> <span class="token comment">// 描述该语句的类型  --> 变量声明的语句</span>
+      <span class="token string">"declarations"</span><span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// 声明内容的数组，里面每一项也是一个对象</span>
+        <span class="token punctuation">&#123;</span>
+          <span class="token string">"type"</span><span class="token operator">:</span> <span class="token string">"VariableDeclarator"</span><span class="token punctuation">,</span> <span class="token comment">// 描述该语句的类型</span>
+          <span class="token string">"id"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 描述变量名称的对象</span>
+            <span class="token string">"type"</span><span class="token operator">:</span> <span class="token string">"Identifier"</span><span class="token punctuation">,</span> <span class="token comment">// 定义</span>
+            <span class="token string">"name"</span><span class="token operator">:</span> <span class="token string">"AST"</span> <span class="token comment">// 名字</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+          <span class="token string">"init"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 初始化变量值的对象</span>
+            <span class="token string">"type"</span><span class="token operator">:</span> <span class="token string">"Literal"</span><span class="token punctuation">,</span> <span class="token comment">// 类型</span>
+            <span class="token string">"value"</span><span class="token operator">:</span> <span class="token string">"is Tree"</span><span class="token punctuation">,</span> <span class="token comment">// 值不带引号</span>
+            <span class="token string">"raw"</span><span class="token operator">:</span> <span class="token string">"'is Tree'"</span>  <span class="token comment">// 值带引号</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string">"kind"</span><span class="token operator">:</span> <span class="token string">"var"</span> <span class="token comment">// 变量声明的关键字  --> var</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"sourceType"</span><span class="token operator">:</span> <span class="token string">"script"</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3><span id="2-语法分析和词法分析">2. 语法分析和词法分析</span></h3><p>JavaScript是解释型语言，一般通过 词法分析 -&gt; 语法分析 -&gt; 语法树，就可以开始解释执行了<br><strong>词法分析</strong>：也叫扫描，是将字符流转换为记号流(tokens)，它会读取我们的代码然后按照一定的规则合成一个个的标识<br>比如说：var a = 2 ，这段代码通常会被分解成 var、a、=、2</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">;</span><span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'Keyword'</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token string">'var'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'Identifier'</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token string">'a'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'Punctuator'</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token string">'='</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> type<span class="token operator">:</span> <span class="token string">'Numeric'</span><span class="token punctuation">,</span> value<span class="token operator">:</span> <span class="token string">'2'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当词法分析源代码的时候，它会一个一个字符的读取代码，所以很形象地称之为扫描 - scans。当它遇到空格、操作符，或者特殊符号的时候，它会认为一个话已经完成了。<br><strong>语法分析</strong>：也称解析器，将词法分析出来的数组转换成树的形式，同时验证语法。语法如果有错的话，抛出语法错误。</p>
+<h3><span id="3-ast用途">3. AST用途</span></h3><ul>
+<li>语法检查、代码风格检查、格式化代码、语法高亮、错误提示、自动补全等</li>
+<li>代码混淆压缩</li>
+<li>优化变更代码，改变代码结构等</li>
+</ul>
+<h3><span id="4-ast解析流程">4. AST解析流程</span></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> esprima <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'esprima'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> estraverse <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'estraverse'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> code <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">function getUser() &#123;&#125;</span><span class="token template-punctuation string">`</span></span>
+<span class="token comment">// 生成 AST</span>
+<span class="token keyword">const</span> ast <span class="token operator">=</span> esprima<span class="token punctuation">.</span><span class="token function">parseScript</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span>
+<span class="token comment">// 转换 AST，只会遍历 type 属性</span>
+<span class="token comment">// traverse 方法中有进入和离开两个钩子函数</span>
+estraverse<span class="token punctuation">.</span><span class="token function">traverse</span><span class="token punctuation">(</span>ast<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">enter</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'enter -> node.type'</span><span class="token punctuation">,</span> node<span class="token punctuation">.</span>type<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">leave</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'leave -> node.type'</span><span class="token punctuation">,</span> node<span class="token punctuation">.</span>type<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>经过钩子函数可以确认，AST遍历的流程是深度优先<br>escodegen可以将一棵AST转换为代码，所以可以直接修改函数名</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 转换树</span>
+estraverse<span class="token punctuation">.</span><span class="token function">traverse</span><span class="token punctuation">(</span>ast<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 进入离开修改都是可以的</span>
+  <span class="token function">enter</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'enter -> node.type'</span><span class="token punctuation">,</span> node<span class="token punctuation">.</span>type<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>node<span class="token punctuation">.</span>type <span class="token operator">===</span> <span class="token string">'Identifier'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      node<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'hello'</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">leave</span><span class="token punctuation">(</span><span class="token parameter">node</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'leave -> node.type'</span><span class="token punctuation">,</span> node<span class="token punctuation">.</span>type<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token comment">// 生成新的代码</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> escodegen<span class="token punctuation">.</span><span class="token function">generate</span><span class="token punctuation">(</span>ast<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+<span class="token comment">// function hello() &#123;&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -388,8 +460,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%80%9D%E8%80%83/">
-                                    <span class="chip bg-color">思考</span>
+                                <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+                                    <span class="chip bg-color">基础知识</span>
                                 </a>
                             
                         </div>
@@ -435,9 +507,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/08/16/js_basic/09-AST%E8%AF%AD%E6%B3%95%E6%A0%91/">
                     <div class="card-image">
@@ -455,9 +528,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -470,6 +543,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -488,13 +562,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/07/29/life/02-%E8%BF%9C%E8%A7%81-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                <a href="/2021/08/06/life/03-%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="远见读书笔记">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="个人随笔">
                         
-                        <span class="card-title">远见读书笔记</span>
+                        <span class="card-title">个人随笔</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -505,14 +579,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E4%BD%9C/" class="post-category">
-                                    工作
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
                                 </a>
                             
                             
@@ -522,8 +596,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%81%8C%E4%B8%9A%E7%94%9F%E6%B6%AF%E8%A7%84%E5%88%92/">
-                        <span class="chip bg-color">职业生涯规划</span>
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
                     </a>
                     
                 </div>
