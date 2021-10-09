@@ -374,6 +374,34 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2><span id="1-flow">1. Flow</span></h2><p>Flow 是 facebook 出品的 JavaScript 静态类型检查工具。Vue.js 的源码利用了 Flow 做了静态类型检查。<br>通常类型检查分成 2 种方式：<br>类型推断：通过变量的使用上下文来推断出变量类型，然后根据这些推断来检查类型。<br>类型注释：事先注释好我们期待的类型，Flow 会基于这些注释来判断。</p>
+<h2><span id="2-flow在vue中的应用">2. Flow在Vue中的应用</span></h2><ul>
+<li>Flow 并不认识自定义类型或者第三方库，因此检查的时候会报错。为了解决这类问题，Flow 提出了一个 libdef 的概念，可以用来识别这些第三方库或者是自定义类型，而 Vue.js 也利用了这一特性。</li>
+<li>.flowconfig指定了flow的相关配置，主要包括8个section，内容如下<pre class="line-numbers language-none"><code class="language-none">[include] &#x2F;&#x2F; 除了.flowconfig之外其余外部需要watch的文件
+[ignore]  &#x2F;&#x2F; 忽略的文件
+[untyped] &#x2F;&#x2F; 不进行类型检查，直接认为是any。与ignore不同，配置部分会导致匹配的文件被模块解析器忽略，这本质上使它们未进行类型检查，也无法通过import或require进行解析。和declarations也不同，declarations只是提取函数或者类的签名，并不会进行类型检查。
+[libs] &#x2F;&#x2F; 自定义类型或者第三方库的目录
+[lints]   &#x2F;&#x2F; 规则
+[options] &#x2F;&#x2F; 配置
+[version] &#x2F;&#x2F; 指定flow的版本
+[declarations] &#x2F;&#x2F; declarations只是提取函数或者类的签名，并不会进行类型检查。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2><span id="3-vue源码目录">3. Vue源码目录</span></h2><pre class="line-numbers language-none"><code class="language-none">src
+  ├── compiler        # 编译相关 
+  ├── core            # 核心代码 
+  ├── platforms       # 不同平台的支持
+  ├── server          # 服务端渲染
+  ├── sfc             # .vue 文件解析
+  ├── shared          # 共享代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p><strong>compiler</strong><br>compiler 目录包含 Vue.js 所有编译相关的代码。它包括把模板解析成 ast 语法树，ast 语法树优化，代码生成等功能。<br><strong>core</strong><br>核心代码，包括内置组件、全局 API 封装，Vue 实例化、观察者、虚拟 DOM、工具函数等等。<br><strong>platforms</strong><br>Vue.js 是一个跨平台的 MVVM 框架，它可以跑在 web 上，也可以配合 weex 跑在 native 客户端上。platform 是 Vue.js 的入口，2 个目录代表 2 个主要入口，分别打包成运行在 web 上和 weex 上的 Vue.js。<br><strong>server</strong><br>服务端渲染主要的工作是把组件渲染为服务器端的 HTML 字符串，将它们直接发送到浏览器，最后将静态标记”混合”为客户端上完全交互的应用程序<br><strong>sfc</strong><br>.vue文件解析<br><strong>shared</strong><br>浏览器端Vue.js和服务器端Vue.js共享</p>
+<h2><span id="4-vue构建过程">4. Vue构建过程</span></h2><ol>
+<li>从配置文件读取配置，再通过命令行参数对构建配置做过滤，这样就可以构建出不同用途的 Vue.js 。</li>
+<li>找到不同构建配置的入口文件</li>
+<li>拼接出入口文件的真实路径</li>
+<li>构建打包<h2><span id="5-runtime-only-vs-runtime-compiler">5. Runtime Only VS Runtime + Compiler</span></h2></li>
+</ol>
+<p><strong>Runtime Only</strong><br>我们在使用 Runtime Only 版本的 Vue.js 的时候，通常需要借助如 webpack 的 vue-loader 工具把 .vue 文件编译成 JavaScript，因为是在编译阶段做的，所以它只包含运行时的 Vue.js 代码，因此代码体积也会更轻量。</p>
+<p><strong>Runtime + Compiler</strong><br>我们如果没有对代码做预编译，但又使用了 Vue 的 template 属性并传入一个字符串，则需要在客户端编译模板</p>
+<p>在 Vue.js 2.0 中，最终渲染都是通过 render 函数，如果写 template 属性，则需要编译成 render 函数，那么这个编译过程会发生运行时，所以需要带有编译器的版本。</p>
 
                 
             </div>
