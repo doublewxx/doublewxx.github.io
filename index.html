@@ -415,6 +415,55 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2021/12/05/nodejs/05-%E7%90%86%E8%A7%A3Buffer/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="理解Buffer">
+                            
+                            <span class="card-title">理解Buffer</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. Buffer结构
+Buffer是一个JS与C++结合的模块，性能部分用C++实现，非性能部分用JS实现
+Buffer所占用的内存不是由V8分配，属于堆外内存，由Node在C++层面实现内存的申请。因为处理大量的字节数据不能采用需要一点
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Node/" class="post-category">
+                                    Node
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Buffer%E7%B1%BB%E5%9E%8B/">
+                            <span class="chip bg-color">Buffer类型</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2021/08/22/nodejs/04-%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6/">
                         <div class="card-image">
                             
@@ -428,8 +477,7 @@
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1. V8的垃圾回收机制与内存限制Node中通过JavaScript使用内存是会发现只能使用部分内存，64位系统下约1.4G，32位系统下约为0.7G。
-
+                                1. V8的垃圾回收机制与内存限制Node中通过JavaScript使用内存是会发现只能使用部分内存，64位系统下约1.4G，32位系统下约为0.7G(不同版本的Node大小不一样)。主要因为Node是基于V8构建，V8的这套内存管理是针对
                             
                         </div>
                         <div class="publish-info">
@@ -841,60 +889,6 @@
                         
                         <a href="/tags/vs-typeof-vs-instanceof/">
                             <span class="chip bg-color">== vs ===, typeof vs instanceof</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/05/24/es6/04-Symbol/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Symbol">
-                            
-                            <span class="card-title">Symbol</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1. Symbol概述
-Symbol是一种新的原始数据类型，用于防止属性名的冲突，通过Symbol函数生成。
-对象的属性名可以有两种类型，Symbol和原来的字符串。
-Symbol函数前不能使用new命令，否则会报错。这是因为生成的 Sym
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-24
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/ES6/" class="post-category">
-                                    ES6
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/ES6/">
-                            <span class="chip bg-color">ES6</span>
-                        </a>
-                        
-                        <a href="/tags/Symbol/">
-                            <span class="chip bg-color">Symbol</span>
                         </a>
                         
                     </div>

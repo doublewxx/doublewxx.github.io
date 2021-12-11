@@ -373,7 +373,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-v8的垃圾回收机制与内存限制">1. V8的垃圾回收机制与内存限制</span></h3><p>Node中通过JavaScript使用内存是会发现只能使用部分内存，64位系统下约1.4G，32位系统下约为0.7G。</p>
+                <h3><span id="1-v8的垃圾回收机制与内存限制">1. V8的垃圾回收机制与内存限制</span></h3><p>Node中通过JavaScript使用内存是会发现只能使用部分内存，64位系统下约1.4G，32位系统下约为0.7G(不同版本的Node大小不一样)。主要因为Node是基于V8构建，V8的这套内存管理是针对浏览器的，并不是服务端。V8的垃圾回收机制有限，一次垃圾回收耗时较长，会因此JavaScript线程暂停执行的事件，应用的性能和响应能力会受限制。</p>
+<h4><span id="11-v8垃圾回收算法">1.1 V8垃圾回收算法</span></h4><ul>
+<li>V8将内存分为新生代和老生代两代</li>
+<li>Scavenge算法将堆内存一分为二，一半使用一半空闲，每次内存垃圾回收，都是把使用中内的存活对象copy到空闲的一半里面。优点是快速，缺点是只能使用堆内存的一半，以空间换时间。对于新生代的生命周期较短的对象，比较适合。</li>
+<li>当一个新生代对象经过多次复制仍然存在，则会被进行对象晋升。晋升两个条件：对象是否经历过Scavenge回收，To空间的内存占用比是否超过限制，只要满足一个就可以晋升</li>
+<li>老生代内存采用Mark-Sweep和Mark-Compact结合的方式。</li>
+<li>Mark-Sweep分为标记和清除两个阶段。标记清除带来的问题是在一次标记清除回收后，内存不连续，此时如果要分配大对象，会出现直接触发不必要的垃圾回收。</li>
+<li>Mark-Compact是在对象标记死亡后，将存活的对象往一端移动，这样回收的内存就是连续的一段。</li>
+<li>老生代一般使用的是标记清除，只有当内存不足以为从新生代copy过来的对象时，才会使用标记移动</li>
+<li>为了避免应用逻辑与垃圾回收器看到不一样的情况，上述三种垃圾回收方法都需要暂停应用逻辑，执行完垃圾回收之后在执行，称为全停顿。</li>
+<li>新生代内存对象少，全停顿问题不大，但是老生代内存大对象多，标记、清除、整理等动作就比较多。V8就把操作拆分为许多小步骤，先做初始化标记，再做清理、整理</li>
+<li>V8后续还引入了延迟清理和增量式整理<h3><span id="2-高效使用内存">2. 高效使用内存</span></h3></li>
+<li>作用域链，在访问一个对象时，如果当前作用域没有，会一层一层向上寻找，直到最外层的全局作用域</li>
+<li>全局作用域需要直到进程退出才能释放</li>
+<li>实现外部作用域访问内部作用域中变量的方法叫做闭包，这是因为高阶函数可以将函数作为参数或返回值<h3><span id="3-内存泄漏">3. 内存泄漏</span></h3></li>
+<li>JS开发者喜欢用对象的键值来缓存东西，但是这与严格意义的缓存也有区别，缓存是有完善的过期策略，但是普通对象的键值没有</li>
+</ul>
 
                 
             </div>
@@ -435,18 +451,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/08/22/nodejs/04-%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6/">
+                <a href="/2021/12/05/nodejs/05-%E7%90%86%E8%A7%A3Buffer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="内存控制">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="理解Buffer">
                         
-                        <span class="card-title">内存控制</span>
+                        <span class="card-title">理解Buffer</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -456,9 +471,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-05
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -471,12 +486,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
-                        <span class="chip bg-color">内存管理</span>
+                    <a href="/tags/Buffer%E7%B1%BB%E5%9E%8B/">
+                        <span class="chip bg-color">Buffer类型</span>
                     </a>
                     
                 </div>
