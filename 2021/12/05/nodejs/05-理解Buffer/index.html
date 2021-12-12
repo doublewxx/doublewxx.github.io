@@ -379,7 +379,11 @@
 <li>Node在进程启动时就加载了Buffer并放在全局对象上，无需require</li>
 <li>Buffer对象也有length属性，初始化Buffer的时候，每一位的值都是随机的0-255</li>
 <li>slab分配机制是动态内存管理机制。slab就是一块申请好的固定大小的内存区域，有三种状态，full完全分配状态，partial部分分配状态，empty没有被分配的状态。</li>
-<li></li>
+<li>Node以8KB为界限区分Buffer是大对象还是小对象</li>
+<li>小对象在分配的时候，中间变量为pool，然后一次分配8KB的slab，used为0，分配给一个小对象。等再次申请小对象的时候，如果剩余空间足够，继续分配。不够则申请新的8KB进行分配。一块slab只有所有的小对象Buffer对象在作用域释放可回收时，才会被回收</li>
+<li>大对象在分配的时候，直接分配一个大对象的长度为slab单元</li>
+<li>Buffer对象是JS层面的，能被V8标记收回，但是内部是指向C++的实现，内存在堆外</li>
+<li>Buffer类型与string类型是不一样的，在转换的时候支持多种编码方式的转换，但是要注意宽字节的转换因为截断会出现乱码的问题。</li>
 </ul>
 
                 
@@ -442,18 +446,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/12/05/nodejs/05-%E7%90%86%E8%A7%A3Buffer/">
+                <a href="/2021/12/11/nodejs/06-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="理解Buffer">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="网络编程">
                         
-                        <span class="card-title">理解Buffer</span>
+                        <span class="card-title">网络编程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -463,9 +466,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-05
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-11
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -478,12 +481,11 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Buffer%E7%B1%BB%E5%9E%8B/">
-                        <span class="chip bg-color">Buffer类型</span>
+                    <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">网络编程</span>
                     </a>
                     
                 </div>
