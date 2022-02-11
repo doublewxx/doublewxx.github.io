@@ -30,7 +30,7 @@ SSL（Secure Socket Layer，安全套接字层）：1994年为 Netscape 所研�
 TLS（Transport Layer Security，传输层安全）：其前身是 SSL，它最初的几个版本（SSL 1.0、SSL 2.0、SSL 3.0）
 由网景公司开发，1999年从 3.1 开始被 IETF 标准化并改名，发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本。SSL3.0和TLS1.0由于存在安全漏洞，已经很少被使用到。TLS 1.3 改动会比较大，目前还在草案阶段，目前使用最广泛的是TLS 1.1、TLS 1.2。
 ##### 浏览器在使用HTTPS传输数据的流程是什么？
-![img.png](https://doublewxx.github.io/images/img.jpg)
+![img.png](https://doublewxx.github.io/images/img.png)
 1. 首先客户端通过URL访问服务器建立SSL连接。
 2. 服务端收到客户端请求后，会将网站支持的证书信息（证书中包含公钥）传送一份给客户端。
 3. 客户端的服务器开始协商SSL连接的安全等级，也就是信息加密的等级。
