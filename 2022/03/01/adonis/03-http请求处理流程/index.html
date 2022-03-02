@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="ace启动流程, cindy&#39;s Notebook">
+    <meta name="keywords" content="http请求处理流程, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>ace启动流程 | cindy&#39;s Notebook</title>
+    <title>http请求处理流程 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">ace启动流程</h1>
+                    <h1 class="description center-align post-title">http请求处理流程</h1>
                 </div>
             </div>
         </div>
@@ -349,7 +349,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-20
+                    2022-03-01
                 </div>
                 
 
@@ -373,67 +373,18 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-启动命令">1. 启动命令</span></h3><p>node ace，adonis默认提供的ace命令有一下几个</p>
-<ul>
-<li>build：编译打包ts，如果配置了编译前端，也会编译进去。</li>
-<li>configure：对给定的一个AdonisJs包进行配置</li>
-<li>repl：启动一个交互界面</li>
-<li>serve：启动一个adonis HTTP服务器</li>
-<li>type-check：启动类型检查但是不输出编译后文件</li>
-<li>dump:rcfile：输出rcfile</li>
-<li>generate:key：生成一个新的APP_KEY 密钥</li>
-<li>generate:manifest：生成manifest文件</li>
-<li>list:routes：列出路由</li>
-<li>make:command：创建一个新的ace命令</li>
-<li>make:controller：创建一个新的HTTP controller<br>……<h3><span id="2-node-ace-serve启动流程">2. node ace serve启动流程</span></h3><h4><span id="21-初始化application">2.1 初始化application</span></h4>执行ace脚本，从打包后单例的standalone里面去加载出来Ignitor实例化一个Ignitor<br>通过调用实例上的ace方法来实例化一个ace对象，在Ace的构造函数中，完成Application的初始化。<br>此时application初始化进行的操作：</li>
-</ul>
+                <h3><span id="1-调用server的handle函数">1. 调用server的handle函数</span></h3><p>handle函数执行流程：</p>
 <ol>
-<li>初始化系统里面提供的helpers并直接绑定到this对象上</li>
-<li>设置cli的cwd</li>
-<li>初始化provider的ready和shutdown的hook</li>
-<li>初始化namespace，系统是有默认的一系列namespace</li>
-<li>读取解析rcFile信息设置到当前上面、map、alias信息和环境变量相关信息等</li>
-<li>preload用于优先load和加载kernal和route。在route里面都需要用到server，因此需要放到后面执行。</li>
+<li>找到对应的上下文信息</li>
+<li>运行所有before的hooks，静态文件处理就在hook里面处理</li>
+<li>最后再执行requestHandle里面的handle，解析url、method和host，找到对应的路由。</li>
+<li>通过commit调用到所有的middleware。</li>
+<li>middleware执行完成所有的中间件之后，finalHandler就是route里面绑定的该路由实际的处理函数，处理函数执行完成后，再回调middleware，从而形成洋葱模型。</li>
 </ol>
-<p>备注：在ace:manifest的时候，是将loadApp等相关配置写到了manifest.json文件里面，避免还需要去加载形成循环load不到：<a target="_blank" rel="noopener" href="https://docs.adonisjs.com/guides/ace-commandline">https://docs.adonisjs.com/guides/ace-commandline</a><br>额外存储command中 loadApp、stayAlive等元数据属性; 原因：command文件中开头的 import ‘@ioc:Adonis/Addon/*’ 与文件中间的loadApp 循环依赖。</p>
-<h4><span id="22-调用ace实例的handle函数">2.2 调用ace实例的handle函数</span></h4><ol>
-<li>加载assembler的manifest文件和项目里面的manifest文件，此时需要load官方提供的命令和自己项目根目录下的manifest文件，将两个文件合并。因此在本地项目生成了新的command，需要重新手动生成manifest文件。</li>
-<li>设置kernel的Hook方法，在beforefind和beforerun之前设置hook函数</li>
-<li>beforefind的钩子的作用是，针对ts并且没有注册过的command，会使用registerTsHook来进行加载和编译，编译为js版本的代码执行。针对wired为false但是loadApp为true的command，在onFind的registerTsHook之后，会执行wired函数。</li>
-<li>提前加载manifest文件，执行manifestLoader上面的boot函数</li>
-<li>绑定app退出和kernel退出时绑定相应的回调</li>
-<li>通过commandName找到相应的command，找到之后在读取文件内容并执行之前，会触发之前绑定的onFind回调函数。loadCommand的时候，找到的是command的name和配置的相对路径，然后拼接出绝对路径，使用esmodule去加载这个路径。第一次查找的时候，参数是serve，对应找到的是node_modules/@adonisjs/assembler/build/下面的serve.js这个command。</li>
-</ol>
-<h4><span id="23-http启动流程">2.3 http启动流程</span></h4><ol>
-<li>调用command上面的exec方法，exec方法实际上是在整个command里面查找run的函数并执行。方法里面有根据环境获取相应的devServer，然后通过devServer去new一个工程目录下的 Server.ts，也就是SERVER_ENTRY_FILE常量指向的入口文件的HttpServer，然后调用这个HttpServer的start函数，在start函数里面，会通过子进程的方式去执行这个server.ts。在server.ts里面，再通过点火器去实例化一个HttpServer，再调用这个HttpServer的start函数，完成启动Http server的流程。<br>start函数执行的操作：<pre class="line-numbers language-none"><code class="language-none">async start(serverCallBack)&#123;
-  try &#123;
-    &#x2F;&#x2F; 点燃应用程序，注册打平系统内所有providers，然后注入进container
-    await this.wire();
-    &#x2F;&#x2F; 把当前的server对象指向core里面的server
-    this.serServer();
-    &#x2F;&#x2F; 把调用原生的CreateServer生成的实例绑定到当前的server上
-    this.createServer(serverCalllback)
-    &#x2F;&#x2F; 监听相应端口
-    await this.listen();
-    &#x2F;&#x2F; 绑定退出事件 
-    this.signalsListener.listen(()&#x3D;&gt;this.close());
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-httpServerProvider是系统的appProviders依赖的，系统的appProviders依赖包括encryption、events、drive、hash、http-server、bodyparser和validator。<br>http-server的register流程包括<pre class="line-numbers language-none"><code class="language-none">public register() &#123;
-  &#x2F;&#x2F; 注册request和response类到container上
-  this.registerRequestResponse();
-  &#x2F;&#x2F; 注册一系列的中间件，主要用一个list维护所有的中间件
-  this.registerMiddlewareStroe();
-  &#x2F;&#x2F; 注册httpServer，需要用到container里面的config和加解密的注入
-  this.rigisterHttpServer();
-  &#x2F;&#x2F; 注册HttpContext，context上面还挂载了container上面的app
-  this.registerHTTPContext();
-  &#x2F;&#x2F; 注册路由，就是把server上面的路由取出来挂在container上面
-  this.registerRouter();
-  &#x2F;&#x2F; 在container里面注册cookieClient
-  this.registerCookieClient();
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-通过以上步骤启动整个http server</li>
+<h3><span id="2-静态文件处理">2. 静态文件处理</span></h3><p>静态文件是挂在在hook上面，加载了一个staticHook，无论是请求函数还是静态文件，都会先走hook，找到了文件的时候，修改hasLazyBody这个属性，就在执行后返回true，直接调用executeAfter函数，触发提前返回。static目录配置在rcFile里，可以进行修改。<br>如果一个静态文件的命名和路由冲突，会直接返回静态文件，相应的路由并不会被调用。</p>
+<h3><span id="3-middleware洋葱模型">3. middleware洋葱模型</span></h3><ol>
+<li>handleRequest函数，每次通过runner()函数返回一个新的Runnable，Runnable里面的executor，绑定了所有要执行的middleware，再把finalHandle(也就是路由匹配找到的处理业务逻辑的controller)绑定上去，就可以调用Runnalbe上面的run函数了。</li>
+<li>run函数讲绑定了新的this指向的invoke打进参数里面，然后执行invoke。这里在执行的时候，params里面的参数包括了invoke，在handle里面作为next函数传入进去。这个getInjections会将组合的的args传入过去作为handle的参数。因为this被修改为Runnable当前的执行环境，每一个middleware在执行的时候，一旦调用next，也就是重新调用invoke函数，则会取出下一个middleware继续执行，上一个等待，等到所有的middleware都执行的前序部分操作后，交由finalHandle执行业务逻辑，执行完成后再一层一层向上进行回调，实现洋葱模型。</li>
 </ol>
 
                 
@@ -496,9 +447,10 @@ httpServerProvider是系统的appProviders依赖的，系统的appProviders依�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/03/01/adonis/03-http%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B/">
                     <div class="card-image">
@@ -516,9 +468,9 @@ httpServerProvider是系统的appProviders依赖的，系统的appProviders依�
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -531,6 +483,7 @@ httpServerProvider是系统的appProviders依赖的，系统的appProviders依�
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -549,13 +502,13 @@ httpServerProvider是系统的appProviders依赖的，系统的appProviders依�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/20/adonis/01-%E7%AE%80%E4%BB%8B/">
+                <a href="/2022/02/20/adonis/02-%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="简介">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="ace启动流程">
                         
-                        <span class="card-title">简介</span>
+                        <span class="card-title">ace启动流程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
