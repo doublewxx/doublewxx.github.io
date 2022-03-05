@@ -154,3 +154,26 @@ var obj = { a: {a: "hello", b: 21} };
 deepClone(obj, str);
 console.log(str.a);
 ```
+deepClone另一个实现
+```
+function deepClone(obj, clone) {
+  //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
+  Array.isArrau(obj) ? clone = clone || [] : clone = clone || {}
+  for (const i in obj) {
+    if (typeof obj[i] === 'object' && obj[i]!==null) {
+      // 要考虑深复制问题了
+      if (Array.isArray(obj[i])) {
+        // 这是数组
+        clone[i] = []
+      } else {
+        // 这是对象
+        clone[i] = {}
+      }
+      deepClone(obj[i], clone[i])
+    } else {
+      clone[i] = obj[i]
+    }
+  }
+  return clone
+}
+```
