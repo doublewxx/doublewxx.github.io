@@ -481,6 +481,27 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span> a<span class="token operator">:</span> <span class="token punctuation">&#123;</span>a<span class="token operator">:</span> <span class="token string">"hello"</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token number">21</span><span class="token punctuation">&#125;</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>deepClone另一个实现</p>
+<pre class="line-numbers language-none"><code class="language-none">function deepClone(obj, clone) &#123;
+  &#x2F;&#x2F;判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
+  Array.isArrau(obj) ? clone &#x3D; clone || [] : clone &#x3D; clone || &#123;&#125;
+  for (const i in obj) &#123;
+    if (typeof obj[i] &#x3D;&#x3D;&#x3D; &#39;object&#39; &amp;&amp; obj[i]!&#x3D;&#x3D;null) &#123;
+      &#x2F;&#x2F; 要考虑深复制问题了
+      if (Array.isArray(obj[i])) &#123;
+        &#x2F;&#x2F; 这是数组
+        clone[i] &#x3D; []
+      &#125; else &#123;
+        &#x2F;&#x2F; 这是对象
+        clone[i] &#x3D; &#123;&#125;
+      &#125;
+      deepClone(obj[i], clone[i])
+    &#125; else &#123;
+      clone[i] &#x3D; obj[i]
+    &#125;
+  &#125;
+  return clone
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
