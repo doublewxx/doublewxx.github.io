@@ -58,7 +58,7 @@ obj.name = "test2";  // set方法被触发
 
 1. 实现一个监听器Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者。
 2. 实现一个订阅者Watcher，每一个Watcher都绑定一个更新函数，watcher可以收到属性的变化通知并执行相应的函数，从而更新视图。
-3. 实现一个解析器Compile，可以扫描和解析每个节点的相关指令（v-model，v-on等指令），如果节点存在v-model，v-on等指令，则解析器Compile初始化这类节点的模板数据，使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。
+3. 实现一个解析器Compile，可以扫描和解析每个节点的相关指令，如果节点存在{% raw %}v-model，v-on{% raw %}等指令，则解析器Compile初始化这类节点的模板数据，使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。
 
 #### 2.2.1 实现Observer
 就是将组件的data的所有属性通过Object.defineProperty绑定上去，在数据的get时添加订阅者，set的时候通知订阅者。
