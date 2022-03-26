@@ -19,7 +19,8 @@ obj：要定义属性的对象。
 prop：要定义或修改的属性的名称或 Symbol 。
 descriptor：要定义或修改的属性描述符。
 属性描述符可以包含的属性：
-```
+
+```javascript
 {
   value: undefined,   // 属性的值
   get: undefined,     // 获取属性值时触发的方法
@@ -29,7 +30,8 @@ descriptor：要定义或修改的属性描述符。
   configurable: false // 该属性是否可以用delete删除，false不可删除，为false时也不能再修改该参数
 }
 ```
-```
+
+```javascript
 var obj = {    
     name:'tset'
 }
@@ -51,7 +53,9 @@ Object.defineProperty(obj, "name",{
 var str = obj.name;  // get方法被触发
 obj.name = "test2";  // set方法被触发
 ```
+
 ### 2.2 实现流程
+
 1. 实现一个监听器Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者。
 2. 实现一个订阅者Watcher，每一个Watcher都绑定一个更新函数，watcher可以收到属性的变化通知并执行相应的函数，从而更新视图。
 3. 实现一个解析器Compile，可以扫描和解析每个节点的相关指令（v-model，v-on等指令），如果节点存在v-model，v-on等指令，则解析器Compile初始化这类节点的模板数据，使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。
