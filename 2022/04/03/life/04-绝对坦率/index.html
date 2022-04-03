@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="node事件循环各个阶段, cindy&#39;s Notebook">
+    <meta name="keywords" content="绝对坦率, cindy&#39;s Notebook">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>node事件循环各个阶段 | cindy&#39;s Notebook</title>
+    <title>绝对坦率 | cindy&#39;s Notebook</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -203,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">node事件循环各个阶段</h1>
+                    <h1 class="description center-align post-title">绝对坦率</h1>
                 </div>
             </div>
         </div>
@@ -324,8 +324,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/">
-                                <span class="chip bg-color">事件机制</span>
+                            <a href="/tags/%E6%80%9D%E8%80%83/">
+                                <span class="chip bg-color">思考</span>
                             </a>
                         
                     </div>
@@ -336,8 +336,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Node/" class="post-category">
-                                Node
+                            <a href="/categories/%E8%81%8C%E5%9C%BA/" class="post-category">
+                                职场
                             </a>
                         
                     </div>
@@ -349,7 +349,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-24
+                    2022-04-03
                 </div>
                 
 
@@ -373,85 +373,52 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3><span id="1-阶段">1. 阶段</span></h3><p>Event loop 包含一系列阶段 (phase)，每个阶段都是只执行属于自己的的任务 (task) 和微任务 (micro task)，这些阶段依次为：</p>
-<ul>
-<li>timers：执行到期的setTimeout / setInterval队列回调</li>
-<li>pending callbacks：执行一些系统调用错误，比如网络通信的错误回调</li>
-<li>idle, prepare：这个阶段仅在内部使用，对外不可见</li>
-<li>poll：阶段基本上涵盖了剩下的所有的情况，你写的大部分回调（I/O，HTTP回调），如果不是上面两种（还要除掉 micro task，后面会讲），那基本上就是在 poll 阶段执行的。</li>
-<li>check：check 阶段和 timer 类似，当你使用 setImmediate() 函数的时候，传入的回调函数就是在 check 阶段执行。</li>
-<li>close callbacks：socket.close在这里</li>
+                <h3><span id="1-绝对坦率">1. 绝对坦率</span></h3><ul>
+<li>一种管理哲学，目的是为了解决问题，解决如何称为好的团队领导</li>
+<li>不仅包括职场的工作的关怀，还有个体关怀</li>
+<li>绝对坦率不仅是你对下属，还有下属之间的</li>
+<li>直接挑战不仅是你对下属，更是接受下属的挑战<h3><span id="2-管理者的三个职责">2. 管理者的三个职责</span></h3></li>
+<li>指导(反馈)：正面反馈和负面反馈，指导如何更有效做事情</li>
+<li>团队建设：每个人在适合的岗位上积极开心做事情</li>
+<li>结果：尽可能少的资源完成并提升绩效（做大蛋糕）<h3><span id="3-人际关系与责任良性循环模型">3. 人际关系与责任良性循环模型</span></h3>领导者-&gt;人际关系圈-&gt;责任圈-&gt;文化圈<br>人际关系变大+良好的指导、团队建设、结果，才会让责任圈变大，形成良性循环。<br>核心：领导者与团队的交互要做好<h3><span id="4-建立信任的方法">4. 建立信任的方法</span></h3></li>
+<li>关心自己：自己要先好，这样才会让人觉得可信赖</li>
+<li>自由工作：给予下属充分的信任和授权，只有自由才有信任感</li>
+<li>工作交往：通过工作实现交往，不要强迫做非工作的事情，非强迫性的活动也会让人感到压迫</li>
+<li>尊重边界：定期去讨论，包括业绩、个人发展、分享价值观并展现包容<h3><span id="5-绝对坦率的两个维度">5. 绝对坦率的两个维度</span></h3><h4><span id="51-个体关怀">5.1 个体关怀</span></h4>承认在除了工作之外，在人性的层面彼此交流沟通，价值观上面去碰撞，个体关怀短期可能有负面效果</li>
+<li>鼓励成员之间个体关怀<h4><span id="52-直接挑战">5.2 直接挑战</span></h4></li>
+<li>直接分享观点，提供反馈</li>
+<li>先个体关怀，再直接挑战，否则会让人感觉到恶意。</li>
+<li>直接挑战一定会直面对方的生气，这种生气是一种情绪失控下的生气，学会处理别人的愤怒。挑战是为了解决问题，而并不是指出你的错误。</li>
+<li>最难的地方，允许别人挑战自己</li>
+<li>允许成员互相直接挑战<h3><span id="6-反馈框架">6. 反馈框架</span></h3>横轴直接挑战，纵轴个体关怀</li>
+<li>个体关怀好+直接挑战差：虚情假意</li>
+<li>个体关怀好+直接挑战差：过分同情。给大家只要事情做了，不管结果，领导都能接受。一片祥和死水一潭。</li>
+<li>个体关怀差+直接挑战好：恶意侵犯。<br>在我看来，恶意侵犯比过分同情要好，做工作是为了赚钱+提升能力，谁都不想要一个没有任何反馈的领导，这样会导致你自己的工作不知道下一步往哪里去。虽然狼性不是个好词，但是毫无反馈一潭死水也没有意义。<br>对组织而言，恶意侵犯比过分同情好。<h3><span id="7-高个体关怀高个体挑战">7. 高个体关怀+高个体挑战</span></h3></li>
+<li>领导向大家展示你很想知道自己是否犯错，下属会细心观察你</li>
+<li>接受批评越多，越知道如何更好给予批评</li>
+<li>寻求批评是建立新人和巩固关系的有效方法</li>
+<li>无论给赞美或者批评，都要是真心实意<h3><span id="8-员工管理">8. 员工管理</span></h3>员工的成长轨迹分为陡峭的成长轨迹和平稳的成长轨迹，关注动态的过程和员工的需求。<h4><span id="81-陡峭的成长轨迹">8.1 陡峭的成长轨迹</span></h4>变革的推动者<h4><span id="82-平稳的成长轨迹">8.2 平稳的成长轨迹</span></h4>公司的稳定力量，岩石明星<br>一个人身上，也并不是一种成长轨迹，不要贴标签<br>根据自己的不同的时间点，根据自己承担的职责的不同，来进行选择<br>并不是晋升就是唯一的奖励，每个人的需求是不一样的<h3><span id="9-成长管理框架">9. 成长管理框架</span></h3><h4><span id="91-高绩效员工管理">9.1 高绩效员工管理</span></h4></li>
+<li>陡峭成长轨迹：晋升</li>
+<li>平稳成长轨迹：平稳的非晋升的奖励方式，这部分员工是企业最应该关注，但是可能容易忽略。<h4><span id="92-中等绩效员工管理">9.2 中等绩效员工管理</span></h4></li>
+<li>陡峭成长轨迹：持续给压力和挑战</li>
+<li>平稳成长轨迹：交代清楚底线，越过底线就是另一个故事<h4><span id="93-低绩效员工管理">9.3 低绩效员工管理</span></h4></li>
+<li>陡峭成长轨迹：给他刺激，不晋则退</li>
+<li>平稳成长轨迹：分道扬镳<h4><span id="94-什么时候解雇一个员工">9.4 什么时候解雇一个员工</span></h4></li>
+<li>解雇之前是否有给过绝对坦率的指导</li>
+<li>留着会对团队的影响是怎样</li>
+<li>是否有征求过其他人的意见<h3><span id="10-gsd闭环">10. GSD闭环</span></h3></li>
 </ul>
-<h4><span id="11-timers阶段">1.1 timers阶段</span></h4><p> timers是事件循环的第一个阶段，node会去检查有无过期的timer，如果有则把它的回调压入timer的任务队列中等待执行，事实上，node并不能保证timer在预设时间到了就会立即执行，因为node对timer的过期检查不一定靠谱，它会受到机器上其他运行程序的影响，或者那个时间点主线程不空闲。比如下面的代码，setTimeout()和setImmediate()的执行顺序是不确定的。<br> <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'settimeout'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">setImmediate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'setimmediate'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><br> 对于以上代码来说，setTimeout 可能执行在前，也可能执行在后。<br>首先 setTimeout(fn, 0) === setTimeout(fn, 1)，这是由源码决定的<br>进入事件循环也是需要成本的，如果在准备时候花费了大于 1ms 的时间，那么在 timer 阶段就会直接执行 setTimeout 回调<br>如果准备时间花费小于 1ms，那么就是 setImmediate 回调先执行了。但是把它们放到一个I/O回调里面，一定是setImmediate()先执行，因为poll阶段后面就是check阶段。</p>
-<p>在 Node 中定时器指定的时间也不是准确时间，只能是尽快执行。</p>
-<h4><span id="12-poll阶段">1.2 poll阶段</span></h4><p> poll阶段两个功能</p>
 <ol>
-<li><p>处理poll队列的事件</p>
-</li>
-<li><p>当有已超时的timer，执行它的回调函数<br>event loop将同步执行poll队列里的回调，直到队列为空或执行的回调达到系统上限(上限具体多少未详)，接下来event loop会去检查有无预设的setImmediate()，分两种情况：</p>
-</li>
-<li><p>若有预设的setImmediate()，event loop将结束poll阶段进入check阶段，并执行check阶段的任务队列。</p>
-</li>
-<li><p>若没有预设的setImmediate()，event loop将阻塞在该阶段等待。</p>
-<p>如果没有setImmediate()将会导致event loop阻塞在poll阶段，这样之前设置的timer岂不是执行不了了？因此在poll阶段event loop会有一个检查机制，检查timer队列是否为空，如果timer队列非空，event loop就开始下一轮事件循环，即重新进入到timer阶段。</p>
-</li>
+<li>倾听：让团队每个成员说出自己的想法，让沉默者发出声音。</li>
+<li>阐明：清晰理解、传递思想和理念。因为表达和理解之间，也是有鸿沟的，抹平信息差。</li>
+<li>讨论：老板在讨论的过程中进行打磨，任何讨论都需要有时间节点。团队成员有责任在讨论的时候，如果自己有不同意见，提出不同意见。</li>
+<li>决策：决策要实事求是，基于事实而不是自己的想象。</li>
+<li>说服：说服包括三个东西：情绪管理、公信力、逻辑。</li>
+<li>执行：不要浪费团队的时间、各司其职、为执行预留足够的时间。</li>
+<li>学习：持续统一和持续改进，因为一件事情、一个项目、团队发展，都是一个动态的过程。</li>
 </ol>
-<h4><span id="13-check阶段">1.3 check阶段</span></h4><p>setImmediate()的回调会被加入到check队列中，从event loop的阶段图可以知道，check阶段的执行顺序会在poll阶段之后。</p>
-<h4><span id="14-每个阶段的microtask阶段">1.4 每个阶段的microtask阶段</span></h4><p>每个阶段还有一个 microtask 的阶段。这个阶段就是我们下面主要要讲的 process.nextTick 和 Promise 的回调函数运行的地方。<br>那么每个阶段就包括以下操作：</p>
-<ol>
-<li>这个阶段的”同步” task queue</li>
-<li>这个阶段的 process.nextTick 的 queue</li>
-<li>这个阶段的 Promise queue</li>
-</ol>
-<h4><span id="14-小结">1.4 小结</span></h4><ol>
-<li>event loop的每个阶段都有一个任务队列。</li>
-<li>event loop到达某个阶段时，将执行该阶段的任务队列，直到队列清空或执行的回调达到系统上限后，才会转入下一个阶段。</li>
-<li>当所有阶段被顺序执行一次后，称event loop完成了一个tick。</li>
-<li>process.nextTick本质上属于Micro Task，但是它先于所有其他的Micro Task 执行；<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'app.js'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'readFile'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'settimeout'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">setImmediate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'setimmediate'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token comment">// readFile</span>
-<span class="token comment">// setImmediate</span>
-<span class="token comment">// settimeout</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-<ul>
-<li>Node 端，microtask 在事件循环的各个阶段之间执行</li>
-<li>浏览器端，microtask 在事件循环的 macrotask 执行完之后执行</li>
-</ul>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'timer1'</span><span class="token punctuation">)</span>
-    Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise1'</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'timer2'</span><span class="token punctuation">)</span>
-    Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'promise2'</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token comment">// node11之后的输出是这个，与浏览器一致</span>
-<span class="token comment">// timer1</span>
-<span class="token comment">// promise1</span>
-<span class="token comment">// timer2</span>
-<span class="token comment">// promise2</span>
-<span class="token comment">// node11之前是</span>
-<span class="token comment">// timer1</span>
-<span class="token comment">// timer2</span>
-<span class="token comment">// promise1</span>
-<span class="token comment">// promise2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>PS：绝对坦率不是唯一的团队管理的方式，也不一定是最好、所有人都能接受的管理方式，只是你可以去尝试一下。</p>
+
                 
             </div>
             <hr/>
@@ -465,8 +432,8 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/">
-                                    <span class="chip bg-color">事件机制</span>
+                                <a href="/tags/%E6%80%9D%E8%80%83/">
+                                    <span class="chip bg-color">思考</span>
                                 </a>
                             
                         </div>
@@ -512,9 +479,10 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/04/03/life/04-%E7%BB%9D%E5%AF%B9%E5%9D%A6%E7%8E%87/">
                     <div class="card-image">
@@ -532,9 +500,9 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -547,6 +515,7 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -565,13 +534,13 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/16/vue.js/05-computed%E5%8E%9F%E7%90%86/">
+                <a href="/2022/03/24/nodejs/11-node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E5%90%84%E4%B8%AA%E9%98%B6%E6%AE%B5/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="computed原理">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="node事件循环各个阶段">
                         
-                        <span class="card-title">computed原理</span>
+                        <span class="card-title">node事件循环各个阶段</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -582,14 +551,14 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-24
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Vue/" class="post-category">
-                                    Vue
+                            <a href="/categories/Node/" class="post-category">
+                                    Node
                                 </a>
                             
                             
@@ -599,8 +568,8 @@ fs<span class="token punctuation">.</span><span class="token function">readFile<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Vue/">
-                        <span class="chip bg-color">Vue</span>
+                    <a href="/tags/%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/">
+                        <span class="chip bg-color">事件机制</span>
                     </a>
                     
                 </div>
