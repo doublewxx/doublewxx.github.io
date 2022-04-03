@@ -19,7 +19,8 @@ obj：要定义属性的对象。
 prop：要定义或修改的属性的名称或 Symbol 。
 descriptor：要定义或修改的属性描述符。
 属性描述符可以包含的属性：
-```
+
+```javascript
 {
   value: undefined,   // 属性的值
   get: undefined,     // 获取属性值时触发的方法
@@ -29,7 +30,8 @@ descriptor：要定义或修改的属性描述符。
   configurable: false // 该属性是否可以用delete删除，false不可删除，为false时也不能再修改该参数
 }
 ```
-```
+
+```javascript
 var obj = {    
     name:'tset'
 }
@@ -51,10 +53,12 @@ Object.defineProperty(obj, "name",{
 var str = obj.name;  // get方法被触发
 obj.name = "test2";  // set方法被触发
 ```
+
 ### 2.2 实现流程
+
 1. 实现一个监听器Observer，用来劫持并监听所有属性，如果有变动的，就通知订阅者。
 2. 实现一个订阅者Watcher，每一个Watcher都绑定一个更新函数，watcher可以收到属性的变化通知并执行相应的函数，从而更新视图。
-3. 实现一个解析器Compile，可以扫描和解析每个节点的相关指令（v-model，v-on等指令），如果节点存在v-model，v-on等指令，则解析器Compile初始化这类节点的模板数据，使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。
+3. 实现一个解析器Compile，可以扫描和解析每个节点的相关指令，如果节点存在v-指令，则解析器Compile初始化这类节点的模板数据，使之可以显示在视图上，然后初始化相应的订阅者（Watcher）。
 
 #### 2.2.1 实现Observer
 就是将组件的data的所有属性通过Object.defineProperty绑定上去，在数据的get时添加订阅者，set的时候通知订阅者。
@@ -63,7 +67,7 @@ obj.name = "test2";  // set方法被触发
 Watcher的getter函数中，Dep.target指向了自己，也就是Watcher对象。在getter函数中把watcher添加到了订阅器中。
 
 #### 2.2.3 实现compiler
-Compile主要的作用是把new SelfVue 绑定的dom节点，（也就是el标签绑定的id）遍历该节点的所有子节点，找出其中所有的v-指令和" {{}} ".
+Compile主要的作用是把new SelfVue 绑定的dom节点，（也就是el标签绑定的id）遍历该节点的所有子节点，找出其中所有的v-指令和模板字符串.
 
 （1）如果子节点含有v-指令，即是元素节点，则对这个元素添加监听事件。（如果是v-on，则node.addEventListener('click'），如果是v-model，则node.addEventListener('input'))。接着初始化模板元素，创建一个Watcher绑定这个元素节点。
 （2）如果子节点是文本节点，即" {{ data }} ",则用正则表达式取出" {{ data }} "中的data，然后var initText = this.vm[exp]，用initText去替代其中的data。xp是node节点的v-model或v-on：click等指令的属性值。
