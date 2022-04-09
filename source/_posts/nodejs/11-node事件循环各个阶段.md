@@ -3,6 +3,7 @@ title: node事件循环各个阶段
 date: 2022-03-24 16:30:59
 tags: 
   - 事件机制
+  - event loop
 categories: Node
 ---
 ### 1. 阶段
@@ -11,7 +12,7 @@ Event loop 包含一系列阶段 (phase)，每个阶段都是只执行属于自�
 - timers：执行到期的setTimeout / setInterval队列回调
 - pending callbacks：执行一些系统调用错误，比如网络通信的错误回调
 - idle, prepare：这个阶段仅在内部使用，对外不可见
-- poll：阶段基本上涵盖了剩下的所有的情况，你写的大部分回调（I/O，HTTP回调），如果不是上面两种（还要除掉 micro task，后面会讲），那基本上就是在 poll 阶段执行的。
+- 轮询阶段poll：阶段基本上涵盖了剩下的所有的情况，你写的大部分回调（I/O，HTTP回调），如果不是上面两种（还要除掉 micro task，后面会讲），那基本上就是在 poll 阶段执行的，当没有要执行的setImediate同时也没有要执行的timers的时候，会阻塞在这个状态
 - check：check 阶段和 timer 类似，当你使用 setImmediate() 函数的时候，传入的回调函数就是在 check 阶段执行。
 - close callbacks：socket.close在这里
 
@@ -32,17 +33,24 @@ Event loop 包含一系列阶段 (phase)，每个阶段都是只执行属于自�
 
 在 Node 中定时器指定的时间也不是准确时间，只能是尽快执行。
 
- #### 1.2 poll阶段
- poll阶段两个功能
-1. 处理poll队列的事件
-2. 当有已超时的timer，执行它的回调函数
-event loop将同步执行poll队列里的回调，直到队列为空或执行的回调达到系统上限(上限具体多少未详)，接下来event loop会去检查有无预设的setImmediate()，分两种情况：
-1. 若有预设的setImmediate()，event loop将结束poll阶段进入check阶段，并执行check阶段的任务队列。
-2. 若没有预设的setImmediate()，event loop将阻塞在该阶段等待。
+ #### 1.2 轮询阶段
+ 轮询阶段两个功能
+1. 计算应该阻塞和轮询I/O的时间
+2. 处理轮询队列里的事件
+
+当事件循环进入 轮询 阶段且 没有被调度的计时器时 ，将发生以下两种情况之一：
+    - 如果 轮询 队列 不是空的 ，事件循环将循环访问回调队列并同步执行它们，直到队列已用尽，或者达到了与系统相关的硬性限制。（就是避免timer被饿死的限制）
+    - 如果 轮询 队列 是空的 ，还有两件事发生：
+      - 如果脚本被 setImmediate() 调度，则事件循环将结束 轮询 阶段，并继续 检查 阶段以执行那些被调度的脚本。
+      - 如果脚本 未被 setImmediate()调度，则事件循环将等待回调被添加到队列中，然后立即执行。
    
 如果没有setImmediate()将会导致event loop阻塞在poll阶段，这样之前设置的timer岂不是执行不了了？因此在poll阶段event loop会有一个检查机制，检查timer队列是否为空，如果timer队列非空，event loop就开始下一轮事件循环，即重新进入到timer阶段。
+为了防止 轮询 阶段饿死事件循环，libuv（实现 Node.js 事件循环和平台的所有异步行为的 C 函数库），在停止轮询以获得更多事件之前，还有一个硬性最大值（依赖于系统）
 
 #### 1.3 check阶段
+此阶段允许人员在轮询阶段完成后立即执行回调。如果轮询阶段变为空闲状态，并且脚本使用 setImmediate() 后被排列在队列中，则事件循环可能继续到 检查 阶段而不是等待。
+
+setImmediate() 实际上是一个在事件循环的单独阶段运行的特殊计时器。它使用一个 libuv API 来安排回调在 轮询 阶段完成后执行。
 setImmediate()的回调会被加入到check队列中，从event loop的阶段图可以知道，check阶段的执行顺序会在poll阶段之后。
 
 #### 1.4 每个阶段的microtask阶段
@@ -51,7 +59,8 @@ setImmediate()的回调会被加入到check队列中，从event loop的阶段图
 1. 这个阶段的"同步" task queue
 2. 这个阶段的 process.nextTick 的 queue
 3. 这个阶段的 Promise queue
-
+Process.nextTick
+这是因为 process.nextTick() 从技术上讲不是事件循环的一部分。相反，它都将在当前操作完成后处理 nextTickQueue， 而不管事件循环的当前阶段如何。这里的一个操作被视作为一个从底层 C/C++ 处理器开始过渡，并且处理需要执行的 JavaScript 代码。
 #### 1.4 小结
 1. event loop的每个阶段都有一个任务队列。
 2. event loop到达某个阶段时，将执行该阶段的任务队列，直到队列清空或执行的回调达到系统上限后，才会转入下一个阶段。
